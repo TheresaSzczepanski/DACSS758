@@ -1,0 +1,35 @@
+---
+title: "Assignment"
+format: 
+  html: 
+    embed-resources: true
+    self-contained-math: true
+---
+
+# Set up working environment
+
+We will be using **ggplot2** and **tidyverse** in this practice. Make you have these packages installed before moving on. We will use the **diamonds** data in the package.
+
+You can embed coode like this:
+
+```{r}
+#install.packages("tidyverse")
+#install.packages("ggplot2")
+
+library(tidyverse)
+library(ggplot2)
+data("diamonds")
+head(diamonds)
+```
+
+# Making a graph in Quarto
+
+Now let's try making a graph
+
+```{r}
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point()
+```
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code.

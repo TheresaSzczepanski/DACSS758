@@ -1,0 +1,429 @@
+---
+title: "Tutorial 5 Preprocessing"
+pagetitle: Tutorial_5
+---
+
+This is our fifth tutorial for running R. In this tutorial, we'll learn about text pre-processing. Text data is often messy and noisy, and careful preprocessing can soften the edges for downstream analyses.
+
+By the end of this notebook, you should be familiar with the following:
+
+1.  Stopword lists
+
+2.  Stemming
+
+3.  preText
+
+4.  N-grams and `phrasemachine`
+
+5.  Readability
+
+# Recap: Tokenization
+
+This week, we'll return to looking at the Harry Potter series. We'll first install and load the packages and data for today's notebook.
+
+```{r}
+library(devtools)
+library(tidytext)
+library(plyr)
+library(tidyverse)
+library(quanteda)
+```
+
+```{r}
+# Define the folder containing the .rda files (Change to your path). 
+folder <- "/Users/theresaszczepanski/documents/DACSS758/HarryPotter"
+
+# Get the list of all .rda files in the folder
+rda_files <- list.files(folder, pattern = "\\.rda$", full.names = TRUE)
+
+# Load all .rda files into the environment
+lapply(rda_files, load, .GlobalEnv)
+```
+
+As a reminder, we have seven books --- each stored as a character vector where each chapter is an element in that vector --- now available in our workspace. These are:
+
+1.  `philosophers_stone`: Harry Potter and the Philosophers Stone (1997)
+
+2.  `chamber_of_secrets`: Harry Potter and the Chamber of Secrets (1998)
+
+3.  `prisoner_of_azkaban`: Harry Potter and the Prisoner of Azkaban (1999)
+
+4.  `goblet_of_fire`: Harry Potter and the Goblet of Fire (2000)
+
+5.  `order_of_the_phoenix`: Harry Potter and the Order of the Phoenix
+
+6.  `half_blood_prince`: Harry Potter and the Half-Blood Prince (2005)
+
+7.  `deathly_hallows`: Harry Potter and the Deathly Hallows (2007)
+
+As you'll recall, we want to convert these to corpus objects that are easier to work with.
+
+```{r}
+philosophers_stone_corpus <- corpus(philosophers_stone)
+philosophers_stone_summary <- summary(philosophers_stone_corpus) 
+philosophers_stone_summary
+```
+
+We then add indicators for books and chapters, and create the metadata. This will be useful later when we add all the books together into a single corpus.
+
+```{r}
+philosophers_stone_summary$book <- "Philosopher's Stone"
+
+# create a chapter indicator
+philosophers_stone_summary$chapter <- as.numeric(str_extract(philosophers_stone_summary$Text, "[0-9]+"))
+
+# add the metadata
+docvars(philosophers_stone_corpus) <- philosophers_stone_summary
+
+philosophers_stone_summary
+```
+
+Next, we move to tokenization. The default breaks on white space.
+
+```{r}
+philosophers_stone_tokens <- tokens(philosophers_stone_corpus)
+print(philosophers_stone_tokens)
+
+
+```
+
+You'll recall that --- in Week 2 --- we covered a couple of options from here about what we can do next with our texts. A few dynamics are quickly evident from the text above: punctuation and numbers are still present. Those are straightforward to remove when you tokenize.
+
+```{r}
+# you can also drop punctuation
+philosophers_stone_tokens <- tokens(philosophers_stone_corpus, 
+    remove_punct = T)
+print(philosophers_stone_tokens)
+
+# as well as numbers
+philosophers_stone_tokens <- tokens(philosophers_stone_corpus, 
+    remove_punct = T,
+    remove_numbers = T)
+print(philosophers_stone_tokens)
+```
+
+Often capitalization is not something that we want to retain. Here, we'll change everything to lower case. Note that, though I have not run into any instance of someone actually doing this, you could also convert to all upper-case tokens by `tokens_toupper()`
+
+```{r}
+philosophers_stone_tokens <- tokens_tolower(philosophers_stone_tokens)
+print(philosophers_stone_tokens[6])
+```
+
+# Stopword lists
+
+Depending on your research project, many of the words above may be of limited interest. Consider "the"; it's unlikely to ever be of much interest in understanding the thematic content of a set of texts. Often we just want to remove these sorts of function words that contribute so little substantive meanings. Most commonly, these are referred to as stopwords.
+
+## Quanteda package
+
+With quanteda, we can remove stopwords using any of few pre-defined lists that come shipped with the package. Here, we can print that list out first, then remove the tokens:
+
+```{r}
+length(stopwords("en"))
+length(print(stopwords("en")))
+
+# Available for other languages as well
+#head(stopwords("zh", source="misc"),50)
+```
+
+```{r}
+# remove stopwords from our tokens object
+philosophers_stone_tokens1 <- tokens_select(philosophers_stone_tokens, 
+                     pattern = stopwords("en"),
+                     selection = "remove")
+
+(philosophers_stone_tokens1[1])
+#print(philosophers_stone_tokens1)
+```
+
+## Tidytext package
+
+In addition to quanteda, there are other packages containing different lists of stopwords, for example, `tidytext`. Tidytext provides various lexicons for English stop words. Sources of the stopwords are: snowball, SMART, or onix.
+
+```{r}
+tidytextstopwords <- tidytext::stop_words
+View(tidytextstopwords)
+table(tidytextstopwords$lexicon)
+
+#OR
+tidytext::get_stopwords(source = "smart")
+tidytext::get_stopwords(language = "de") # change language
+```
+
+Remove stop words using tidytext stopwords. And we see find the number of tokens after removing stopwords is different as we use different packages.
+
+```{r}
+tidystop <- get_stopwords(source = "smart")
+
+philosophers_stone_tokens2 <-     tokens_select(philosophers_stone_tokens, 
+                     pattern = tidystop$word,
+                     selection = "remove")
+
+length(philosophers_stone_tokens2)
+print(philosophers_stone_tokens2)
+```
+
+# Stemming
+
+Now, we turn to stemming. Of the pre-processing options, stemming is perhaps the most controversial. The underlying idea is to collapse multiple tokens that are of the same general form into a single token (the word stem). For example, consider "tackle", which could take a multitude of different forms: "tackle", "tackling", "tackled", or "tackles". Without stemming, each of these is treated as a unique token. That's potentially undesirable, particularly when the central concept (or stem) is likely to be the real point of substantive interest. Therefore, we can stem the tokens in our vocabulary, yielding a new set of tokens. In the above example, this would yield "tackl".
+
+```{r}
+# we use the tokens after removing stopwords using quanteda
+philosophers_stone_tokens <- tokens_wordstem(philosophers_stone_tokens1)
+philosophers_stone_tokens
+```
+
+##Stemming Vs. Lemmatization
+
+Stemming is a process that stems or removes last few characters from a word, this often leads to incorrect meanings and spelling (such as the "tackl" we saw earlier). In contrast, Lemmatization considers the context and converts the word to its meaningful base form, which is called Lemma.
+
+Now let's experience the difference:
+
+We have an example sentence. Then we preprocess that data: tokenization, remove punctuation and stop words.
+
+```{r}
+example <- "This location does not have good service. When through drive-through and they forgot our drinks and our sides. While they were preparing what they forgot, we could see another girl who had her back to us and it was obvious that she was on the phone. ANy other KFC would be better."
+
+example_ready <- tokens(example,
+                       remove_punct=T)
+
+example_ready <- tokens_select(example_ready,
+                       pattern=stopwords("en"),
+                       select = "remove")
+```
+
+Now we compare stemming and lemmatization. Note that we can also lemmatize tokens using `cleanNLP` package. Please check Tutorial 4 for more details.
+
+```{r}
+# stemming
+stemming <- tokens_wordstem(example_ready)
+as.character(stemming)
+
+# lemmatization
+lemmitized <- tokens_replace(example_ready,
+                             pattern = lexicon:: hash_lemmas$token,
+                             replacement = lexicon:: hash_lemmas$lemma)
+
+as.character(lemmitized)
+
+# What's lexicon package's hash_lemmas?
+head(lexicon::hash_lemmas,100)
+```
+
+##What to do?
+
+Clearly, you have a multitude of options for pre-processing texts. The choice, then, for what to do becomes complicated. Should you remove stop words? Numbers? Punctuation? Capitalization? Should you stem? What combination and why? Anyone who has done work in the area has faced scrutiny --- warranted or not --- from reviewers questioning the pre-processing choices.
+
+At the most basic level, the answer to this should be theoretically driven. Consider the research question and whether each of the varied pre-processing steps would make sense for that research question. Are you missing something if you remove capitalization or punctuation? Are there different versions of the same term that might be meaningful for your analysis? It's most important to be able to defend the choices on the merits.
+
+Of course, you also have the ability to simply, in an appendix, include versions of analyses that carry out the analysis while employing the pre-processing steps highlighted by the reviewer. Especially if your code is well-written and the computational time required for the analysis is low, this may be another useful response.
+
+# preText
+
+A final way of approaching this is more systematic, and is proposed by [Matt Denny](https://www.mjdenny.com/) --- a former UMass (and Penn State University) student! --- and Art Spirling in their [paper](https://www.cambridge.org/core/journals/political-analysis/article/abs/text-preprocessing-for-unsupervised-learning-why-it-matters-when-it-misleads-and-what-to-do-about-it/AA7D4DE0AA6AB208502515AE3EC6989E). They've written an R package to execute the recommendations from their paper, which you can download directly from github. Note that there are a ton of dependencies associated with the package. You can see a vignette describing the use of `preText` [here](http://www.mjdenny.com/getting_started_with_preText.html).
+
+Install the package first
+
+```{r}
+#install.packages("devtools")
+devtools::install_github("matthewjdenny/preText")
+library(preText)
+```
+
+We use the U.S. presidential inaugural speeches from Quanteda example data
+
+```{r}
+corp <- data_corpus_inaugural
+# use first 10 documents for example
+documents <- corp[1:10,]
+# take a look at the document names
+print(names(documents))
+```
+
+Having loaded in some data, we can now make use of the `factorial_preprocessing()` function, which will preprocess the data 64 or 128 different ways (depending on whether n-grams are included). In this example, we are going to preprocess the documents all 128 different ways. This should take between 5 and 10 minutes on most modern laptops. Longer documents and larger numbers of documents will significantly increase run time and memory usage.
+
+```{r}
+preprocessed_documents <- factorial_preprocessing(
+    documents,
+    use_ngrams = TRUE,
+    infrequent_term_threshold = 0.2,
+    verbose = FALSE)
+```
+
+This function will output a list object with three fields. The first of these is `$choices`, a data.frame containing indicators for each of the preprocessing steps used. The second is `$dfm_list`, which is a list with 64 or 128 entries, each of which contains a `quanteda::dfm` object preprocessed according to the specification in the corresponding row in `choices`. Each DFM in this list will be labeled to match the row names in choices, but you can also access these labels from the `$labels` field. We can look at the first few rows of `choices` below:
+
+```{r}
+names(preprocessed_documents)
+
+head(preprocessed_documents$choices)
+```
+
+Now that we have our preprocessed documents, we can perform the preText procedure on the factorial preprocessed corpus using the `preText()` function. It will be useful now to give a name to our data set using the `dataset_name` argument, as this will show up in some of the plots we generate with the output.
+
+```{r}
+preText_results <- preText(
+    preprocessed_documents,
+    dataset_name = "Inaugural Speeches",
+    distance_method = "cosine",
+    num_comparisons = 20,
+    verbose = FALSE)
+```
+
+The `preText()` function returns a list of result with four fields:
+
+1.  `$preText_scores`: A data.frame containing preText scores and preprocessing step labels for each preprocessing step as columns. Note that there is no preText score for the case of no prepprocessing steps.
+
+2.  `$ranked_preText_scores`: A data.frame that is identical to \$preText_scores except that it is ordered by the magnitude of the preText score
+
+3.  `$choices`: A data.frame containing binary indicators of which preprocessing steps were applied to factorial preprocessed DFM.
+
+4.  `$regression_results`: A data.frame containing regression results where indicators for each preprocessing decision are regressed on the preText score for that specification.
+
+We can now feed these results to two functions that will help us make better sense of them. `preText_score_plot()` creates a dot plot of scores for each preprocessing specification:
+
+```{r}
+preText_score_plot(preText_results)
+```
+
+Here, the least risky specifications have the lowest preText score and are displayed at the top of the plot. We can also see the conditional effects of each preprocessing step on the mean preText score for each specification that included that step. Here again, a negative coefficient indicates that a step tends to reduce the unusualness of the results, while a positive coefficient indicates that applying the step is likely to produce more unusual results for that corpus.
+
+```{r}
+regression_coefficient_plot(preText_results,
+                            remove_intercept = TRUE)
+```
+
+In this particular toy example, we see that including n-grams and removing stop words tends to produce more "normal" results, while removing punctuation tends to produce more unusual results.
+
+# N-grams and `phrasemachine`
+
+Like mentioned in the lecture, curse of dimensionality means we get lots of meaningless bigrams, trigrams (e.g. "is", "is of", "is of the"). What if we want to find substantively meaningful n-grams? The solution is `phrasemachine`.
+
+```{r}
+devtools::install_github("slanglab/phrasemachine/R/phrasemachine")
+  
+library(phrasemachine)                      
+```
+
+We load in the U.S. presidential inaugural speeches from Quanteda example data, and use the first 5 documents for example.
+
+```{r}
+corp <- quanteda::corpus(quanteda::data_corpus_inaugural)
+
+documents <- as.character(corp)[1:5]
+print(names(documents))
+```
+
+Phrasemachine provides one main function: `phrasemachine()`, which takes as input a vector of strings (one string per document), or a `quanteda` corpus object. This function returns phrases extracted from the input documents in one of two forms. Find more information [here](https://www.mjdenny.com/getting_started_with_phrasemachine.html)
+
+```{r}
+phrases <- phrasemachine(documents,
+                         minimum_ngram_length = 2,
+                         maximum_ngram_length = 8,
+                         return_phrase_vectors = TRUE,
+                         return_tag_sequences = TRUE)
+
+# look at some example phrases
+print(phrases[[1]]$phrases[1:10])
+```
+
+# Readability
+
+While we've covered some pre-processing above, we're going to take a detour now before we head into representing texts next week. One form of analysis that can occassionally be interesting, though with limitations, is the readability of a text. The general idea here is that some forms of composition are easier to understand, while others may take more scrutiny. Interestingly, most of these are based on transformations around some basic aspects of text: the length of words or sentences, for instance.
+
+There are loads of actual measures for readability; fortunately, nearly all are included with the quanteda. For the full list, check out the reference page [here](https://quanteda.io/reference/textstat_readability.html). Here, we'll play around and check out the readability of Philosopher's Stone by chapter, to see how the book progresses.
+
+```{r}
+library(quanteda)
+library(quanteda.textstats)
+library(ggplot2)
+# calculate readability
+readability <- textstat_readability(philosophers_stone_corpus, 
+                                    measure = c("Flesch.Kincaid")) 
+
+# add in a chapter number
+readability$chapter <- c(1:nrow(readability))
+
+# look at the dataset
+head(readability)
+
+# plot results
+ggplot(readability, aes(x = chapter, y = Flesch.Kincaid)) +
+  geom_line() + 
+  geom_smooth() + 
+  theme_bw()
+```
+
+That's interesting, but as I noted, we have lots of options. Lets take a look at a couple of others.
+
+```{r}
+readability <- textstat_readability(philosophers_stone_corpus, 
+                                    measure = c("Flesch.Kincaid", "FOG", "Coleman.Liau.grade")) 
+
+# add in a chapter number
+readability$chapter <- c(1:nrow(readability))
+
+# look at the dataset
+head(readability)
+
+# plot results
+ggplot(readability, aes(x = chapter)) +
+  geom_line(aes(y = Flesch.Kincaid), color = "black") + 
+  geom_line(aes(y = FOG), color = "red") + 
+  geom_line(aes(y = Coleman.Liau.grade), color = "blue") + 
+  theme_bw()
+
+readability%>%
+  summarize(mean_readability = mean(Flesch.Kincaid))
+```
+
+The shapes are all pretty close. Let's look at some correlations.
+
+```{r}
+cor(readability$Flesch.Kincaid, readability$FOG, use = "complete.obs")
+cor(readability$Coleman.Liau.grade, readability$FOG, use = "complete.obs")
+cor(readability$Coleman.Liau.grade,readability$Flesch.Kincaid,  use = "complete.obs")
+```
+
+## Deathly Hallows Readability
+### Set up Corpus
+
+```{r}
+deathly_hallows_corpus <- corpus(deathly_hallows)
+deathly_hallows_summary <- summary(deathly_hallows_corpus) 
+#deathly_hallows_summary
+
+deathly_hallows_summary$book <- "Deathly Hallows"
+
+# create a chapter indicator
+deathly_hallows_summary$chapter <- as.numeric(str_extract(deathly_hallows_summary$Text, "[0-9]+"))
+
+# add the metadata
+docvars(deathly_hallows_corpus) <- deathly_hallows_summary
+
+deathly_hallows_summary
+```
+
+### Calculate Readability
+
+```{r}
+# calculate readability
+readability <- textstat_readability(deathly_hallows_corpus, 
+                                    measure = c("Flesch.Kincaid")) 
+
+# add in a chapter number
+readability$chapter <- c(1:nrow(readability))
+
+# look at the dataset
+head(readability)
+
+# plot results
+ggplot(readability, aes(x = chapter, y = Flesch.Kincaid)) +
+  geom_line() + 
+  geom_smooth() + 
+  theme_bw()
+```
+
+```
+
+This is a little bit of the story and is pretty straightforward. Remember how all of these are just "magic number" transformations of the same underlying measures (syllables, word counts, sentence length, etc.)? Because of that, they are generally really highly correlated. That's a good thing.
+
+So what's the downside? Well, I can't do any better to explain the problem than Mark Liberman's Language Log post [here](https://languagelog.ldc.upenn.edu/nll/?p=21847).

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Tutorial_3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">DACSS758</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./CheckIn1.html"> 
+<span class="menu-text">Check In 1</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#nicely-formatted-data" id="toc-nicely-formatted-data" class="nav-link active" data-scroll-target="#nicely-formatted-data">Nicely Formatted Data</a></li>
+  <li><a href="#less-nicely-formatted-data" id="toc-less-nicely-formatted-data" class="nav-link" data-scroll-target="#less-nicely-formatted-data">Less Nicely Formatted Data</a></li>
+  <li><a href="#a-quick-analysis" id="toc-a-quick-analysis" class="nav-link" data-scroll-target="#a-quick-analysis">A Quick Analysis</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tutorial 3 Web Scraping in R</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This tutorial walks you through the process of using the package <code>rvest</code> to scrape websites using R. rvest (sounds like “harvest”, get it?) is the workhorse package for text scraping in R and contains all of the functionality for basic scraping applications. We’ll start by loading the package and tidyverse more generally so that we can use many of the tidyverse functions later on.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("rvest")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter()         masks stats::filter()
+✖ readr::guess_encoding() masks rvest::guess_encoding()
+✖ dplyr::lag()            masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+<section id="nicely-formatted-data" class="level1">
+<h1>Nicely Formatted Data</h1>
+<p>Let’s start with a simple example; we’ll use the work from the Stanford Data Challenge Lab prepared by Sara Altman and Bill Behrman. Specifically, let’s say you are interested in the study of famines and come across <a href="https://ourworldindata.org/famines#the-our-world-in-data-dataset-of-famines">this website</a>. Wonderful! But how can we get this into a format for analysis? Time to waste a lot of hours on manually entering the data or maybe we have some spare funds to hire an undergrad…</p>
+<p>Fortunately, that’s not true. With <code>rvest</code> this is arbitrarily easy. First, we can tell R the webpage we are looking at.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the url</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://ourworldindata.org/famines#the-our-world-in-data-dataset-of-famines"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Of course, we can’t just read that webpage in because webpages are filled with all variety of — from our perspective — junk.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what happens when we just read that in; it's a full webpage</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_html</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{html_document}
+&lt;html class="js-disabled"&gt;
+[1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
+[2] &lt;body&gt;\n&lt;header class="site-header"&gt;&lt;div class="site-navigation-root"&gt;&lt;di ...</code></pre>
+</div>
+</div>
+<p>Yeah, that’s not helpful. Instead, we need to identify just the table. This is the hardest part, but it’s not really too difficult. If you are familiar with HTML / CSS, then you might be able to just inspect the HTML to identify the correct selector. If you are in a Chrome browser, for instance, you can right click then select “Inspect”.</p>
+<p>If you are less familiar, you can use SelectorGadget, a Chrome add-on that lets you — for whatever webpage you are visiting — “select” the portion of a page you are interested in scraping. SelectorGadget will then highlight whatever the Selector (in the bar at the bottom) would return. Once you’ve identified the Selector that works for the element of interest to you, you can add that to our code and you are off and running.</p>
+<p>Note that, especially if you aren’t familiar, this is going to take some time to get used to and require some patience and practice. Take a moment now to install the SelectorGadget Chrome extension, then play around with SelectorGadget on the <a href="https://ourworldindata.org/famines#the-our-world-in-data-dataset-of-famines">website</a> until you can correctly identify “table”, the CSS selector that will let us pull the table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use SelectorGadget to find the info</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>css_selector <span class="ot">&lt;-</span> <span class="st">"table"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once we have the correct selector, we still need to (1) read the full html, (2) select out the portion that we are interested in, and (3) start formatting. That third step is really particularly easy when what we are pulling is already in tabular format. So, for example, here’s how we could read our table of data on famines into R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pull the table</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>url <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="at">css =</span> css_selector) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 77 × 6
+   Year      Country           Excess Mortality midpoin…¹ Excess Mortality low…²
+   &lt;chr&gt;     &lt;chr&gt;             &lt;chr&gt;                      &lt;chr&gt;                 
+ 1 1846–52   Ireland           1,000,000                  1,000,000             
+ 2 1860-1    India             2,000,000                  2,000,000             
+ 3 1863-67   Cape Verde        30,000                     30,000                
+ 4 1866-7    India             961,043                    961,043               
+ 5 1868      Finland           100,000                    100,000               
+ 6 1868-70   India             1,500,000                  1,500,000             
+ 7 1870–1871 Persia (now Iran) 1,000,000                  500,000               
+ 8 1876–79   Brazil            750,000                    500,000               
+ 9 1876–79   India             7,176,346                  6,135,000             
+10 1877–79   China             11,000,000                 9,000,000             
+# ℹ 67 more rows
+# ℹ abbreviated names: ¹​`Excess Mortality midpoint`, ²​`Excess Mortality lower`
+# ℹ 2 more variables: `Excess Mortality upper` &lt;chr&gt;, Source &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>And if we wanted to save that, we’d just assign the prior chunk of code to an list item object. Then, we’d be ready for analysis.</p>
+</section>
+<section id="less-nicely-formatted-data" class="level1">
+<h1>Less Nicely Formatted Data</h1>
+<p>Of course, more likely than not we will be encountering data that aren’t so nice and tidy. This is particularly true for web scraping when the item of interest is text data, which rarely appear in tables like the one above.</p>
+<p>Let’s try out an example. We’ll look at yelp reviews for everyone’s favorite brutalist building: Hotel UMass.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># start by defining the url we want</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.umass.edu/public-policy/dacss-core-faculty"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># now define the field we want</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>css_selector <span class="ot">&lt;-</span> <span class="st">"td"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>faculty <span class="ot">&lt;-</span> url <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">css =</span> css_selector) <span class="sc">%&gt;%</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>faculty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Soo Young BaeAssociate Professor of Communication"                                  
+ [2] "Forrest BowlickSenior Lecturer of Geosciences"                                      
+ [3] "David CortProfessor of Sociology"                                                   
+ [4] "Jane FountainDistinguished Professor of Public Policy"                              
+ [5] "Ina GanguliProfessor of Economics"                                                  
+ [6] "Krista GileProfessor of Math and Statistics"                                        
+ [7] "Justin GrossAssociate Professor of Political Science"                               
+ [8] "Tyler HoranLecturer of Data Analytics and Computational Social Science"             
+ [9] "Jason KamilarProfessor of Anthropology"                                             
+[10] "Scott MonroeAssociate Professor of Education"                                       
+[11] "Brendan O’ConnorAssociate Professor of Computer Science"                            
+[12] "Anthony PaikProfessor of Sociology"                                                 
+[13] "Rosemary PangLecturer of Data Analytics and Computational Social Science"           
+[14] "Crystal PaulSenior Lecturer of Data Analytics and Computational Social Science"     
+[15] "Henry RenskiProfessor of Landscape Architecture and Regional Planning"              
+[16] "Doug RiceAssociate Professor of Political Science &amp; Legal Studies"                  
+[17] "Meredith RolfeAssociate Professor of Political Science"                             
+[18] "Kelsey ShoubAssistant Professor of Public Policy"                                   
+[19] "Eunkyung SongLecturer of Data Analytics and Computational Social Science"           
+[20] "Carey StapletonLecturer of Data Analytics and Computational Social Science"         
+[21] "Alexander TheodoridisAssociate Professor of Political Science"                      
+[22] "Viviana WuAssistant Professor of Public Policy"                                     
+[23] "Weiai (Wayne) XuAssociate Professor of Communication"                               
+[24] "Omer YalcinLecturer of Data Analytics and Computational Social Science"             
+[25] "Kevin YoungProfessor of Economics"                                                  
+[26] "Erico YuLecturer of Data Analytics and Computational Social Science"                
+[27] "Ethan ZuckermanAssociate Professor of Public Policy, Communication, and Information"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># start by defining the url we want</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># now define the field we want</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>css_selector1 <span class="ot">&lt;-</span> <span class="st">"li.y-css-mu4kr5"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>css_selector2<span class="ot">&lt;-</span><span class="st">"#reviews"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>css_selector<span class="ot">&lt;-</span><span class="st">"#reviews"</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>reviews <span class="ot">&lt;-</span> url <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">css =</span> css_selector1) <span class="sc">%&gt;%</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>reviews</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Tara H.Newport, RI7096Nov 25, 2018I booked this place after I decided we should stay overnight after Thanksgiving dinner with family in the area.  I am UMass alumni and was feeling nostalgic so when I started looking for rooms and came across the hotel (which I had forgotten was even there) I got excited about the prospect of being on the campus again.The good:  it really is a decent hotel.  Nice and modern and updated and comfortable.  They have water bottles in the room that can be used to get spring water downstairs for the duration of your stay.  I thought that this was a very nice touch since when I need a drink at night I usually end up using a plastic cup to get water out of the tap.  They also have a limited continental breakfast that does the job for some.  Would have been fine for me but left something to be desired for my kids.  The gentleman checking us in at the front desk was friendly and helpful.  We were only staying for one night during Thanksgiving so the campus was pretty much deserted but I would definitely come back and stay for longer.  The location in the center of campus in the student center with access to tons of food options and amenities is awesome.  Perfect spot from which to access and explore the entire campus.The not so good:  Hardly anything.  You only get one parking space in the garage.  Not usually an issue but because my mother was staying with us she had to pay the $20 parking fee.  Not a huge deal but I like open access to parking.  The bathroom was so teeny you can barely even turn around in there!  It does have a nice large stand-up shower which again was fine for me but my 8-year-old son lamented that he couldn't take a bath which he really wanted to do.   I would definitely recommend staying here if your main focus is seeing the campus.  You cannot beat the location and it's a pretty decent place.  Don't let the fact that it's a college hotel scare you!Helpful 1Helpful 2Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                              
+ [2] "Joe M.Dartmouth, MA0245Sep 18, 20211 photoWhat a disaster!! What kind of hotel has only one clerk on during a rush period? After a long day and Football game we went to check in an there was a line of at least 20 people waiting to check in. Ya think they might actually have some staff on to handle the anticipated crowd trying to check inA long line of people being forced to wait for over an hour to simply check in!Helpful 1Helpful 2Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+ [3] "Greg H.Wethersfield, CT04Jul 10, 2022They claim to have no rooms available during the summer but I have a hard time believing that.Helpful 1Helpful 2Thanks 0Thanks 1Love this 0Love this 1Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+ [4] "Mike D.Elite 24Ridgefield, CT34248364May 9, 2019The great: location, location, location,they've got it and you want it. So they make you pay for it. Also great covered garage parking, restaurants, pub, and nice managers reception at night and all food is great.The good, decent room, comfortable beds, in room keurig The bad, noisy, especially if near elevator, small bathroom. Pillows aren't very good, we bring ours.not very many outlets and no usb chargingThe ugly, no mini fridge for your stuff like a white wine, weird.  No safe. 3 night minimum at peak times like graduation so $900 for a stay 3x300=900SummaryWe keep coming back, so we think it's worth itHelpful 1Helpful 2Thanks 0Thanks 1Love this 0Love this 1Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ [5] "Kim S.Coos, NH617Sep 18, 2021We book our stay over a month in advance. We were traveling to see our son and take in a show. Check in time was 3:00pm. We arrived at 3:15. There were several people in the lobby who all looked unhappy. The was a sign on the front desk that said due to staffing shortages the desk was closed and would open at 6. We left to take our son to dinner and a show. We call all the numbers for the hotel to no avail. We then called Umass police. They said many people had called. They did not know why it was not ope either. Now we are driving to Framingham to the closest hotel with availability. Do not stay there. Ruined a nice weekend.Helpful 3Helpful 4Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ [6] "Howie B.Elite 24Needham, MA45135568Jun 23, 2016It was wonderful to be back at my Alma Mater! Stayed two nights in connection with my son's New Student Orientation. It was a terrific stay and it is wonderfully convenient to be situated right on campus. Having attended in the '80s, the hotel always felt aesthetically cold - both inside and out (lots of poured concrete will do that. Housed in the university's Campus Center, one of the New Student Program tour guides referred to the hotel's exterior as looking like a \"waffle iron.\" I had never heard that before, yet it is indeed true.) However, as new buildings continue to rise up around it, the Campus Center building seems to have become more charming over the years.Inside the hotel they have professionalized their operation and \"warmed-up\" the public spaces, redecorated their rooms and offer amenities like a substantial continental breakfast and free wifi (there was no wifi back in the '80s :-) There are amazing food options in the new Blue Wall on the Campus Center concourse level. Previously an aged bar on campus, this has been totally redesigned as a state-of-the-art \"food court\" with eye-popping selections (a bakery, gelateria, Mexican and Asian stations, sushi, deli, pizza, salad bar, and much more (UMASS's food service is among the most-awarded for colleges and universities in the US!)We stayed in a \"pond view\" room which offered a stunning (at least it was to me) view of the center of campus. The room was very clean, updated and well-appointed. The bed was among the most comfortable I've ever slept in. The bathroom, which was on the small side making it difficult to close the door once inside, was updated and was serviceable. One small gripe is that they don't provide bar soap in the shower, instead providing a tiny tube of body wash. I actually ran into the Hotel Manager, Rachelle Allen, during my stay (she could not have been more personable and lovely) and noted this to her. She indicated that this is done in an effort to economize and avoid waste. However, she said she would be happy to send up bar soap if requested.This was a wonderful and very pleasant stay and it was great to be back on campus. I look forward to many more stays over the next four years!Helpful 2Helpful 3Thanks 0Thanks 1Love this 0Love this 1Oh no 0Oh no 1"
+ [7] "Kat Y.Elite 24Newport, RI37206277Mar 9, 2019Clean, easy, convenient. Bring your own conditioner, they do not produce any. This was a major problem for my textured hair. This is the best place to say if you have business at the Flagship UMass campus.Helpful 3Helpful 4Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+ [8] "Chris K.Elite 24Bloomfield Township, MI118851149Feb 17, 2019I admit I wasn't sure what to expect on arrival, viewing the exterior - which I later learned was a brutalist architectural style. Staff were very friendly on check-in and quickly got me settled in my quiet room with good views of the surrounding campus. The two-queen room was spacious and very clean. My only cons would be the wireless internet (good speed, reliable) seemed to kick you off a few times per day and force you to re-enter the password each time, and it was very quiet - nice to have at least a fan on the AC unit that can create a little white noise for sleeping at night. Breakfast buffet in the morning, cookies on the check-in counter, lots of nice touches. Was overall very happy here, and would happily stay again!Helpful 1Helpful 2Thanks 0Thanks 1Love this 0Love this 1Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+ [9] "Roy A.Elite 24Alexandria, VA3574525829Apr 3, 2018The five stars is based on basic services and the desire to be located in the center of UMass Amherst while doing a tour. Being on campus is the bonus, the room was small but very clean, room service was prompt and no issues. The price is very reasonable and I highly recommend the hotel. It has no high end feature so if your looking for luxuries you may need to look elsewhere. Unlimited access to parking in the connected garage and multiple dining options also a plus.Helpful 1Helpful 2Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+[10] "Kevin J.Philadelphia, PA195642126Mar 24, 2011I much prefer staying here than the newer-built hotels up in the town of Amherst.  The central campus location of UMass Hotel Campus Center is not only the most convenient, it's actually picturesque. They offer a view of the little pond and the trees in late autumn are particularly breathtaking - the entrance plaza stairs could even be called artistic.  UMass offers a reduced rate specific for students and their guests. They offer the most convenient location for walking to campus events at the Mullins Center and other facilities. They offer indoor swimming pool access. Would stay here again in a heartbeat.  Although simple accommodations, it still makes for a very comfortable setting.  Qualifies for my Best of the A10 list... no other hotel in Amherst or Springfield comes close to providing the same convenience or at-home feeling.Helpful 2Helpful 3Thanks 0Thanks 1Love this 0Love this 1Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+[11] ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </code></pre>
+</div>
+</div>
+<p>There are 10 reviews on each page, but we find an extra empty review [11]. So we want to filter out empty reviews.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="ot">&lt;-</span> reviews[reviews <span class="sc">!=</span> <span class="st">""</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>reviews</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Tara H.Newport, RI7096Nov 25, 2018I booked this place after I decided we should stay overnight after Thanksgiving dinner with family in the area.  I am UMass alumni and was feeling nostalgic so when I started looking for rooms and came across the hotel (which I had forgotten was even there) I got excited about the prospect of being on the campus again.The good:  it really is a decent hotel.  Nice and modern and updated and comfortable.  They have water bottles in the room that can be used to get spring water downstairs for the duration of your stay.  I thought that this was a very nice touch since when I need a drink at night I usually end up using a plastic cup to get water out of the tap.  They also have a limited continental breakfast that does the job for some.  Would have been fine for me but left something to be desired for my kids.  The gentleman checking us in at the front desk was friendly and helpful.  We were only staying for one night during Thanksgiving so the campus was pretty much deserted but I would definitely come back and stay for longer.  The location in the center of campus in the student center with access to tons of food options and amenities is awesome.  Perfect spot from which to access and explore the entire campus.The not so good:  Hardly anything.  You only get one parking space in the garage.  Not usually an issue but because my mother was staying with us she had to pay the $20 parking fee.  Not a huge deal but I like open access to parking.  The bathroom was so teeny you can barely even turn around in there!  It does have a nice large stand-up shower which again was fine for me but my 8-year-old son lamented that he couldn't take a bath which he really wanted to do.   I would definitely recommend staying here if your main focus is seeing the campus.  You cannot beat the location and it's a pretty decent place.  Don't let the fact that it's a college hotel scare you!Helpful 1Helpful 2Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                              
+ [2] "Joe M.Dartmouth, MA0245Sep 18, 20211 photoWhat a disaster!! What kind of hotel has only one clerk on during a rush period? After a long day and Football game we went to check in an there was a line of at least 20 people waiting to check in. Ya think they might actually have some staff on to handle the anticipated crowd trying to check inA long line of people being forced to wait for over an hour to simply check in!Helpful 1Helpful 2Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+ [3] "Greg H.Wethersfield, CT04Jul 10, 2022They claim to have no rooms available during the summer but I have a hard time believing that.Helpful 1Helpful 2Thanks 0Thanks 1Love this 0Love this 1Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+ [4] "Mike D.Elite 24Ridgefield, CT34248364May 9, 2019The great: location, location, location,they've got it and you want it. So they make you pay for it. Also great covered garage parking, restaurants, pub, and nice managers reception at night and all food is great.The good, decent room, comfortable beds, in room keurig The bad, noisy, especially if near elevator, small bathroom. Pillows aren't very good, we bring ours.not very many outlets and no usb chargingThe ugly, no mini fridge for your stuff like a white wine, weird.  No safe. 3 night minimum at peak times like graduation so $900 for a stay 3x300=900SummaryWe keep coming back, so we think it's worth itHelpful 1Helpful 2Thanks 0Thanks 1Love this 0Love this 1Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ [5] "Kim S.Coos, NH617Sep 18, 2021We book our stay over a month in advance. We were traveling to see our son and take in a show. Check in time was 3:00pm. We arrived at 3:15. There were several people in the lobby who all looked unhappy. The was a sign on the front desk that said due to staffing shortages the desk was closed and would open at 6. We left to take our son to dinner and a show. We call all the numbers for the hotel to no avail. We then called Umass police. They said many people had called. They did not know why it was not ope either. Now we are driving to Framingham to the closest hotel with availability. Do not stay there. Ruined a nice weekend.Helpful 3Helpful 4Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ [6] "Howie B.Elite 24Needham, MA45135568Jun 23, 2016It was wonderful to be back at my Alma Mater! Stayed two nights in connection with my son's New Student Orientation. It was a terrific stay and it is wonderfully convenient to be situated right on campus. Having attended in the '80s, the hotel always felt aesthetically cold - both inside and out (lots of poured concrete will do that. Housed in the university's Campus Center, one of the New Student Program tour guides referred to the hotel's exterior as looking like a \"waffle iron.\" I had never heard that before, yet it is indeed true.) However, as new buildings continue to rise up around it, the Campus Center building seems to have become more charming over the years.Inside the hotel they have professionalized their operation and \"warmed-up\" the public spaces, redecorated their rooms and offer amenities like a substantial continental breakfast and free wifi (there was no wifi back in the '80s :-) There are amazing food options in the new Blue Wall on the Campus Center concourse level. Previously an aged bar on campus, this has been totally redesigned as a state-of-the-art \"food court\" with eye-popping selections (a bakery, gelateria, Mexican and Asian stations, sushi, deli, pizza, salad bar, and much more (UMASS's food service is among the most-awarded for colleges and universities in the US!)We stayed in a \"pond view\" room which offered a stunning (at least it was to me) view of the center of campus. The room was very clean, updated and well-appointed. The bed was among the most comfortable I've ever slept in. The bathroom, which was on the small side making it difficult to close the door once inside, was updated and was serviceable. One small gripe is that they don't provide bar soap in the shower, instead providing a tiny tube of body wash. I actually ran into the Hotel Manager, Rachelle Allen, during my stay (she could not have been more personable and lovely) and noted this to her. She indicated that this is done in an effort to economize and avoid waste. However, she said she would be happy to send up bar soap if requested.This was a wonderful and very pleasant stay and it was great to be back on campus. I look forward to many more stays over the next four years!Helpful 2Helpful 3Thanks 0Thanks 1Love this 0Love this 1Oh no 0Oh no 1"
+ [7] "Kat Y.Elite 24Newport, RI37206277Mar 9, 2019Clean, easy, convenient. Bring your own conditioner, they do not produce any. This was a major problem for my textured hair. This is the best place to say if you have business at the Flagship UMass campus.Helpful 3Helpful 4Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+ [8] "Chris K.Elite 24Bloomfield Township, MI118851149Feb 17, 2019I admit I wasn't sure what to expect on arrival, viewing the exterior - which I later learned was a brutalist architectural style. Staff were very friendly on check-in and quickly got me settled in my quiet room with good views of the surrounding campus. The two-queen room was spacious and very clean. My only cons would be the wireless internet (good speed, reliable) seemed to kick you off a few times per day and force you to re-enter the password each time, and it was very quiet - nice to have at least a fan on the AC unit that can create a little white noise for sleeping at night. Breakfast buffet in the morning, cookies on the check-in counter, lots of nice touches. Was overall very happy here, and would happily stay again!Helpful 1Helpful 2Thanks 0Thanks 1Love this 0Love this 1Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+ [9] "Roy A.Elite 24Alexandria, VA3574525829Apr 3, 2018The five stars is based on basic services and the desire to be located in the center of UMass Amherst while doing a tour. Being on campus is the bonus, the room was small but very clean, room service was prompt and no issues. The price is very reasonable and I highly recommend the hotel. It has no high end feature so if your looking for luxuries you may need to look elsewhere. Unlimited access to parking in the connected garage and multiple dining options also a plus.Helpful 1Helpful 2Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+[10] "Kevin J.Philadelphia, PA195642126Mar 24, 2011I much prefer staying here than the newer-built hotels up in the town of Amherst.  The central campus location of UMass Hotel Campus Center is not only the most convenient, it's actually picturesque. They offer a view of the little pond and the trees in late autumn are particularly breathtaking - the entrance plaza stairs could even be called artistic.  UMass offers a reduced rate specific for students and their guests. They offer the most convenient location for walking to campus events at the Mullins Center and other facilities. They offer indoor swimming pool access. Would stay here again in a heartbeat.  Although simple accommodations, it still makes for a very comfortable setting.  Qualifies for my Best of the A10 list... no other hotel in Amherst or Springfield comes close to providing the same convenience or at-home feeling.Helpful 2Helpful 3Thanks 0Thanks 1Love this 0Love this 1Oh no 0Oh no 1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </code></pre>
+</div>
+</div>
+<p>That’s great, but as you can see it only pulls the first 10 reviews. We’d ideally like to have them all. To do so, we need to iterate through the pages. This takes some understanding of how Yelp sets up their website. Here’s the URL we were using</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass"</code></pre>
+</div>
+</div>
+<p>If you head to that webpage, you’ll notice that only the first set of reviews is actually present. How might we get the second set? The easiest way would be if we could identify some standard language that Yelp is using that we can then leverage to “loop” through each page (that is, run the same operation as above for each page). To see how Yelp lays everything out, click through to the second page of reviews. Here’s the URL for that page, and a comparison of the two URLs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>new_url <span class="ot">&lt;-</span> <span class="st">"https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass&amp;start=10"</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print these next to each other</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>new_url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass&amp;start=10"</code></pre>
+</div>
+</div>
+<p>Aha! That shows us how they are indexing the pages, with a little statement :“&amp;start=10”. The indexing here is kind of weird but if you click on the next set, you’ll see that 10 jumps up to 20. So they are counting by 10 and creating a new page each time. We can use that to set up a loop. Ostensibly, you could identify the total number of pages is 4 pages. The first page is — as we just saw — unnumbered, and then each thereafter is indexed by 10. Because the first is unnumbered, we’ll subtract one from our number of pages to loop through.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the indices</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>pageNumber <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get an idea of what we just created</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pageNumber)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 20 30</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pageNumber)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set up a new vector to store the urls</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>urls <span class="ot">&lt;-</span> url</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># loop through the page numbers and create the new urls</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(pageNumber)){</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  urls <span class="ot">&lt;-</span> <span class="fu">c</span>(urls, <span class="fu">paste</span>(<span class="st">"https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass&amp;start="</span>,pageNumber[i], <span class="at">sep =</span> <span class="st">""</span>))</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the first few</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(urls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass"         
+[2] "https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass&amp;start=10"
+[3] "https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass&amp;start=20"
+[4] "https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass&amp;start=30"</code></pre>
+</div>
+</div>
+<p>Now that we have all of the urls, we can loop through each pulling the reviews from each page. To do so, we need to create a new vector that will store all of the reviews; otherwise, we’ll just be overwriting our review object in each loop.</p>
+<p>Note that this will take a couple of minutes; we’re iterating through 4 pages after all.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set up an empty vector to store reviews</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>reviews <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># loop through urls</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(urls)){</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># extract reviews for this url</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  tmpReviews <span class="ot">&lt;-</span> urls[i] <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">css =</span> css_selector1) <span class="sc">%&gt;%</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add them to the set of reviews</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  reviews <span class="ot">&lt;-</span> <span class="fu">c</span>(reviews,tmpReviews)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co">#filter out empty reviews</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>reviews <span class="ot">&lt;-</span> reviews[reviews <span class="sc">!=</span> <span class="st">""</span>]</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the 12th reviews</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>reviews[<span class="dv">15</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Barbara A.Elite 24East Watertown, MA605645277Apr 17, 2013This brings back memories ... they last time I was here, I was a senior in college and I just lost my housing and had no where to go.  Luckily, every year, my mom would make a reservation here for herself so she could rest up before heading home after dropping me off.  Nice improvements! The rooms are very nice if not still on the small side, but I will take clean over size any day.  If you have to be on campus early, I suggest staying here so you can just roll out and go.  We had gone to dinner before we checked in and brought back leftovers but ... there was no fridge.  We looked everywhere because we were so sure there would be one but no.  They have complimentary water in the room and they have continental breakfast which is decent.The -1 star for check in  ... we got there about 10 pm and we waited but no one was at the desk (and a line was forming behind me).  I finally ended up calling the hotel and saying could someone take care of the people at the front desk and they were right on it. Other than that, a good hotel experience.Helpful 1Helpful 2Thanks 0Thanks 1Love this 1Love this 2Oh no 0Oh no 1"</code></pre>
+</div>
+</div>
+<p>There’s a few things we’d want to do from here. We could expand the extraction to identify all sorts of other aspects of each review — the name, location, and prior reviews by a reviewer; the overall rating as well as the rating across different categories; and so on — and add those extractions to each stage of our loop. We’ll leave those steps to future analyses.</p>
+</section>
+<section id="a-quick-analysis" class="level1">
+<h1>A Quick Analysis</h1>
+<p>With the text scraped from the site, we can use a bit of what we’ve done in past tutorials (and will continue to do going forward) to take a look at what folks are saying about Hotel UMass.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Package version: 4.1.0
+Unicode version: 14.0
+ICU version: 71.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Parallel computing: disabled</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>See https://quanteda.io for tutorials and examples.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to corpus</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>hotel_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(reviews)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create a word cloud</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>hotel_dfm <span class="ot">&lt;-</span> <span class="fu">tokens</span>(hotel_corpus, <span class="at">remove_punct=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>          <span class="fu">tokens_select</span>(<span class="at">pattern=</span><span class="fu">stopwords</span>(<span class="st">"en"</span>),</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">selection=</span><span class="st">"remove"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>          <span class="fu">dfm</span>()</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(hotel_dfm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Tutorial3_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It’s hard to find a pattern. Since we included the buttons “helpful”, “thanks”, etc. under the reviews, the most common words are “1love”, “0oh”. Also, since we are interested in hotel reviews, we also see common words such as “hotel”, “rooms”, “campus”, etc. Let’s see if we can remove these words.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>hotel_dfm2 <span class="ot">&lt;-</span> <span class="fu">tokens</span>(hotel_corpus,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">remove_punct=</span><span class="cn">TRUE</span>,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_select</span>(<span class="at">pattern=</span><span class="fu">c</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>),</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">"hotel"</span>,<span class="st">"rooms"</span>,<span class="st">"room"</span>,<span class="st">"umass"</span>,<span class="st">"campus"</span>),<span class="at">selection=</span><span class="st">"remove"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Regular expression that matches words that start with numbers followed by letters</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tokens_select</span>(<span class="at">pattern =</span> <span class="st">"^</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">w+$"</span>, <span class="at">selection =</span> <span class="st">"remove"</span>, <span class="at">valuetype =</span> <span class="st">"regex"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">dfm</span>()</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(hotel_dfm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Tutorial3_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now the reviews are pretty obvious! Good job Hotel UMass!</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Everything here worked well. But what if we have a website that doesn’t follow the same nice URL nomenclature / pattern that we found above? In that case, we’ll need to resort to RSelenium. We’ll leave that for another tutorial.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

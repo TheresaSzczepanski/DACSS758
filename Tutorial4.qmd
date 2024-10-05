@@ -1,0 +1,508 @@
+---
+title: "Tutorial 4 Natural Language Processing"
+pagetitle: Tutorial_4
+---
+
+In this tutorial, we'll learn about doing standard natural language processing (NLP) tasks in R, and will be introduced to regular expressions. After completing this notebook, you should be familar with:
+
+1.  Annotators: udpipe, spacy, and CoreNLP
+
+2.  NLP in R with `cleanNLP`
+
+3.  Annotation: `cnlp_annotate()`
+
+4.  Part of Speech Tagging
+
+5.  Dependency Relations
+
+6.  String Operations
+
+7.  Regular Expressions
+
+```{r}
+# load libraries
+library(cleanNLP)
+library(tidytext)
+library(tidyverse)
+library(quanteda)
+```
+
+# Annotators: udpipe, spacy, and CoreNLP
+
+The standard-bearer for NLP work is Stanford's CoreNLP suite ([available here](https://stanfordnlp.github.io/CoreNLP/)). Historically, that work was available in Java, with really ineffective ports to other programming languages. Fortunately, the past few years have seen major progress in making the suite more accessible in both Python and R. We're going to leverage the best package with the best port to R --- `cleanNLP` --- for our NLP tasks.
+
+Stanford's CoreNLP, though, is just one of many NLP annotation tools available with `cleanNLP`. There are two important points to highlight related to this. First, in addition to CoreNLP, `cleanNLP` can leverage spacy, a high-powered Python library; spacy is (much) faster than CoreNLP, but with some cost in classification accuracy. Second, both CoreNLP and spacy require a Python installation on your machine. Because of that, we can't run the CoreNLP or spacy code in R (it's a long story). We will be able to use the universal dependencies pipe (udpipe), so that's what we'll do here.
+
+More generally, though, you'll want to have the capacity provided by CoreNLP or spacy available for your projects on your personal machine. Therefore, you need to install Python. I recommend installing Anaconda Python ([available here](https://www.anaconda.com/download)). Once you've done that, you'll need to install the cleanNLP module within Python.
+
+# NLP in R with `cleanNLP`
+
+To get started, you'll need to initialize the NLP backend. We'll be using the udpipe backend, which comes installed with the cleanNLP package.
+
+```{r}
+cnlp_init_udpipe()
+```
+
+We have our NLP backend initialized and ready to roll. We'll be using the U.S. Presidential Inaugural Address corpus, which comes pre-loaded with quanteda. The corpus is already in your workspace (since it is pre-loaded) as data_corpus_inaugural; it features speeches from 1789 to the present, with document variables indicating the year (Year) of the speech, the last name of the president (President), and their political party (Party).
+
+```{r}
+# pull the corpus as a character vector (which works with cleanNLP) rather than a corpus object, which does not.
+text <- as.character(data_corpus_inaugural)
+
+# To give you an idea of what these look like, here's Biden's speech
+text[length(text)]
+```
+
+```{r}
+# pull out the data we want
+myData <- docvars(data_corpus_inaugural)
+head(myData)
+tail(myData)
+
+# now add the text to our data frame for running the annotation tool; column must be named `text`
+myData$text <- text
+
+#head(myData)
+```
+
+The steps we take in the above get the data ready for use with the NLP package `cleanNLP`. This is, unfortunately, a common theme in R and other open-source programming languages. The ability for users to contribute their own packages means we have an enormous amount of flexibility and progress happens fast, but the trade off is that the different packages don't always play well with one another. As you get more familiar with working in R, getting used to moving between the preferred formats of different packages becomes easier.
+
+With that said, those simple steps above are all we need to do to get our texts ready for annotation with `cleanNLP`, which takes a vector of file names, a character vector with one document in each element, or a data frame as input. If we have a corpus --- as we often do --- we can convert it to a character vector as above and be ready to annotate.
+
+# Annotation: `cnlp_annotate()`
+
+So, let's annotate. The next line is going to take a few minutes so it's a good chance to go take care of making that pot of coffee you forgot to make before starting this up.
+
+```{r}
+annotated <- cnlp_annotate(myData)
+```
+
+The output for each of the backends is going to look a little bit different, though the general structure will be consistent. Here we can start seeing what our udpipe annotation looks like. The first thing to note is that it is a very particular type of object with two fields: token and document. Both are dataframes; token is a dataframe featuring the annotations from the text, while document is a dataframe featuring just the unique document IDs. We'll primarily be interested in the former.
+
+```{r}
+head(annotated$token)
+tail(annotated$token)
+```
+
+If we wanted, we could create a single database from both of these using `doc_id` variable present in both. This is particularly helpful for downstream analyses we might want to do that would analyze --- say --- patterns over time.
+
+```{r}
+annoData <- left_join(annotated$document, annotated$token, by = "doc_id")
+head(annoData)
+tail(annoData)
+```
+
+Let's discuss what this new annotated data set provides. First, note that speeches are now organized at the token level. Three variables help us to index this new level: doc_id, the number of the document in the corpus; sid, the number of the sentence within the document; and tid, the number of the token within the sentence. At a really basic level then, we can now figure out the number of sentences within each document, and the average length (in tokens) of those sentences. Here's the former.
+
+```{r}
+# plot length of documents (in sentences) over time
+annoData %>% 
+  group_by(Year) %>% 
+  summarize(Sentences = max(sid)) %>%
+  ggplot(aes(Year, Sentences)) +
+    geom_line() +
+    geom_smooth() +
+    theme_bw()
+```
+
+This is interesting and potentially useful information. Length is incredibly simple to estimate and has been used as a proxy in published research for, among other things, the [complexity of public policies like the Affordable Care Act](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2307352) and, in the case of judicial opinions, [a host of legal characteristics of interest (dicta, law clerk influence, etc.)](https://houstonlawreview.org/article/4873-an-empirical-analysis-of-the-length-of-u-s-supreme-court-opinions). Length is also often connected with readability statistics, which we will come to in later sections of the course.
+
+That said, the real prize of the annotations are the details related to each individual token. The next three columns (token, token_with_ws, and lemma) all relate directly to the actual characters of the token. Take, as an example, "Citizens" (third row). The token is "Citizens", while the lemma is a headword for a group of related words; here, "citizen" is the lemma of "Citizens" as it is the non-plural version of the token. To get an idea of how else lemmatization changes the tokens, here's a comparison of the first 40 tokens in the dataset.
+
+```{r}
+cbind(head(annoData$token,40),
+      head(annoData$lemma,40))
+```
+
+Lemmatization can be particularly useful as a pre-processing step in some analyses; topic modeling immediately comes to mind. The general reason is that references to different forms of the same underlying token (say, "transmit", "transmitted", "transmits") all connote one related concept but are going to be treated as entirely distinct tokens if we were to say just look for the most frequent tokens in the corpus or in a speech. We'll come back to this later this semester when we discuss stemming and other related pre-processing considerations.
+
+# Part of Speech Tagging
+
+Now we are into the heart of the annotations. Let's highlight a chunk of the data to use as illustrations.
+
+```{r}
+# First tokens from Trump's speech
+head(annoData[which(annoData$Year == 2017),9:15],28)
+```
+
+Next, *upos* stands for the universal part of speech tag while *xpos* stands for the treebank-specific part of speech. You can find descriptions of each *upos* classification tag [here](https://universaldependencies.org/u/pos/index.html). Knowing the parts of speech, we could --- at a really basic level --- just look to see what nouns are most frequently used in presidential addresses overall, and in the most recent era (i.e., post 2000).
+
+```{r}
+annoData %>% 
+  filter(Party == "Republican") %>%
+  filter(Year > 1980) %>%
+  filter(upos == "NOUN") %>%
+  group_by(lemma) %>% 
+  summarize(count = n()) %>%
+  top_n(n=10) %>%
+  arrange(desc(count))
+
+annoData %>% 
+  filter(Party == "Democratic") %>%
+  filter(Year > 1980) %>%
+  filter(upos == "NOUN") %>%
+  group_by(lemma) %>% 
+  summarize(count = n()) %>%
+  top_n(n=10) %>%
+  arrange(desc(count))
+```
+
+You can further distinguish parts of speech using the feats field, which references more specific "features" related to the parts of speech. More information on the features can be found [here](https://universaldependencies.org/u/feat/index.html).
+
+# Dependency Relations
+
+Finally, the relationships between tokens are captured in dependency relations, which are reflected by syntactic annotations through `tid_source` and `relation`. The goal of dependency relations is to form a generalizable structure of language that works across languages (thus, universal dependencies). If we want to capture meaning from many different texts in different languages (with all of the different customs of those particular languages), we would first want to have some generalizable structure about how words in languages fit together.
+
+Consider a sentence like: `The child chased the dog down the hall.` The underlying idea behind dependency relations is to focus primarily on content words; in the above, that would be "child", "chased", "dog", and "hall". We can start to see how knowing *just* those four words gets us a long way to understanding what might be happening; if we can add in some sort of structure (say, that "child" is the nominal subject \[nsubj\], or the do-er of the action, and "dog" is the object \[obj\], or the receiver of the action) then we can recognize that a child chased a dog (rather than the much-less-cute reverse).
+
+The full list of dependency relations and their abbreviations can be found [here](https://universaldependencies.org/u/dep/).
+
+What can we do with dependency relations? At the simplest level, they can be features that we rely on for classification. For that matter, everything we've covered in this tutorial could be a feature. We'll cover classifiers later this semester and will be able to explore this avenue a bit more then.
+
+We could also, however, be more directly interested in using the dependency relations to study particular choices over word usage in texts. As an example, consider unique phrasings from President Trump's 2017 speech and President Biden's 2021 speech (for more on the approach here, see the `cleanNLP` documentation [here](https://statsmaths.github.io/cleanNLP/state-of-union.html).
+
+```{r}
+library(magrittr)
+
+# Trump 2017
+annoData %>%
+  left_join(
+    annotated$token,
+    c("doc_id"="doc_id", "sid"="sid", "tid"="tid_source"),
+    suffix=c("", "_source")
+  ) %>%
+  filter(Year == 2017) %>%
+  filter(relation == "obj") %>%
+  select(doc_id = doc_id, start = token, word = token_source) %>%
+  left_join(word_frequency, by="word") %>%
+  filter(frequency < 0.005) %>%
+  select(doc_id, start, word) %$%
+  sprintf("%s => %s", start, word)
+```
+
+```{r}
+# Biden 2021
+annoData %>%
+  left_join(
+    annotated$token,
+    c("doc_id"="doc_id", "sid"="sid", "tid"="tid_source"),
+    suffix=c("", "_source")
+  ) %>%
+  filter(Year == 2021) %>%
+  filter(relation == "obj") %>%
+  select(doc_id = doc_id, start = token, word = token_source) %>%
+  left_join(word_frequency, by="word") %>%
+  filter(frequency < 0.005) %>%
+  select(doc_id, start, word) %$%
+  sprintf("%s => %s", start, word)
+```
+
+By applying a similar method, we can investigate how adjectives describing "economy" differ in speeches by Democratic and Republican politicians. This allows us to analyze whether the two parties emphasize distinct characteristics of the same topic, potentially reflecting ideological differences.
+
+```{r}
+# Democratic
+annoData %>%
+  left_join(
+    annotated$token,
+    c("doc_id" = "doc_id", "sid" = "sid", "tid" = "tid_source"),
+    suffix = c("", "_source")
+    ) %>%
+  filter(Party == "Democratic") %>%
+  filter(lemma == "economy") %>%
+  # Filter for adjectives (ADJ) modifying 'economy' via 'amod' relation
+  filter(relation_source == "amod" & upos_source == "ADJ") %>%
+  # Select relevant columns: doc_id, the noun ('economy'), and the adjective
+  select(doc_id = doc_id, noun = token, adj = token_source)
+```
+
+```{r}
+# Republican
+annoData %>%
+  left_join(
+    annotated$token,
+    c("doc_id" = "doc_id", "sid" = "sid", "tid" = "tid_source"),
+    suffix = c("", "_source")
+    ) %>%
+  filter(Party == "Republican") %>%
+  filter(lemma == "economy") %>%
+  # Filter for adjectives (ADJ) modifying 'economy' via 'amod' relation
+  filter(relation_source == "amod" & upos_source == "ADJ") %>%
+  # Select relevant columns: doc_id, the noun ('economy'), and the adjective
+  select(doc_id = doc_id, noun = token, adj = token_source)
+
+
+annoData %>%
+  left_join(
+    annotated$token,
+    c("doc_id" = "doc_id", "sid" = "sid", "tid" = "tid_source"),
+    suffix = c("", "_source")
+    ) %>%
+  #filter(Party == "Democratic") %>%
+  filter(lemma == "woman") %>%
+  # Filter for adjectives (ADJ) modifying 'economy' via 'amod' relation
+  filter(relation_source == "amod" & upos_source == "ADJ") %>%
+  # Select relevant columns: doc_id, the noun ('economy'), and the adjective
+  select(doc_id = doc_id, noun = token, adj = token_source)
+```
+
+# Visualizing Dependency Trees
+
+Visualizing dependency trees can help us better understand the syntactic structure of sentences and how different words relate to each other. Dependency trees show which words are the "head" of a phrase and which words are dependents, along with the types of relationships (like subject, object, etc.) between them.
+
+```{r}
+library(udpipe)
+library(rsyntax)
+```
+
+Now we can annotate text and visualize the dependency tree
+
+```{r}
+text1 <- "Barack Obama was the 44th President of the United States."
+text2 <- "BAGHDAD. Iraqi leaders criticized Turkey on Monday for bombing Kurdish militants in northern Iraq with airstrikes that they said had left at least one woman dead."
+
+tokens1 <- udpipe(text1,'english')
+tokens2 <- udpipe(text2,'english')
+
+#rsyntax requires the tokens to be in a certain format. The as_tokenindex() function converts a data.frame to this format. 
+
+tokens1 <- as_tokenindex(tokens1)
+tokens2 <- as_tokenindex(tokens2)
+
+#Visualization
+plot_tree(tokens1, token, lemma, upos)
+#plot_tree(tokens2, token, lemma, upos)
+```
+
+Note that this function only prints one sentence a time, so if the sentence is not specified it uses the first sentence in the data.
+
+```{r}
+second_sentence <- tokens2[tokens2$sentence == 2, ]
+
+plot_tree(second_sentence, token, lemma, upos)
+```
+
+# Named Entity Recognition (NER)
+
+Named Entity Recognition (NER) is a key task in natural language processing (NLP) that involves identifying and categorizing entities in text, such as people, organizations, locations, dates, and more. While tools like udpipe excel in tasks like part-of-speech tagging and dependency parsing, they are limited in their ability to perform NER. Udpipe models do not consistently include NER capabilities, making them less suited for entity recognition tasks.
+
+In contrast, spacy is a more robust option for NER. It provides high-performance models specifically designed for recognizing named entities in text. Spacy's NER models can classify entities into a variety of categories, such as PERSON, ORG (organization), and LOC (location), making it an excellent tool for tasks that require precise entity extraction. Switching to spacy for NER ensures more accurate and reliable results, especially when working with real-world text data.
+
+Remember we mentioned at the beginning of the tutorial, spacy requires a Python environment. Make sure you have Python installed on your device, and run `pip install cleannlp` in your terminal or Python to install the `cleannlp` Python module.
+
+```{r}
+# Download the spacy model
+# cnlp_download_spacy("en_core_web_sm")
+
+# Initialize spacy backend
+cnlp_init_spacy()
+```
+
+Now we start with some easy tasks:
+
+```{r}
+text1
+text_anno1 <- cnlp_annotate(text1)
+head(text_anno1$entity)
+
+text2
+text_anno2 <- cnlp_annotate(text2)
+text_anno2$entity
+```
+
+Now let's look into the top **person** mentioned by the Democratic and Republican Party
+
+```{r}
+annotated_spacy <- cnlp_annotate(myData)
+
+annoData_spacy <- left_join(annotated_spacy$document,
+                            annotated_spacy$entity, 
+                            by ="doc_id")
+head(annoData_spacy)
+
+#Democratic
+annoData_spacy %>%
+  filter(entity_type == "PERSON")%>%
+  filter(Party == "Democratic") %>%
+  group_by(entity) %>% 
+  summarize(count = n()) %>%
+  top_n(n=10) %>%
+  arrange(desc(count))
+
+#Republican
+annoData_spacy %>%
+  filter(entity_type == "PERSON") %>%
+  filter(Party == "Republican") %>%
+  group_by(entity) %>% 
+  summarize(count = n()) %>%
+  top_n(n=10) %>%
+  arrange(desc(count))
+```
+
+# String Operations
+
+To this point, we've worked on getting our text into R, getting some basic statistics out, and annotating that text. One thing we have skipped past is a really foundational tool in programming, regular expressions. The idea here is to create a pattern of text that we can search for. To see what we can do with regular expressions, let's start playing with them.
+
+We are going to use the stringr library, which is associated with the tidyverse. To be clear, a lot of what we do could be done in base R, but the language for the base R functions (grep(),gsub()\`, etc.) can be far less intuitive.
+
+```{r}
+library(stringr)
+```
+
+## What's in a string?
+
+Let's look at some simpler data first.
+
+```{r}
+length(sentences)
+head(sentences)
+
+string <- 'It\'s easy to tell the depth of a well.'
+
+```
+
+As you can see, `sentences` contains 720 short and simple sentences. We'll use these to illustrate regular expressions. A first thing to note is the string. See that \\? That's an escape, and tells R to ignore the single quote. Why is this important? Well, notice what demarcates each sentence that's being printed. That's right, single quotes! So the \\ let's R know that the element is not yet complete. That doesn't mean the \\ is always there though. If you want to see the "printed" version of the sentence, you can use writeLines()
+
+```{r}
+writeLines(head(sentences))
+```
+
+There are lots of other special characters that may require escapes in R if you are doing regular expression matching. That can be particularly challenging because of the special meanings of those special characters --- like the single quote --- leads to particular operations. As an example, the single period . in a regular expression is a *wild card* for character matching, and will match any character but a newline. Therefore, if you include the . in a regular expression without escaping it, you'll end up matching just about everything. The cheat sheet posted to the course website gives more details on these special characters.
+
+## Combining strings
+
+Now that we have our strings, let's do some basic operations. We can combine two strings using the str_c command in stringr. For instance, if we wanted to combine the first two sentences from sentences, we could.
+
+```{r}
+str_c(sentences[1], sentences[2], sep = " ")
+```
+
+This also works if we have two separate string vectors that we'd like to combine. Imagine if we split `sentences` in half; we could combine the two halves! This is often really helpful if you have a couple of character / string variables in your dataset / metadata that you'd like to combine into a single indicator.
+
+```{r}
+sentencesA <- sentences[1:360]
+sentencesB <- sentences[361:720]
+
+head(str_c(sentencesA, sentencesB, sep = " "))
+```
+
+You can also combine all of the strings in one vector into a single observation using the `collapse` option.
+
+```{r}
+length(str_c(sentences, collapse = " "))
+
+# Note that the string in collapse is up to you but is what will be pasted 
+# between the elements in the new string. So here's a version with a new line
+# which gets specified by \n
+str_c(head(sentences), collapse = "\n")
+
+# and here's what that looks like with writeLines() then
+writeLines(str_c(head(sentences), collapse = "\n"))
+```
+
+You can also do the opposite, splitting a string into two by using `str_split()` and identifying a common splitting indicator.
+
+```{r}
+# create combined string
+combined_string <- str_c(head(sentences), collapse = "\n")
+combined_string
+
+# create split string; simplify = TRUE returns a matrix (rather than a list)
+split_string <- str_split(combined_string, "\n", simplify = TRUE)
+split_string
+```
+
+## Substrings
+
+Occassionally, we need to pull out parts of strings. For instance, maybe we just want the first few letters of each string. In those instances, we can use `str_sub()`:
+
+```{r}
+# example string this actually makes some sense for
+month.name
+
+# substring the first three letters
+short_months <- str_sub(month.name, 1, 3)
+short_months
+```
+
+You can also use `str_sub()` to change a string through replacement of specific characters. Here we'll replace the first few letters of every month with "Cat".
+
+```{r}
+year_of_cat <- month.name
+str_sub(year_of_cat, 1, 2) <- "Cat"
+year_of_cat
+```
+
+## Pattern searches
+
+Where regular expressions really kick in isn't with these sorts of operations though. It's in searching for specific patterns. Let's start illustrating by looking at one type of pattern: a word! To illustrate these pattern searches, we'll use another set of words, a vector of names of fruit.
+
+```{r}
+fruit
+```
+
+We can look to see which include the string berry in their name in a whole lot of different ways.
+
+```{r}
+# which elements in the vector have fruit in the name
+length(str_which(fruit, "fruit"))
+
+# does the fruit contain the string `fruit`
+str_detect(fruit, "fruit")
+
+# name the fruits that contain the string `fruit`
+str_subset(fruit, "fruit")
+```
+
+# Regular Expressions
+
+Now we can try to generalize beyond the simple word case to broader patterns. These can capture more complex phenomena, which are often what we need when we are doing work with text-as-data.
+
+To illustrate, we'll go back to the sentences data from earlier. Now let's look for any sentences that contain "hog", "bog", "log", or "dog".
+
+```{r}
+# note that the spaces are important within the quotes below. what happens if you remove them? Why?
+str_subset(sentences, ' [hbd]og ')
+```
+
+We can also negate the letters we're using above by using \^, looking for any words that do not start with h, b, d, or l but that do end with -og. Or we can use - to look across a range of characters
+
+```{r}
+#length(str_subset(sentences, '[^hbdl]og'))
+
+# look for anything between b and l
+#str_subset(sentences, ' [b-l]ot ')
+
+length(str_subset(sentences, '[ch]at '))
+
+# look for anything between b and l
+str_subset(sentences, ' [ch]at ')
+```
+
+## Classes and quantifiers
+
+There are also a series of escaped characters that have special meanings. These let you match, for example, any alphanumeric character (\w), any space (\s), or any number (\d). These become really helpful when combined with quantifiers, which indicate the number of occurrences of the character. On this, \* indicates zero or more of the character, and + indicates one more of the character.
+
+```{r}
+# create some strings
+tutone <- c("Jenny Jenny, who can I turn to?", "867-5309")
+
+# match any number string of more than one number
+str_extract_all(tutone, "\\d+")
+
+# match any alphanumeric string of 0 or more
+str_extract_all(tutone, "\\w*")
+
+# match any number string of more than three numbers; note the comma
+str_extract_all(tutone, "\\d{4,}")
+
+```
+
+## Extracting data
+
+Where regular expressions start to get really powerful for us is in automating the extraction of information from rich digital text. Consider an example where we want to identify mentions of courts from inaugural addresses. We can leverage regular expressions to do just that:
+
+```{r}
+str_match(text, " [C|c]ourt[s]*|[J|j]udicia[\\w]+ ")
+```
+
+While that isn't necessarily the most useful, consider if you were looking instead for something like the authors of each text, where the author was featured in a consistent format at the start of each text. While you could go through by hand and code each of those, it is much more straightforward to do this with regular expressions. As you start working with your corpus --- and particularly if you are in any way thinking of coding something by hand from the corpus --- take some time to think and to chat with me about whether it's something we can do with regular expressions.

@@ -1,0 +1,231 @@
+---
+title: "Tutorial 3 Web Scraping in R"
+pagetitle: Tutorial_3
+---
+
+This tutorial walks you through the process of using the package `rvest` to scrape websites using R. rvest (sounds like "harvest", get it?) is the workhorse package for text scraping in R and contains all of the functionality for basic scraping applications. We'll start by loading the package and tidyverse more generally so that we can use many of the tidyverse functions later on.
+
+```{r}
+#install.packages("rvest")
+library(rvest)
+library(tidyverse)
+```
+
+# Nicely Formatted Data
+
+Let's start with a simple example; we'll use the work from the Stanford Data Challenge Lab prepared by Sara Altman and Bill Behrman. Specifically, let's say you are interested in the study of famines and come across [this website](https://ourworldindata.org/famines#the-our-world-in-data-dataset-of-famines). Wonderful! But how can we get this into a format for analysis? Time to waste a lot of hours on manually entering the data or maybe we have some spare funds to hire an undergrad...
+
+Fortunately, that's not true. With `rvest` this is arbitrarily easy. First, we can tell R the webpage we are looking at.
+
+```{r}
+# identify the url
+url <- "https://ourworldindata.org/famines#the-our-world-in-data-dataset-of-famines"
+```
+
+Of course, we can't just read that webpage in because webpages are filled with all variety of --- from our perspective --- junk.
+
+```{r}
+# what happens when we just read that in; it's a full webpage
+read_html(url)
+```
+
+Yeah, that's not helpful. Instead, we need to identify just the table. This is the hardest part, but it's not really too difficult. If you are familiar with HTML / CSS, then you might be able to just inspect the HTML to identify the correct selector. If you are in a Chrome browser, for instance, you can right click then select "Inspect".
+
+If you are less familiar, you can use SelectorGadget, a Chrome add-on that lets you --- for whatever webpage you are visiting --- "select" the portion of a page you are interested in scraping. SelectorGadget will then highlight whatever the Selector (in the bar at the bottom) would return. Once you've identified the Selector that works for the element of interest to you, you can add that to our code and you are off and running.
+
+Note that, especially if you aren't familiar, this is going to take some time to get used to and require some patience and practice. Take a moment now to install the SelectorGadget Chrome extension, then play around with SelectorGadget on the [website](https://ourworldindata.org/famines#the-our-world-in-data-dataset-of-famines) until you can correctly identify "table", the CSS selector that will let us pull the table.
+
+```{r}
+# use SelectorGadget to find the info
+css_selector <- "table"
+```
+
+Once we have the correct selector, we still need to (1) read the full html, (2) select out the portion that we are interested in, and (3) start formatting. That third step is really particularly easy when what we are pulling is already in tabular format. So, for example, here's how we could read our table of data on famines into R.
+
+```{r}
+# pull the table
+url %>%
+  read_html() %>%
+   html_node(css = css_selector) %>%
+  html_table()
+ 
+```
+
+And if we wanted to save that, we'd just assign the prior chunk of code to an list item object. Then, we'd be ready for analysis.
+
+# MCAS Test
+
+```{r}
+url_mcas<- "https://profiles.doe.mass.edu/mcas/achievement_level.aspx?linkid=32&orgcode=04830000&orgtypecode=5&&fycode=2024"
+
+css_selector <- "table"
+
+mcas_achieve<-url_mcas %>%
+  read_html() %>%
+   html_node("#tblNextGen") %>%
+  html_nodes("tr")%>%
+  html_text2() # better than html_text()
+ # html_table()
+
+
+```
+```{r}
+mcas_achieve <- str_replace_all(nu.fac.name, "\r", "")
+nu.fac<-trimws(nu.fac)
+nu.fac <- unlist(nu.fac)
+class(nu.fac) # character vector!
+
+```
+# Less Nicely Formatted Data
+
+Of course, more likely than not we will be encountering data that aren't so nice and tidy. This is particularly true for web scraping when the item of interest is text data, which rarely appear in tables like the one above.
+
+Let's try out an example. We'll look at yelp reviews for everyone's favorite brutalist building: Hotel UMass.
+
+```{r}
+# start by defining the url we want
+url <- "https://www.umass.edu/public-policy/dacss-core-faculty"
+
+# now define the field we want
+css_selector <- "td"
+
+faculty <- url %>%
+  read_html() %>%
+  html_nodes(css = css_selector) %>%
+  html_text()
+
+faculty
+```
+
+```{r}
+# start by defining the url we want
+url <- "https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass"
+
+# now define the field we want
+css_selector1 <- "li.y-css-mu4kr5"
+
+css_selector2<-"#reviews"
+css_selector<-"#reviews"
+reviews <- url %>%
+  read_html() %>%
+  html_nodes(css = css_selector1) %>%
+  html_text()
+
+reviews
+```
+
+There are 10 reviews on each page, but we find an extra empty review \[11\]. So we want to filter out empty reviews.
+
+```{r}
+reviews <- reviews[reviews != ""]
+
+reviews
+```
+
+That's great, but as you can see it only pulls the first 10 reviews. We'd ideally like to have them all. To do so, we need to iterate through the pages. This takes some understanding of how Yelp sets up their website. Here's the URL we were using
+
+```{r}
+url
+```
+
+If you head to that webpage, you'll notice that only the first set of reviews is actually present. How might we get the second set? The easiest way would be if we could identify some standard language that Yelp is using that we can then leverage to "loop" through each page (that is, run the same operation as above for each page). To see how Yelp lays everything out, click through to the second page of reviews. Here's the URL for that page, and a comparison of the two URLs.
+
+```{r}
+new_url <- "https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass&start=10"
+
+# print these next to each other
+url
+new_url
+```
+
+Aha! That shows us how they are indexing the pages, with a little statement :"&start=10". The indexing here is kind of weird but if you click on the next set, you'll see that 10 jumps up to 20. So they are counting by 10 and creating a new page each time. We can use that to set up a loop. Ostensibly, you could identify the total number of pages is 4 pages. The first page is --- as we just saw --- unnumbered, and then each thereafter is indexed by 10. Because the first is unnumbered, we'll subtract one from our number of pages to loop through.
+
+```{r}
+# create the indices
+pageNumber <- 10 * c(1:3)
+# get an idea of what we just created
+head(pageNumber)
+length(pageNumber)
+
+# set up a new vector to store the urls
+urls <- url
+
+# loop through the page numbers and create the new urls
+for (i in 1:length(pageNumber)){
+  urls <- c(urls, paste("https://www.yelp.com/biz/hotel-umass-amherst?osq=hotel+umass&start=",pageNumber[i], sep = ""))
+}
+
+# look at the first few
+head(urls)
+```
+
+Now that we have all of the urls, we can loop through each pulling the reviews from each page. To do so, we need to create a new vector that will store all of the reviews; otherwise, we'll just be overwriting our review object in each loop.
+
+Note that this will take a couple of minutes; we're iterating through 4 pages after all.
+
+```{r}
+# set up an empty vector to store reviews
+reviews <- c()
+
+# loop through urls
+for (i in 1:length(urls)){
+  # extract reviews for this url
+  tmpReviews <- urls[i] %>%
+  read_html() %>%
+  html_nodes(css = css_selector1) %>%
+  html_text()
+
+  # add them to the set of reviews
+  reviews <- c(reviews,tmpReviews)
+}
+
+#filter out empty reviews
+reviews <- reviews[reviews != ""]
+
+# look at the 12th reviews
+reviews[15]
+```
+
+There's a few things we'd want to do from here. We could expand the extraction to identify all sorts of other aspects of each review --- the name, location, and prior reviews by a reviewer; the overall rating as well as the rating across different categories; and so on --- and add those extractions to each stage of our loop. We'll leave those steps to future analyses.
+
+# A Quick Analysis
+
+With the text scraped from the site, we can use a bit of what we've done in past tutorials (and will continue to do going forward) to take a look at what folks are saying about Hotel UMass.
+
+```{r}
+library(quanteda)
+library(quanteda.textplots)
+
+# convert to corpus
+hotel_corpus <- corpus(reviews)
+
+# create a word cloud
+hotel_dfm <- tokens(hotel_corpus, remove_punct=TRUE) %>%
+          tokens_select(pattern=stopwords("en"),
+          selection="remove") %>%
+          dfm()
+
+textplot_wordcloud(hotel_dfm)
+```
+
+It's hard to find a pattern. Since we included the buttons "helpful", "thanks", etc. under the reviews, the most common words are "1love", "0oh". Also, since we are interested in hotel reviews, we also see common words such as "hotel", "rooms", "campus", etc. Let's see if we can remove these words.
+
+```{r}
+hotel_dfm2 <- tokens(hotel_corpus,
+                     remove_punct=TRUE,
+                     remove_numbers = TRUE) %>%
+  tokens_select(pattern=c(stopwords("en"),
+          "hotel","rooms","room","umass","campus"),selection="remove") %>%
+  ## Regular expression that matches words that start with numbers followed by letters
+    tokens_select(pattern = "^\\d+\\w+$", selection = "remove", valuetype = "regex") %>%
+             dfm()
+
+textplot_wordcloud(hotel_dfm2)
+
+```
+
+Now the reviews are pretty obvious! Good job Hotel UMass!
+
+# Conclusion
+
+Everything here worked well. But what if we have a website that doesn't follow the same nice URL nomenclature / pattern that we found above? In that case, we'll need to resort to RSelenium. We'll leave that for another tutorial.

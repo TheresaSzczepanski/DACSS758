@@ -1,0 +1,9 @@
+---
+title: "About"
+---
+
+This is Theresa Szczepanski's work for DACSS 758 Text as Data
+
+```{r}
+1 + 1
+```

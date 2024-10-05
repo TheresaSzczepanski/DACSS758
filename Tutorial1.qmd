@@ -1,0 +1,157 @@
+---
+title: "Tutorial 1 Introduction to R"
+pagetitle: Tutorial_1
+---
+
+In this tutorial, you'll learn (or refresh your memory) about working in R, how to get your R workspace set up, how to do some basic work with data in R, and we'll introduce a quick version of some (pretty though not necessarily useful) text analysis.
+
+By the end of this tutorial, you should be familiar with the following:
+
+1\. Load packages: install.packages(), library()
+
+2\. Working directories: getwd(), setwd()
+
+3\. Read in some data: read.csv()
+
+4\. Look at data: str(), head(), tail()
+
+5\. Piping: %\>% or \|\>
+
+6\. Manipulate data: group_by, summarise()
+
+# Background
+
+Each week, the tutorial will include all of the code to demonstrate some of the fundamental aspects of the work we are doing. The tutorials on the website include R code and output. If you would like to execute & edit the code, please download the .qmd file from Google Classroom, and execute & edit the code in RStudio.
+
+You'll do code inside of `cells` that look like this:
+
+```{r}
+x <- 5
+x + 10
+```
+
+You can run the code inside the cell by hitting the play button in the upper righthand side of the cell. When the code is running, you'll notice that the play button transforms, indicating that the operation is being performed.
+
+# Front-end Matters
+
+R itself has a `base` set of pre-programmed functions and operations that are included as soon as you open the program up. However, the real magic of R is in the user-contributed packages, which are all freely available online and easy --- generally speaking --- to add on to the `base` functionality. You can think of these as like the apps you add to your smart phone. While you can do a lot with your smart phone without doing anything, those apps provide a world of different ways of employing your phone. For R, packages serve the same purpose. When you start R up, then, you need to get the packages loaded. If you have never installed the packages before, you need to do that first:
+
+(since I have these packages already, I put a \# mark in front of the code to stop it from running. If you don't have these packages, make sure you delete the \# mark before running the code.)
+
+```{r}
+#install.packages("quanteda")
+#install.packages("quanteda.textplots")
+```
+
+Once the packages are installed, you can load them as follows:
+
+```{r}
+library("quanteda")
+library("quanteda.textplots")
+```
+
+Occasionally, you'll see conflicts between packages, and notes about a function in one program being masked from another program. For now, don't worry about this. It arises because different programs will have similar functions with the same name. To return to the metaphor of the phone: it's a bit like you may have multiple web browsers and you can choose from any of them to surf the web when, say, you click a link from a friend. There are some dangers associated with this, as some of those functions may be named the same thing but may actually do something slightly different. Again, though, this is a topic for another day.
+
+# Working Directories
+
+Directories are the folders on a computer. Just as you navigate to different folders when you are looking for that ever elusive file that you can't remember where you saved, you need to tell R where on your computer to look for data or other files. For new programmers, not understanding working directories (or the directory that R is currently working in) is one of the primary time sucks and sources of frustration. You can set the working directory using the drop down menu. You can also always check your working directory by entering getwd() (i.e., "get working directory"), and can change the working directory using setwd(). The latter requires that you enter the specific address of the folder on your machine (so, something like "\~\user\mrpang\downloads" on a Mac, or "c:\users\mrpang\downloads" on a PC).
+
+# Reading in Data
+
+Each tutorial will be designed to work with a dataset that I provide and link to. At the most basic level, many packages include datasets as illustrative examples that we can pull on to explore the basics of that package. However, the code that we cover should --- generally speaking --- work with the data that you aim to work with this semester.
+
+We'll spend a lot of time during the Web Scraping week discussing the import of text data into R. For now, our focus will just be on getting a dataset into R that we can try out a few basic exploratory functions with. To do that, we can call down data directly from the web as so:
+
+```{r}
+# set up temporary file
+temp <- tempfile()
+
+# download file and store it in the temporary file
+download.file("http://scdb.wustl.edu/_brickFiles/2020_01/SCDB_2020_01_caseCentered_Citation.csv.zip", temp)
+
+# the file is compressed, so we need to unzip it first
+data <- read.csv(unz(temp, "SCDB_2020_01_caseCentered_Citation.csv"))
+
+# if that all works, then you can check the number of observations or the number of rows by
+nrow(data)
+```
+
+# Looking at Data
+
+Once the data is in, we can start to work with it. There's really no limit on us from this point on. In the code chunk below, we'll cover a few of the basics. Now that we are working with data, we'll load the `tidyverse`. The `tidyverse` describes itself as "an opinionated collection of R packages designed for data science." That's about right; the packages are designed to improve on the base functionality of R in order to provide a better experience in working with data, conducting analyses, and creating visualizations. (make sure to install `tidyverse` if you haven't done so.)
+
+```{r}
+library(tidyverse)
+
+# convert to tibble, the tidyverse dataframe format
+data <- as_tibble(data)
+
+# inspect the data
+str(data)
+```
+
+That's pretty informative, but we have other ways to look at the data as well. If you want to see just the first few rows, you can use `head()`, and if you want to see the last few rows, you can use `tail()`.
+
+```{r}
+head(data)
+tail(data)
+```
+
+We can also start to run basic analyses. Say you are interested in the average size of the majority coalition from a Supreme Court decision, or the mean number of majority votes in Supreme Court cases. We can calculate that as follows:
+
+```{r}
+data %>% 
+  summarise(medianVotes = median(majVotes))
+```
+
+For folks that have worked with R and the `tidyverse` before, that should look familiar. But for others, here's the idea of what we did there. First, we take the dataset (`data`) and pass it to a function via the pipe operator (`%>%` or `|>`). Then, we call a group of potential summary functions through `summarise()`, create a new variable called `meanVotes`, and set it's value equal to the `mean()` of `majVotes` via `mean(majVotes)`. We can see from R that the mean is approximately 7.1 during the entire time period under study here. We are probably more interested, though, in how divisiveness changes. For instance, has the divisiveness of the Court increased or decreased over time? We can do that by just adding another line to what we had above, as so:
+
+```{r}
+data %>% 
+  group_by(term) %>% 
+  summarise(medianVotes = median(majVotes))
+```
+
+That's cool but it's hard to see exactly what's happening. Instead, let's plot it out to have a look. Within the tidyverse, and probably it's most popular package, is `ggplot`, or the "Grammar of Graphics" (i.e., gg). The underlying intuition is that we'll be "layering" graphics; first you create a blank plot, then you start adding features to the plot. Here's a basic plot for us:
+
+```{r}
+# pass the work we did above to ggplot
+data %>% 
+  group_by(term) %>% 
+  summarise(meanVotes = mean(majVotes),
+            meanMinVotes = mean(minVotes)) %>%
+  # then create the ggplot "canvas", specify our variables, then start "adding" (+) layers
+  ggplot(mapping = aes(x=term, y=meanMinVotes)) +
+    # our first layer creates a scatterplot
+    geom_point() + 
+    # our second layer creates a smoothed fit across the points, a sort of moving average to give us a sense of how 
+    # things have changed over time
+    geom_smooth() +
+    # our last layer is going to change the default style of the panel to a black and white theme
+    theme_bw()
+```
+
+# Where We Are Headed
+
+Of course, all of this is just working with formatted data, variables that others have already coded. What we are really interested in --- and the reason you are taking this class --- is to work with **text-as-data**. So what does the work that we'll be doing look like?
+
+Let's do a quick example. We'll use the same piping command as before along with a host of functions from `quanteda`, the best text-as-data package out there for R. You can learn (a lot) more about `quanteda` [here](https://quanteda.io/) at the package website. We'll be working with `quanteda` throughout the semester, and here's a quick example of some basics of what we'll do:
+
+```{r}
+# quanteda comes with a corpus of presidential inaugural speeches
+# this first line subsets that corpus to speeches later than 1953
+dfm_inaug <- corpus_subset(data_corpus_inaugural, Year >= 1954) |>
+    # notice we are using the piping operator again.
+    # this time, we pipe the corpus to tokens, which is a single unit of text
+    # in creating it, we remove stop words ("a", "it", "they") and punctuation
+  tokens(remove_punct=TRUE) |>
+    # now we pipe it to DFM, which creates a document-feature matrix
+    dfm() |>
+    dfm_remove(stopwords('english')) |>
+    # then we trim words that appear fewer than 50 times
+    dfm_trim(min_termfreq = 50, verbose = FALSE)
+
+textplot_wordcloud(dfm_inaug)
+```
+
+Now you have a nice word cloud! Don't worry if you are unfamiliar with terms like `corpus`, `document-feature matrix`, and `stop words`. We will be covering and learning about these concepts throughout the semester. Here's more exciting text analysis!

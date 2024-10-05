@@ -1,0 +1,157 @@
+---
+title: "Check in 1"
+pagetitle: CheckIn1.qmd
+author: "Theresa Szczepanski"
+---
+
+Find **TWO academic journal articles using Text Analysis Approaches** in your field, or of the topics you are interested in. For each article, answer the questions below:
+
+# Article 1
+
+In Uurrutia and Araya's paper "Do Written Responses to Open-Ended Questions on Fourth Grade Online Formative Assessments in Mathematics Help Predict Scores on End-of-Year Standardized Tests?", the authors explore the use of student responses to open-ended formative assessment questions to predict student performance on end-of-year tests. [@Urrutia22]\
+
+\
+1. What is this paper's research question?\
+
+The papers research question is: "To what extent do students’ short, written answers to teacher-designed, open-ended questions in weekly online formative tests help improve predictions of performance on end-of-the-year national multiple-choice standardized assessments?" [@Urrutia22]\
+
+\
+2. What data does the paper use? How are the data collected?\
+
+The authors used a database of chilean students' questions and answers from an online assessment platform called *ConectaIdeas.* Students completed formative assessments consisting of closed-ended (multiple choice) and open-ended (free-response) mathematics questions. The authors had the responses from 464 fourth grade students to 16,618 open-ended questions and 621,575 closed-ended questions. The authors used these responses and student performance data on the Sistema de Medición de la Calidad de la Educación (SIMCE) exam, a national exam given annually to Chilean students to build a model to predict student performance on SIMCE exams.
+
+\
+3. What is the hypotheses of the paper? \
+
+**Hypothesis:** A predictive model of 4th grade student performance on the end of year SIMCE assessment that includes regressors taken from students' responses to open-ended mathematics questions will outperform a baseline predictive model that includes only students' scores on closed-ended mathematics questions.
+
+\
+4. What text-as-data methods do the author(s) use? For example, sentiment analysis, classification, topic model, named-entity recognition, topic analysis, word embedding, etc.\
+
+The authors used two prediction models. One model would ***classify*** open-ended mathematics questions into one of 6 categories.
+
+The second model would ***classify*** student responses as either *coherent* or *incoherent***.** Incoherent answers were answers that consisted of noisy text, such as emojis or curse words as well as nonsensical responses.
+
+\
+5. Based on your understanding of the paper, what is the usage of each text-as-data method? For example, sentiment analysis detects the sentiment of a sentence, such as fear, anger, etc.
+
+The researchers used **classification** to develop models to predict if a student's answer to an open-ended question was *coherent*. They used student answers to open-ended questions in 2019 and the corresponding teacher's **classification** of responses as either *incoherent* or *coherent* to train the model. 
+
+They also used **classification** to develop models to categorize open-ended questions into different types:
+
+1.  Calculate without explaining
+
+2.  Calculate with explaining
+
+3.  Choice and/or affirmation
+
+4.  Compare quantities
+
+5.  Procedure and content knowledge
+
+6.  Other
+
+The authors also extracted several linguistic features from the the student responses. These included: Number of **dep/NumMod** tokens and number of **tag/Num** tokens. They referenced other possible dependencies from this list: [https://universaldependencies.org/u/dep/](#0).\
+
+\
+6. What are the findings of the paper?\
+
+In testing, 83.5% of the time, the Open-ended model, which included regressors using linguistic features of student open-response answers, was better than the baseline model at predicting student performance on the end of year exam in terms of $𝑅^2$ [@Urrutia22]. Also, the correlation matrix of the Open-ended model was "more homogeneous and null than the that of the baseline model" indicating that the "Open-ended model regressors correlate less with each other than the baseline model regressors" [@Urrutia22].
+
+\
+7. What is your take on it?\
+
+I think that it was very interesting that the authors were able to parse out student written responses as *coherent* or *incoherent.* I think that it is useful to categorize student responses that are filled with noisy text or emojis into a distinct category from student responses that are incoherent because the mathematics is illogical. Noisy text from a student indicates something about the student's emotional state and is distinct from latent math ability. I found the features: "Ratio of Incoherent responses" to be very interesting. I can see how a student who is overhwelmed with writing or explanations might exhibit differences from other students with this variable. The other linguistic features seemed to me to be more indicative of a student's overall writing skills. I see how this coupled with their response to multiple choice problems can give a more accurate picture of a students' overall skill profile than multiple choice responses alone. The correlation matrix seems to suggest that the variables the authors constructed are measuring something seemingly independent from the latent skills measured by the multiple choice responses.
+
+\
+8. **(Optional)** If you find the paper helpful to your research, try to find the replication file of the paper. 
+
+I looked for a replication file and could not find one. I also looked on the author's homepage. Perhaps since this involved student work it isn't published?
+
+# Article 2
+
+In the article *Framework for Classroom Student Grading with Open-Ended Questions: A Text-Mining Approach,* the authors apply text analysis techniques to student responses to open-ended questions in several grade level and subject areas[@Vairinhos22].
+
+\
+1. What is this paper's research question?
+
+Can text-mining be used to "extract objective, relevant, reliable and valid features" from student responses to open-ended questions (OEQ), in a way to allow the teacher to "construct, in real time, informed, unbiased and fact-based assessments" of student learning [@Vairinhos22]?
+
+\
+2. What data does the paper use? How are the data collected?
+
+The researchers collected three sets of observational data of students' answers to tests with open response questions in Portuguese schools. The first data set was collected from student responses to questions on the official examinations of the Portuguese public educational system's 12th year students. The responses were rated manually by teachers according to a rubric. The second data set consisted of 12th year student responses to open-response formative assessment questions in a Sociology class. The third data set consisted of University students' response to open-response formative assessment questions in an Economics class. These data were stored in excel sheets with each row corresponding to an individual student's response to a given question.
+
+\
+3. What is the hypotheses of the paper? 
+
+**Hypothesis:** A classification model created from descriptive statistics on student responses to open-response questions will provide teachers with "valid and reliable summaries" of these texts.
+
+\
+4. What text-as-data methods do the author(s) use? For example, sentiment analysis, classification, topic model, named-entity recognition, topic analysis, word embedding, etc.
+
+The authors used **token extraction** and **topic modeling** to create linguistic features that they could summarize with descriptive statistics. The authors then built a model that estimates a students language and subject matter content skills to **classify** the quality of the overall response.
+
+\
+5. Based on your understanding of the paper, what is the usage of each text-as-data method? For example, sentiment analysis detects the sentiment of a sentence, such as fear, anger, etc.
+
+The authors used **token extraction** to gather information about students' general use of language. They also used **topic modeling** to estimate how much of a student's response contained text that was subadjacent to the topic of the question. The authors performed summary statistics on the linguistic features in student responses to create features in their **classification** model. The authors built a model that included as features estimates of a student's *lexical diversity* , a student's *capability to structure text,* and a student's level of *subject matter competence*. With these features they used a student's language and subject matter content skills to **classify** the quality of the overall response. The authors produced several visual representations using dendograms and biplots of the information in the classification models in the hope to give teachers quick visual summaries of key information from a student's written response that a teacher could then combine with their observations of the student's work to assign a grade.
+
+\
+6. What are the findings of the paper?
+
+The authors found that the correlation between official classifications of the texts from a grading panel and the classifications assigned by a Portuguese teacher hired for the research project were of the same magnitude as the correlations obtained between those teachers and results obtained by the authors' model (although both correlations were surprisingly low). The authors also found that there was no significant difference between the distributions of standardized results obtained by the teachers and those suggested by the model.
+
+\
+7. What is your take on it? \
+
+I think that it is interesting to see the authors try to provide teachers with systems to more-efficiently grade open response items. This is a challenge for many teachers in the humanities. The authors noted in their findings that it was surprising that "the correlation between scores allocated by the official human correctors and those obtained by a Portuguese teacher hired by the second author" were "low" *but* of the same magnitude as the correlation of the model to the official correctors. This suggests to me that there is still a lot of work to be done to make this tool a valid and reliable estimate of how trained scoring panels would score the responses. If this model could be improved, could it eventually be more valid and reliable than a randomly selected teacher?
+
+# Final Project
+
+After reading the articles, think about the final project you want to do in this course, and answer the questions below:
+
+\
+1. What research topic you want to study? Do you have a specific research question?
+
+I work for a public charter school in Massachusetts. Our students in Grades 5-10 are tested annually in Mathematics, English Language Arts, and Science. I am interested in using the student performance data to identify areas of weakness in our program in terms of curricular alignment. For every question on a given assessment, the state releases an **item description** detailing what was asked of students and the corresponding average score earned by students in our school as well as the average score earned by students across Massachusetts.
+
+***My research question is***: "Can test item descriptions on MCAS assessments be mined to extract features associated with student performance trends?"
+
+\
+2. Do you have any hypothesis/expected answer to your research question?
+
+I have already found statistically significant patterns in student performance associated with an item's content reporting category in every subject and grade level at our school. When interviewing one of our experienced teachers who has historical success with student achievement in English Language Arts (ELA), she identified specific things that she believes all kids need to practice for success with (ELA), such as "synthesizing multiple texts", "reading non-fiction", and "identifying text features". These are requirements in questions that can be mined from item descriptions but not from an item's reporting category or standard description. Our students have historically performed weaker on the 7th grade English Language Arts exam than on the 6th and 8th grade exams. This suggests a curricular issue. I've already identified reporting categories in which our students have performed relatively weaker on this assessment. I suspect that within these reporting categories there exist patterns to the types of questions or tasks that our students struggle with. This could provide valuable information for teachers to adjust their instruction and instructional materials.
+
+Similarly, in Mathematics I have identified specific content reporting categories that are relative weaknesses at different grade levels; however, this does not take into account the differences in questions like those Uurrutia and Araya classified in open-ended Math prompts. I would be curious to see if our students are weaker in items that ask them to evaluate an expression (apply technical skills) vs. construct or interpret a mathematical model (conceptual understanding). This would be very interesting information for teachers.
+
+***Hypotheses***:
+
+***H1***: A predictive model of 7th grade student performance on 7th grade English Language Arts assessment items that includes regressors taken from the test item descriptions will outperform a baseline predictive model that includes only a given test item's content reporting category.
+
+***H2***: A predictive model of 6th grade student performance on 6th grade Mathematics assessment items that includes regressors taken from the test item descriptions will outperform a baseline predictive model that includes only a given test item's content reporting category.
+
+\
+3. What are some potential data sources?
+
+I can scrape the [Department of Elementary and Secondary Educations' accountability page](https://profiles.doe.mass.edu/mcas/mcasitems2.aspx?grade=07&subjectcode=ELA&linkid=10&orgcode=04830000&fycode=2023&orgtypecode=5&). It includes tables for all Next Generation MCAS tests (beginning in 2018) and text descriptions for all test items. I have actually already done this for the High School Science Exams in my Python course last fall. The structures of the tables are similar for the other exams.
+
+\
+4. Is any of the text-as-data methods you identified in the journal articles may be helpful to your research?
+
+In Uurrutia and Araya's paper, they used ***classification*** to categorize open-ended mathematics questions into different types. I would like to classify the MCAS questions into different categories using the item descriptions.
+
+For the Mathematics items, I would also like to use **topic modeling** to identify different topics within a given content reporting category. For example, Grade 6 students are assessed in the category *Geometry* on their ability to "Solve real-world and mathematical problems involving area, surface area, and volume." I would like to parse out if there are distinctions between their performance on tasks involving *area* versus tasks involving *volume*. Being able to classify a problem as an *area* versus *volume* problem would allow me to do this. On a broader level, I would like to distinguish between items that ask students to apply technical or *computational* skills versus constructing or interpreting models (*conceptual understanding*).
+
+For the English Language Arts items, I would like to classify items as to whether or not they require the "synthesis of multiple texts" and whether or not they require the analysis of "text features".
+
+\
+At this phase, you might have more questions than answers. Document all those questions.
+
+1.  I have also downloaded PDFs of all of the released paper-based versions of the MCAS tests. Here is an [example of a Math test](https://www.doe.mass.edu/mcas/2023/release/g5-math.pdf). Do you think it would be possible to parse out the text of each question into a data frame? The question texts themselves would also be interesting to analyze. I was wondering if you think it is an achievable task. If so, I'm curious to see more about how to set up a corpus with texts contained in PDF files.
+
+2.  For any subject and grade level, my data set of text would consist of approximately 200 items and their corresponding text descriptions. Is that large enough?
+
+3.  The Urrutia and Araya article discussed creating linguistic features using **dep/NumMod** tokens and **tag/Num** tokens. I was wondering if there is a good place for me to read about and understand them as a concept?
+
+4.  The Varinhos article discusses the use of topic modeling. This is something I would be interested in applying. Is there a good place to read about the fundamentals of topic modeling?

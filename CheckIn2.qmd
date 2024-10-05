@@ -1,0 +1,64 @@
+---
+title: "Check in 2"
+pagetitle: CheckIn2.qmd
+author: "Theresa Szczepanski"
+---
+
+You have been thinking about your research question and data source in the previous weeks. Now you have learned how to scrape online data, and how to get the data ready for basic text analysis (e.g. tokenization, stemming, remove punctuation, remove stopwords, n-gram, ect.) \
+\
+In this check-in, you need to \
+1. Restate your research question and hypothesis (totally fine if it's different from Check-in 1)\
+2. What is the data source you are going to use for your final project? Is it already collected by others, or do you need to scrape data yourself? **Get your data ready and read them in R**.\
+3. You may get messy data (e.g. several key elements are combined under one variable). Clean your data in a tidy and meaningful way.\
+4. Preprocess the data (e.g. tokenization etc.) and start explore some descriptive information by making wordclouds and tables. You are welcome to use any codes that you have learned up to this point of the course. \
+\
+Note: Turn in this assignment as a standalone html file. Check the instruction of Assignment 0 for creating a standalone html file.
+
+# Final Project
+
+After reading the articles, think about the final project you want to do in this course, and answer the questions below:
+
+\
+1. What research topic you want to study? Do you have a specific research question?
+
+I work for a public charter school in Massachusetts. Our students in Grades 5-10 are tested annually in Mathematics, English Language Arts, and Science. I am interested in using the student performance data to identify areas of weakness in our program in terms of curricular alignment. For every question on a given assessment, the state releases an **item description** detailing what was asked of students and the corresponding average score earned by students in our school as well as the average score earned by students across Massachusetts.
+
+***My research question is***: "Can test item descriptions on MCAS assessments be mined to extract features associated with student performance trends?"
+
+\
+2. Do you have any hypothesis/expected answer to your research question?
+
+I have already found statistically significant patterns in student performance associated with an item's content reporting category in every subject and grade level at our school. When interviewing one of our experienced teachers who has historical success with student achievement in English Language Arts (ELA), she identified specific things that she believes all kids need to practice for success with (ELA), such as "synthesizing multiple texts", "reading non-fiction", and "identifying text features". These are requirements in questions that can be mined from item descriptions but not from an item's reporting category or standard description. Our students have historically performed weaker on the 7th grade English Language Arts exam than on the 6th and 8th grade exams. This suggests a curricular issue. I've already identified reporting categories in which our students have performed relatively weaker on this assessment. I suspect that within these reporting categories there exist patterns to the types of questions or tasks that our students struggle with. This could provide valuable information for teachers to adjust their instruction and instructional materials.
+
+Similarly, in Mathematics I have identified specific content reporting categories that are relative weaknesses at different grade levels; however, this does not take into account the differences in questions like those Uurrutia and Araya classified in open-ended Math prompts. I would be curious to see if our students are weaker in items that ask them to evaluate an expression (apply technical skills) vs. construct or interpret a mathematical model (conceptual understanding). This would be very interesting information for teachers.
+
+***Hypotheses***:
+
+***H1***: A predictive model of 7th grade student performance on 7th grade English Language Arts assessment items that includes regressors taken from the test item descriptions will outperform a baseline predictive model that includes only a given test item's content reporting category.
+
+***H2***: A predictive model of 6th grade student performance on 6th grade Mathematics assessment items that includes regressors taken from the test item descriptions will outperform a baseline predictive model that includes only a given test item's content reporting category.
+
+\
+3. What are some potential data sources?
+
+I can scrape the [Department of Elementary and Secondary Educations' accountability page](https://profiles.doe.mass.edu/mcas/mcasitems2.aspx?grade=07&subjectcode=ELA&linkid=10&orgcode=04830000&fycode=2023&orgtypecode=5&). It includes tables for all Next Generation MCAS tests (beginning in 2018) and text descriptions for all test items. I have actually already done this for the High School Science Exams in my Python course last fall. The structures of the tables are similar for the other exams.
+
+\
+4. Is any of the text-as-data methods you identified in the journal articles may be helpful to your research?
+
+In Uurrutia and Araya's paper, they used ***classification*** to categorize open-ended mathematics questions into different types. I would like to classify the MCAS questions into different categories using the item descriptions.
+
+For the Mathematics items, I would also like to use **topic modeling** to identify different topics within a given content reporting category. For example, Grade 6 students are assessed in the category *Geometry* on their ability to "Solve real-world and mathematical problems involving area, surface area, and volume." I would like to parse out if there are distinctions between their performance on tasks involving *area* versus tasks involving *volume*. Being able to classify a problem as an *area* versus *volume* problem would allow me to do this. On a broader level, I would like to distinguish between items that ask students to apply technical or *computational* skills versus constructing or interpreting models (*conceptual understanding*).
+
+For the English Language Arts items, I would like to classify items as to whether or not they require the "synthesis of multiple texts" and whether or not they require the analysis of "text features".
+
+\
+At this phase, you might have more questions than answers. Document all those questions.
+
+1.  I have also downloaded PDFs of all of the released paper-based versions of the MCAS tests. Here is an [example of a Math test](https://www.doe.mass.edu/mcas/2023/release/g5-math.pdf). Do you think it would be possible to parse out the text of each question into a data frame? The question texts themselves would also be interesting to analyze. I was wondering if you think it is an achievable task. If so, I'm curious to see more about how to set up a corpus with texts contained in PDF files.
+
+2.  For any subject and grade level, my data set of text would consist of approximately 200 items and their corresponding text descriptions. Is that large enough?
+
+3.  The Urrutia and Araya article discussed creating linguistic features using **dep/NumMod** tokens and **tag/Num** tokens. I was wondering if there is a good place for me to read about and understand them as a concept?
+
+4.  The Varinhos article discusses the use of topic modeling. This is something I would be interested in applying. Is there a good place to read about the fundamentals of topic modeling?

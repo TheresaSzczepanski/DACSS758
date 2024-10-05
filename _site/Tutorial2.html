@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Tutorial_2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">DACSS758</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./CheckIn1.html"> 
+<span class="menu-text">Check In 1</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#front-end-matters" id="toc-front-end-matters" class="nav-link active" data-scroll-target="#front-end-matters">Front-end Matters</a></li>
+  <li><a href="#reading-all-files-in-a-directory" id="toc-reading-all-files-in-a-directory" class="nav-link" data-scroll-target="#reading-all-files-in-a-directory">Reading all files in a directory</a></li>
+  <li><a href="#character-vectors" id="toc-character-vectors" class="nav-link" data-scroll-target="#character-vectors">Character Vectors</a></li>
+  <li><a href="#corpus" id="toc-corpus" class="nav-link" data-scroll-target="#corpus">Corpus</a></li>
+  <li><a href="#metadata" id="toc-metadata" class="nav-link" data-scroll-target="#metadata">Metadata</a></li>
+  <li><a href="#tokens" id="toc-tokens" class="nav-link" data-scroll-target="#tokens">Tokens</a></li>
+  <li><a href="#combining-corpora" id="toc-combining-corpora" class="nav-link" data-scroll-target="#combining-corpora">Combining Corpora</a></li>
+  <li><a href="#need-more-practice" id="toc-need-more-practice" class="nav-link" data-scroll-target="#need-more-practice">Need more practice?</a></li>
+  <li><a href="#mcas-corpus" id="toc-mcas-corpus" class="nav-link" data-scroll-target="#mcas-corpus">MCAS Corpus?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tutorial 2 Text as Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This is our second tutorial for running R. In this tutorial, we’ll start working with texts. As we discussed in class, there’s a huge variance in what counts as a “text”, running the gamut from sentences or tweets to entire novels like War &amp; Peace.</p>
+<p>In this tutorial, you’ll learn how to start working with text-as-data in R. That includes storage formats, manipulation, counting, subsetting, and editing of the texts. There’s a lot we can do once we have the texts in R!</p>
+<p>By the end of this tutorial, you should be familiar with the following:</p>
+<p>1. Character vectors: c()</p>
+<p>2. Corpus: corpus(), summary()</p>
+<p>3. Metadata: docvars()</p>
+<p>4. Subsetting corpora: corpus_subset()</p>
+<p>5. Number of documents: ndoc()</p>
+<p>6. Tokenization: tokens()</p>
+<p>7. Contextual analysis: kwic()</p>
+<p>8. N-grams: tokens_ngrams()</p>
+<section id="front-end-matters" class="level2">
+<h2 class="anchored" data-anchor-id="front-end-matters">Front-end Matters</h2>
+<p>This week, we’ll start by looking at the Harry Potter series. First things first, we need to install and load the packages for today’s notebook.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::arrange()   masks plyr::arrange()
+✖ purrr::compact()   masks plyr::compact()
+✖ dplyr::count()     masks plyr::count()
+✖ dplyr::desc()      masks plyr::desc()
+✖ dplyr::failwith()  masks plyr::failwith()
+✖ dplyr::filter()    masks stats::filter()
+✖ dplyr::id()        masks plyr::id()
+✖ dplyr::lag()       masks stats::lag()
+✖ dplyr::mutate()    masks plyr::mutate()
+✖ dplyr::rename()    masks plyr::rename()
+✖ dplyr::summarise() masks plyr::summarise()
+✖ dplyr::summarize() masks plyr::summarize()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Package version: 4.1.0
+Unicode version: 14.0
+ICU version: 71.1
+Parallel computing: disabled
+See https://quanteda.io for tutorials and examples.</code></pre>
+</div>
+</div>
+</section>
+<section id="reading-all-files-in-a-directory" class="level2">
+<h2 class="anchored" data-anchor-id="reading-all-files-in-a-directory">Reading all files in a directory</h2>
+<p>Unfortunately, the <code>harrypotter</code> package, which contains the book contents of all seven Harry Potter books, we used in previous years no longer works now (It seems R packages can disappear faster than a disarming spell!). So before we move on to text analysis, let’s read in our data first. Please visit my Github <a href="https://github.com/RosemaryPang/HarryPotter">HarryPotter repository</a>. <strong>Download all the .rda files, and save them under the same folder</strong>.</p>
+<p><strong>Make sure to replace the folder path with the correct path on your own device.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the folder containing the .rda files. </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>folder <span class="ot">&lt;-</span> <span class="st">"/Users/theresaszczepanski/Documents/DACSS758/HarryPotter"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the list of all .rda files in the folder</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>rda_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(folder, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.rda$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all .rda files into the environment</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(rda_files, load, .GlobalEnv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "chamber_of_secrets"
+
+[[2]]
+[1] "deathly_hallows"
+
+[[3]]
+[1] "goblet_of_fire"
+
+[[4]]
+[1] "half_blood_prince"
+
+[[5]]
+[1] "order_of_the_phoenix"
+
+[[6]]
+[1] "philosophers_stone"
+
+[[7]]
+[1] "prisoner_of_azkaban"</code></pre>
+</div>
+</div>
+</section>
+<section id="character-vectors" class="level2">
+<h2 class="anchored" data-anchor-id="character-vectors">Character Vectors</h2>
+<p>Now you should see the seven books our workspace/environment. These are:</p>
+<p>1. philosophers_stone: Harry Potter and the Philosophers Stone (1997)</p>
+<p>2. chamber_of_secrets: Harry Potter and the Chamber of Secrets (1998)</p>
+<p>3. prisoner_of_azkaban: Harry Potter and the Prisoner of Azkaban (1999)</p>
+<p>4. goblet_of_fire: Harry Potter and the Goblet of Fire (2000)</p>
+<p>5. order_of_the_phoenix: Harry Potter and the Order of the Phoenix</p>
+<p>6. half_blood_price: Harry Potter and the Half-Blood Prince (2005)</p>
+<p>7. deathly_hallows: Harry Potter and the Deathly Hallows (2007)</p>
+<p>Each is stored as a <strong>character vector</strong>. A character vector is a collection of elements, where each element is a string. You could create your own character vector as something like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_char_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Rosemary's"</span>, <span class="st">"favorite"</span>,<span class="st">"horror movie"</span>,<span class="st">"director"</span>, <span class="st">"is"</span>, <span class="st">"James Wan."</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_char_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Rosemary's"   "favorite"     "horror movie" "director"     "is"          
+[6] "James Wan."  </code></pre>
+</div>
+</div>
+<p>Each element of a vector has an index; starting at 1, count from left-to-right. You can call to particular elements from the character vector using that indexing. So, if I wanted the third element from the above, I could type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_char_vec[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "horror movie"</code></pre>
+</div>
+</div>
+<p>As you can see in the example, an element doesn’t have to be a single word. Each element can be as long as you like. For instance, a character vector could also be:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>my_char_vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Rosemary's favorite horror movie director is James Wan."</span>, <span class="st">"She has a James Wan figure in her office."</span>, <span class="st">"She likes the Conjuring series the most."</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_char_vec2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Rosemary's favorite horror movie director is James Wan."
+[2] "She has a James Wan figure in her office."              
+[3] "She likes the Conjuring series the most."               </code></pre>
+</div>
+</div>
+<p>The storage of the Harry Potter books follows this intuition. Each book is a character vector, and each chapter is an element in that book’s character vector. So, for <code>philosophers_stone</code>, we can see the first chapter via:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>philosophers_stone[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "THE BOY WHO LIVED  Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much. They were the last people you'd expect to be involved in anything strange or mysterious, because they just didn't hold with such nonsense.  Mr. Dursley was the director of a firm called Grunnings, which made drills. He was a big, beefy man with hardly any neck, although he did have a very large mustache. Mrs. Dursley was thin and blonde and had nearly twice the usual amount of neck, which came in very useful as she spent so much of her time craning over garden fences, spying on the neighbors. The Dursleys had a small son called Dudley and in their opinion there was no finer boy anywhere.  The Dursleys had everything they wanted, but they also had a secret, and their greatest fear was that somebody would discover it. They didn't think they could bear it if anyone found out about the Potters. Mrs. Potter was Mrs. Dursley's sister, but they hadn't met for several years; in fact, Mrs. Dursley pretended she didn't have a sister, because her sister and her good-for-nothing husband were as unDursleyish as it was possible to be. The Dursleys shuddered to think what the neighbors would say if the Potters arrived in the street. The Dursleys knew that the Potters had a small son, too, but they had never even seen him. This boy was another good reason for keeping the Potters away; they didn't want Dudley mixing with a child like that.  When Mr. and Mrs. Dursley woke up on the dull, gray Tuesday our story starts, there was nothing about the cloudy sky outside to suggest that strange and mysterious things would soon be happening all over the country. Mr. Dursley hummed as he picked out his most boring tie for work, and Mrs. Dursley gossiped away happily as she wrestled a screaming Dudley into his high chair.  None of them noticed a large, tawny owl flutter past the window.  At half past eight, Mr. Dursley picked up his briefcase, pecked Mrs. Dursley on the cheek, and tried to kiss Dudley good-bye but missed, because Dudley was now having a tantrum and throwing his cereal at the walls. `Little tyke,` chortled Mr. Dursley as he left the house. He got into his car and backed out of number four's drive.  It was on the corner of the street that he noticed the first sign of something peculiar -- a cat reading a map. For a second, Mr. Dursley didn't realize what he had seen -- then he jerked his head around to look again. There was a tabby cat standing on the corner of Privet Drive, but there wasn't a map in sight. What could he have been thinking of? It must have been a trick of the light. Mr. Dursley blinked and stared at the cat. It stared back. As Mr. Dursley drove around the corner and up the road, he watched the cat in his mirror. It was now reading the sign that said Privet Drive -- no, looking at the sign; cats couldn't read maps or signs. Mr. Dursley gave himself a little shake and put the cat out of his mind. As he drove toward town he thought of nothing except a large order of drills he was hoping to get that day.  But on the edge of town, drills were driven out of his mind by something else. As he sat in the usual morning traffic jam, he couldn't help noticing that there seemed to be a lot of strangely dressed people about. People in cloaks. Mr. Dursley couldn't bear people who dressed in funny clothes -- the getups you saw on young people! He supposed this was some stupid new fashion. He drummed his fingers on the steering wheel and his eyes fell on a huddle of these weirdos standing quite close by. They were whispering excitedly together. Mr. Dursley was enraged to see that a couple of them weren't young at all; why, that man had to be older than he was, and wearing an emerald-green cloak! The nerve of him! But then it struck Mr. Dursley that this was probably some silly stunt -- these people were obviously collecting for something... yes, that would be it. The traffic moved on and a few minutes later, Mr. Dursley arrived in the Grunnings parking lot, his mind back on drills.  Mr. Dursley always sat with his back to the window in his office on the ninth floor. If he hadn't, he might have found it harder to concentrate on drills that morning. He didn't see the owls swoop ing past in broad daylight, though people down in the street did; they pointed and gazed open- mouthed as owl after owl sped overhead. Most of them had never seen an owl even at nighttime. Mr. Dursley, however, had a perfectly normal, owl-free morning. He yelled at five different people. He made several important telephone calls and shouted a bit more. He was in a very good mood until lunchtime, when he thought he'd stretch his legs and walk across the road to buy himself a bun from the bakery. He'd forgotten all about the people in cloaks until he passed a group of them next to the baker's. He eyed them angrily as he passed. He didn't know why, but they made him uneasy. This bunch were whispering excitedly, too, and he couldn't see a single collecting tin. It was on his way back past them, clutching a large doughnut in a bag, that he caught a few words of what they were saying.   `The Potters, that's right, that's what I heard yes, their son, Harry`  Mr. Dursley stopped dead. Fear flooded him. He looked back at the whisperers as if he wanted to say something to them, but thought better of it.  He dashed back across the road, hurried up to his office, snapped at his secretary not to disturb him, seized his telephone, and had almost finished dialing his home number when he changed his mind. He put the receiver back down and stroked his mustache, thinking... no, he was being stupid. Potter wasn't such an unusual name. He was sure there were lots of people called Potter who had a son called Harry. Come to think of it, he wasn't even sure his nephew was called Harry. He'd never even seen the boy. It might have been Harvey. Or Harold. There was no point in worrying Mrs. Dursley; she always got so upset at any mention of her sister. He didn't blame her -- if he'd had a sister like that... but all the same, those people in cloaks...  He found it a lot harder to concentrate on drills that afternoon and when he left the building at five o'clock, he was still so worried that he walked straight into someone just outside the door.  `Sorry,` he grunted, as the tiny old man stumbled and almost fell. It was a few seconds before Mr. Dursley realized that the man was wearing a violet cloak. He didn't seem at all upset at being almost knocked to the ground. On the contrary, his face split into a wide smile and he said in a squeaky voice that made passersby stare, `Don't be sorry, my dear sir, for nothing could upset me today! Rejoice, for You-Know-Who has gone at last! Even Muggles like yourself should be celebrating, this happy, happy day!`  And the old man hugged Mr. Dursley around the middle and walked off.  Mr. Dursley stood rooted to the spot. He had been hugged by a complete stranger. He also thought he had been called a Muggle, whatever that was. He was rattled. He hurried to his car and set off for home, hoping he was imagining things, which he had never hoped before, because he didn't approve of imagination.  As he pulled into the driveway of number four, the first thing he saw -- and it didn't improve his mood -- was the tabby cat he'd spotted that morning. It was now sitting on his garden wall. He was sure it was the same one; it had the same markings around its eyes. `Shoo!` said Mr. Dursley loudly. The cat didn't move. It just gave him a stern look. Was this normal cat behavior? Mr. Dursley wondered. Trying to pull himself together, he let himself into the house. He was still determined not to mention anything to his wife. Mrs. Dursley had had a nice, normal day. She told him over dinner all about Mrs. Next Door's problems with her daughter and how Dudley had learned a new word (`Won't!`). Mr. Dursley tried to act normally. When Dudley had been put to bed, he went into the living room in time to catch the last report on the evening news:  `And finally, bird-watchers everywhere have reported that the nation's owls have been behaving very unusually today. Although owls normally hunt at night and are hardly ever seen in daylight, there have been hundreds of sightings of these birds flying in every direction since sunrise. Experts are unable to explain why the owls have suddenly changed their sleeping pattern.` The newscaster allowed himself a grin. `Most mysterious. And now, over to Jim McGuffin with the weather. Going to be any more showers of owls tonight, Jim?`  `Well, Ted,` said the weatherman, `I don't know about that, but it's not only the owls that have been acting oddly today. Viewers as far apart as Kent, Yorkshire, and Dundee have been phoning in to tell me that instead of the rain I promised yesterday, they've had a downpour of shooting stars! Perhaps people have been celebrating Bonfire Night early -- it's not until next week, folks! But I can promise a wet night tonight.`  Mr. Dursley sat frozen in his armchair. Shooting stars all over Britain? Owls flying by daylight? Mysterious people in cloaks all over the place? And a whisper, a whisper about the Potters...  Mrs. Dursley came into the living room carrying two cups of tea. It was no good. He'd have to say something to her. He cleared his throat nervously. `Er -- Petunia, dear -- you haven't heard from your sister lately, have you?` As he had expected, Mrs. Dursley looked shocked and angry. After all, they normally pretended she didn't have a sister.  `No,` she said sharply. `Why?`  `Funny stuff on the news,` Mr. Dursley mumbled. `Owls... shooting stars... and there were a lot of funny-looking people in town today...`  `So?` snapped Mrs. Dursley.  `Well, I just thought... maybe... it was something to do with... you know... her crowd.` Mrs. Dursley sipped her tea through pursed lips. Mr. Dursley wondered whether he dared tell her he'd heard the name `Potter.` He decided he didn't dare. Instead he said, as casually as he could, `Their son -- he'd be about Dudley's age now, wouldn't he?`  `I suppose so,` said Mrs. Dursley stiffly.  `What's his name again? Howard, isn't it?`  `Harry. Nasty, common name, if you ask me.`  `Oh, yes,` said Mr. Dursley, his heart sinking horribly. `Yes, I quite agree.` He didn't say another word on the subject as they went upstairs to bed. While Mrs. Dursley was in the bathroom, Mr. Dursley crept to the bedroom window and peered down into the front garden. The cat was still there. It was staring down Privet Drive as though it were waiting for something.  Was he imagining things? Could all this have anything to do with the Potters? If it did... if it got out that they were related to a pair of -- well, he didn't think he could bear it.  The Dursleys got into bed. Mrs. Dursley fell asleep quickly but Mr. Dursley lay awake, turning it all over in his mind. His last, comforting thought before he fell asleep was that even if the Potters were involved, there was no reason for them to come near him and Mrs. Dursley. The Potters knew very well what he and Petunia thought about them and their kind.... He couldn't see how he and Petunia could get mixed up in anything that might be going on -- he yawned and turned over -- it couldn't affect them....  How very wrong he was.  Mr. Dursley might have been drifting into an uneasy sleep, but the cat on the wall outside was showing no sign of sleepiness. It was sitting as still as a statue, its eyes fixed unblinkingly on the far corner of Privet Drive. It didn't so much as quiver when a car door slammed on the next street, nor when two owls swooped overhead. In fact, it was nearly midnight before the cat moved at all.  A man appeared on the corner the cat had been watching, appeared so suddenly and silently you'd have thought he'd just popped out of the ground. The cat's tail twitched and its eyes narrowed.  Nothing like this man had ever been seen on Privet Drive. He was tall, thin, and very old, judging by the silver of his hair and beard, which were both long enough to tuck into his belt. He was wearing long robes, a purple cloak that swept the ground, and high-heeled, buckled boots. His blue eyes were light, bright, and sparkling behind half-moon spectacles and his nose was very long and crooked, as though it had been broken at least twice. This man's name was Albus Dumbledore.  Albus Dumbledore didn't seem to realize that he had just arrived in a street where everything from his name to his boots was unwelcome. He was busy rummaging in his cloak, looking for something. But he did seem to realize he was being watched, because he looked up suddenly at the cat, which was still staring at him from the other end of the street. For some reason, the sight of the cat seemed to amuse him. He chuckled and muttered, `I should have known.` He found what he was looking for in his inside pocket. It seemed to be a silver cigarette lighter. He flicked it open, held it up in the air, and clicked it. The nearest street lamp went out with a little pop. He clicked it again -- the next lamp flickered into darkness. Twelve times he clicked the Put-Outer, until the only lights left on the whole street were two tiny pinpricks in the distance, which were the eyes of the cat watching him. If anyone looked out of their window now, even beady-eyed Mrs. Dursley, they wouldn't be able to see anything that was happening down on the pavement. Dumbledore slipped the Put-Outer back inside his cloak and set off down the street toward number four, where he sat down on the wall next to the cat. He didn't look at it, but after a moment he spoke to it.  `Fancy seeing you here, Professor McGonagall.`  He turned to smile at the tabby, but it had gone. Instead he was smiling at a rather severe-looking woman who was wearing square glasses exactly the shape of the markings the cat had had around its eyes. She, too, was wearing a cloak, an emerald one. Her black hair was drawn into a tight bun. She looked distinctly ruffled.  `How did you know it was me?` she asked.  `My dear Professor, I 've never seen a cat sit so stiffly.`  `You'd be stiff if you'd been sitting on a brick wall all day,` said Professor McGonagall.  `All day? When you could have been celebrating? I must have passed a dozen feasts and parties on my way here.`  Professor McGonagall sniffed angrily. `Oh yes, everyone's celebrating, all right,` she said impatiently. `You'd think they'd be a bit more careful, but no -- even the Muggles have noticed something's going on. It was on their news.` She jerked her head back at the Dursleys' dark living-room window. `I heard it. Flocks of owls... shooting stars.... Well, they're not completely stupid. They were bound to notice something. Shooting stars down in Kent -- I'll bet that was Dedalus Diggle. He never had much sense.`  `You can't blame them,` said Dumbledore gently. `We've had precious little to celebrate for eleven years.`  `I know that,` said Professor McGonagall irritably. `But that's no reason to lose our heads. People are being downright careless, out on the streets in broad daylight, not even dressed in Muggle clothes, swapping rumors.`  She threw a sharp, sideways glance at Dumbledore here, as though hoping he was going to tell her something, but he didn't, so she went on. `A fine thing it would be if, on the very day YouKnow-Who seems to have disappeared at last, the Muggles found out about us all. I suppose he really has gone, Dumbledore?` `It certainly seems so,` said Dumbledore. `We have much to be thankful for. Would you care for a lemon drop?`  `A what?` `A lemon drop. They're a kind of Muggle sweet I'm rather fond of`  `No, thank you,` said Professor McGonagall coldly, as though she didn't think this was the moment for lemon drops. `As I say, even if You-Know-Who has gone -`  `My dear Professor, surely a sensible person like yourself can call him by his name? All this 'You- Know-Who' nonsense -- for eleven years I have been trying to persuade people to call him by his proper name: Voldemort.` Professor McGonagall flinched, but Dumbledore, who was unsticking two lemon drops, seemed not to notice. `It all gets so confusing if we keep saying 'You-Know-Who.' I have never seen any reason to be frightened of saying Voldemort's name.  `I know you haven 't, said Professor McGonagall, sounding half exasperated, half admiring. `But you're different. Everyone knows you're the only one You-Know- oh, all right, Voldemort, was frightened of.`  `You flatter me,` said Dumbledore calmly. `Voldemort had powers I will never have.`  `Only because you're too -- well -- noble to use them.`  `It's lucky it's dark. I haven't blushed so much since Madam Pomfrey told me she liked my new earmuffs.`  Professor McGonagall shot a sharp look at Dumbledore and said, `The owls are nothing next to the rumors that are flying around. You know what everyone's saying? About why he's disappeared? About what finally stopped him?`  It seemed that Professor McGonagall had reached the point she was most anxious to discuss, the real reason she had been waiting on a cold, hard wall all day, for neither as a cat nor as a woman had she fixed Dumbledore with such a piercing stare as she did now. It was plain that whatever `everyone` was saying, she was not going to believe it until Dumbledore told her it was true. Dumbledore, however, was choosing another lemon drop and did not answer.  `What they're saying,` she pressed on, `is that last night Voldemort turned up in Godric's Hollow. He went to find the Potters. The rumor is that Lily and James Potter are -- are -- that they're -- dead. ` Dumbledore bowed his head. Professor McGonagall gasped.  `Lily and James... I can't believe it... I didn't want to believe it... Oh, Albus...` Dumbledore reached out and patted her on the shoulder. `I know... I know...` he said heavily.  Professor McGonagall's voice trembled as she went on. `That's not all. They're saying he tried to kill the Potter's son, Harry. But -- he couldn't. He couldn't kill that little boy. No one knows why, or how, but they're saying that when he couldn't kill Harry Potter, Voldemort's power somehow broke -- and that's why he's gone.  Dumbledore nodded glumly.  `It's -- it's true?` faltered Professor McGonagall. `After all he's done... all the people he's killed... he couldn't kill a little boy? It's just astounding... of all the things to stop him... but how in the name of heaven did Harry survive?`  `We can only guess,` said Dumbledore. `We may never know.`  Professor McGonagall pulled out a lace handkerchief and dabbed at her eyes beneath her spectacles. Dumbledore gave a great sniff as he took a golden watch from his pocket and examined it. It was a very odd watch. It had twelve hands but no numbers; instead, little planets were moving around the edge. It must have made sense to Dumbledore, though, because he put it back in his pocket and said, `Hagrid's late. I suppose it was he who told you I'd be here, by the way?`  `Yes,` said Professor McGonagall. `And I don't suppose you're going to tell me why you're here, of all places?`  `I've come to bring Harry to his aunt and uncle. They're the only family he has left now.`  `You don't mean -- you can't mean the people who live here?` cried Professor McGonagall, jumping to her feet and pointing at number four. `Dumbledore -- you can't. I've been watching them all day. You couldn't find two people who are less like us. And they've got this son -- I saw him kicking his mother all the way up the street, screaming for sweets. Harry Potter come and live here!`  `It's the best place for him,` said Dumbledore firmly. `His aunt and uncle will be able to explain everything to him when he's older. I've written them a letter.`  `A letter?` repeated Professor McGonagall faintly, sitting back down on the wall. `Really, Dumbledore, you think you can explain all this in a letter? These people will never understand him! He'll be famous -- a legend -- I wouldn't be surprised if today was known as Harry Potter day in the future -- there will be books written about Harry -- every child in our world will know his name!`  `Exactly,` said Dumbledore, looking very seriously over the top of his half-moon glasses. `It would be enough to turn any boy's head. Famous before he can walk and talk! Famous for something he won't even remember! CarA you see how much better off he'll be, growing up away from all that until he's ready to take it?` Professor McGonagall opened her mouth, changed her mind, swallowed, and then said, `Yes -- yes, you're right, of course. But how is the boy getting here, Dumbledore?` She eyed his cloak suddenly as though she thought he might be hiding Harry underneath it.  `Hagrid's bringing him.` `You think it -- wise -- to trust Hagrid with something as important as this?`  I would trust Hagrid with my life,` said Dumbledore.  `I'm not saying his heart isn't in the right place,` said Professor McGonagall grudgingly, `but you can't pretend he's not careless. He does tend to -- what was that?`  A low rumbling sound had broken the silence around them. It grew steadily louder as they looked up and down the street for some sign of a headlight; it swelled to a roar as they both looked up at the sky -- and a huge motorcycle fell out of the air and landed on the road in front of them.  If the motorcycle was huge, it was nothing to the man sitting astride it. He was almost twice as tall as a normal man and at least five times as wide. He looked simply too big to be allowed, and so wild - long tangles of bushy black hair and beard hid most of his face, he had hands the size of trash can lids, and his feet in their leather boots were like baby dolphins. In his vast, muscular arms he was holding a bundle of blankets.  `Hagrid,` said Dumbledore, sounding relieved. `At last. And where did you get that motorcycle?`  `Borrowed it, Professor Dumbledore, sit,` said the giant, climbing carefully off the motorcycle as he spoke. `Young Sirius Black lent it to me. I've got him, sir.`  `No problems, were there?`  `No, sir -- house was almost destroyed, but I got him out all right before the Muggles started swarmin' around. He fell asleep as we was flyin' over Bristol.`  Dumbledore and Professor McGonagall bent forward over the bundle of blankets. Inside, just visible, was a baby boy, fast asleep. Under a tuft of jet-black hair over his forehead they could see a curiously shaped cut, like a bolt of lightning.  `Is that where -?` whispered Professor McGonagall.  `Yes,` said Dumbledore. `He'll have that scar forever.`  `Couldn't you do something about it, Dumbledore?`  `Even if I could, I wouldn't. Scars can come in handy. I have one myself above my left knee that is a perfect map of the London Underground. Well -- give him here, Hagrid -- we'd better get this over with.`  Dumbledore took Harry in his arms and turned toward the Dursleys' house.  `Could I -- could I say good-bye to him, sir?` asked Hagrid. He bent his great, shaggy head over Harry and gave him what must have been a very scratchy, whiskery kiss. Then, suddenly, Hagrid let out a howl like a wounded dog.  `Shhh!` hissed Professor McGonagall, `you'll wake the Muggles!`  `S-s-sorry,` sobbed Hagrid, taking out a large, spotted handkerchief and burying his face in it. `But I c-c-can't stand it -- Lily an' James dead -- an' poor little Harry off ter live with Muggles -`  `Yes, yes, it's all very sad, but get a grip on yourself, Hagrid, or we'll be found,` Professor McGonagall whispered, patting Hagrid gingerly on the arm as Dumbledore stepped over the low garden wall and walked to the front door. He laid Harry gently on the doorstep, took a letter out of his cloak, tucked it inside Harry's blankets, and then came back to the other two. For a full minute the three of them stood and looked at the little bundle; Hagrid's shoulders shook, Professor McGonagall blinked furiously, and the twinkling light that usually shone from Dumbledore's eyes seemed to have gone out. `Well,` said Dumbledore finally, `that's that. We've no business staying here. We may as well go and join the celebrations.`  `Yeah,` said Hagrid in a very muffled voice, `I'll be takin' Sirius his bike back. G'night, Professor McGonagall -- Professor Dumbledore, sir.`  Wiping his streaming eyes on his jacket sleeve, Hagrid swung himself onto the motorcycle and kicked the engine into life; with a roar it rose into the air and off into the night.  `I shall see you soon, I expect, Professor McGonagall,` said Dumbledore, nodding to her. Professor McGonagall blew her nose in reply.  Dumbledore turned and walked back down the street. On the corner he stopped and took out the silver Put-Outer. He clicked it once, and twelve balls of light sped back to their street lamps so that Privet Drive glowed suddenly orange and he could make out a tabby cat slinking around the corner at the other end of the street. He could just see the bundle of blankets on the step of number four.  `Good luck, Harry,` he murmured. He turned on his heel and with a swish of his cloak, he was gone.  A breeze ruffled the neat hedges of Privet Drive, which lay silent and tidy under the inky sky, the very last place you would expect astonishing things to happen. Harry Potter rolled over inside his blankets without waking up. One small hand closed on the letter beside him and he slept on, not knowing he was special, not knowing he was famous, not knowing he would be woken in a few hours' time by Mrs. Dursley's scream as she opened the front door to put out the milk bottles, nor that he would spend the next few weeks being prodded and pinched by his cousin Dudley... He couldn't know that at this very moment, people meeting in secret all over the country were holding up their glasses and saying in hushed voices: `To Harry Potter -- the boy who lived!"</code></pre>
+</div>
+</div>
+</section>
+<section id="corpus" class="level2">
+<h2 class="anchored" data-anchor-id="corpus">Corpus</h2>
+<p>While this is interesting, we want something that’s more straightforward to work with. Therefore, we are going to convert the character vectors to a corpus. A corpus is a stored collection of texts; we can also store corpus meta-data as a dataframe associated with the corpus. This is particularly helpful when we have document-level covariates that we might want to use in analysis of the texts.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>philosophers_stone_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(philosophers_stone)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>philosophers_stone_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(philosophers_stone_corpus)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>philosophers_stone_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Corpus consisting of 17 documents, showing 17 documents:
+
+   Text Types Tokens Sentences
+  text1  1271   5693       350
+  text2  1066   4154       237
+  text3  1226   4656       297
+  text4  1193   4832       322
+  text5  1818   8446       563
+  text6  1563   8016       566
+  text7  1374   5487       351
+  text8  1095   3608       198
+  text9  1422   6195       411
+ text10  1293   5237       334
+ text11  1110   4215       277
+ text12  1509   6790       447
+ text13  1076   3953       262
+ text14  1110   4394       308
+ text15  1385   6486       459
+ text16  1581   8357       591
+ text17  1489   7172       506</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how to access to "Tokens" in the summary?</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>philosophers_stone_summary<span class="sc">$</span>Tokens</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 5693 4154 4656 4832 8446 8016 5487 3608 6195 5237 4215 6790 3953 4394 6486
+[16] 8357 7172</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which chapters have less than 5000 words?</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(philosophers_stone_summary<span class="sc">$</span>Tokens <span class="sc">&lt;</span> <span class="dv">5000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  2  3  4  8 11 13 14</code></pre>
+</div>
+</div>
+<p>Notice that each element from the character vector has been treated as a unique text; that is, each chapter is being treated as a separate text. The <code>summary()</code> function provides a breakdown of some basic statistics on each chapter then. <code>Text</code> is an automatically created unique identifier for each text, <code>Types</code> is the number of unique words/tokens in the text, <code>Tokens</code> is the total number of words/tokens in the text (i.e., the length of the chapter), and <code>Sentences</code> is the number of sentences in the chapter.</p>
+</section>
+<section id="metadata" class="level2">
+<h2 class="anchored" data-anchor-id="metadata">Metadata</h2>
+<p>For each book, we don’t have much in the way of metadata. However, this summary gives us a start and is something we can use to add metadata to the corpus we’ve created.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check for metadata; shouldn't see any</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(philosophers_stone_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>data frame with 0 columns and 17 rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add an indicator for the book; this will be useful later when we add all the books together into a single corpus</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>philosophers_stone_summary<span class="sc">$</span>book <span class="ot">&lt;-</span> <span class="st">"Philosopher's Stone"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>philosophers_stone_summary<span class="sc">$</span>Tokens</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 5693 4154 4656 4832 8446 8016 5487 3608 6195 5237 4215 6790 3953 4394 6486
+[16] 8357 7172</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a chapter indicator</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>philosophers_stone_summary<span class="sc">$</span>chapter <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_extract</span>(philosophers_stone_summary<span class="sc">$</span>Text, <span class="st">"[0-9]+"</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>philosophers_stone_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Corpus consisting of 17 documents, showing 17 documents:
+
+   Text Types Tokens Sentences                book chapter
+  text1  1271   5693       350 Philosopher's Stone       1
+  text2  1066   4154       237 Philosopher's Stone       2
+  text3  1226   4656       297 Philosopher's Stone       3
+  text4  1193   4832       322 Philosopher's Stone       4
+  text5  1818   8446       563 Philosopher's Stone       5
+  text6  1563   8016       566 Philosopher's Stone       6
+  text7  1374   5487       351 Philosopher's Stone       7
+  text8  1095   3608       198 Philosopher's Stone       8
+  text9  1422   6195       411 Philosopher's Stone       9
+ text10  1293   5237       334 Philosopher's Stone      10
+ text11  1110   4215       277 Philosopher's Stone      11
+ text12  1509   6790       447 Philosopher's Stone      12
+ text13  1076   3953       262 Philosopher's Stone      13
+ text14  1110   4394       308 Philosopher's Stone      14
+ text15  1385   6486       459 Philosopher's Stone      15
+ text16  1581   8357       591 Philosopher's Stone      16
+ text17  1489   7172       506 Philosopher's Stone      17</code></pre>
+</div>
+</div>
+<p>Now we can assign these to the corpus as document-level metadata as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(philosophers_stone_corpus) <span class="ot">&lt;-</span> philosophers_stone_summary</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(philosophers_stone_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Text Types Tokens Sentences                book chapter
+1   text1  1271   5693       350 Philosopher's Stone       1
+2   text2  1066   4154       237 Philosopher's Stone       2
+3   text3  1226   4656       297 Philosopher's Stone       3
+4   text4  1193   4832       322 Philosopher's Stone       4
+5   text5  1818   8446       563 Philosopher's Stone       5
+6   text6  1563   8016       566 Philosopher's Stone       6
+7   text7  1374   5487       351 Philosopher's Stone       7
+8   text8  1095   3608       198 Philosopher's Stone       8
+9   text9  1422   6195       411 Philosopher's Stone       9
+10 text10  1293   5237       334 Philosopher's Stone      10
+11 text11  1110   4215       277 Philosopher's Stone      11
+12 text12  1509   6790       447 Philosopher's Stone      12
+13 text13  1076   3953       262 Philosopher's Stone      13
+14 text14  1110   4394       308 Philosopher's Stone      14
+15 text15  1385   6486       459 Philosopher's Stone      15
+16 text16  1581   8357       591 Philosopher's Stone      16
+17 text17  1489   7172       506 Philosopher's Stone      17</code></pre>
+</div>
+</div>
+<p>These document variables can be really useful when we want to subset the corpus to some specific level. With just one book, it doesn’t make a lot of sense to subset right now. But the intuition works later, so let’s look at what we’d do if we wanted to, say, look at only chapters with fewer than 5,000 tokens.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>small_corpus <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(philosophers_stone_corpus, Tokens <span class="sc">&lt;</span> <span class="dv">5000</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(small_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Corpus consisting of 7 documents, showing 7 documents:
+
+   Text Types Tokens Sentences   Text Types Tokens Sentences
+  text2  1066   4154       237  text2  1066   4154       237
+  text3  1226   4656       297  text3  1226   4656       297
+  text4  1193   4832       322  text4  1193   4832       322
+  text8  1095   3608       198  text8  1095   3608       198
+ text11  1110   4215       277 text11  1110   4215       277
+ text13  1076   3953       262 text13  1076   3953       262
+ text14  1110   4394       308 text14  1110   4394       308
+                book chapter
+ Philosopher's Stone       2
+ Philosopher's Stone       3
+ Philosopher's Stone       4
+ Philosopher's Stone       8
+ Philosopher's Stone      11
+ Philosopher's Stone      13
+ Philosopher's Stone      14</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>test_corpus <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(philosophers_stone_corpus, Tokens <span class="sc">&gt;</span> <span class="dv">8000</span> )</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(test_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Corpus consisting of 3 documents, showing 3 documents:
+
+   Text Types Tokens Sentences   Text Types Tokens Sentences
+  text5  1818   8446       563  text5  1818   8446       563
+  text6  1563   8016       566  text6  1563   8016       566
+ text16  1581   8357       591 text16  1581   8357       591
+                book chapter
+ Philosopher's Stone       5
+ Philosopher's Stone       6
+ Philosopher's Stone      16</code></pre>
+</div>
+</div>
+<p>Chapters offer a natural unit for analysis here. However, we may want to reshape the level of analysis that we are conducting, perhaps moving from the chapter level to the paragraph or sentence level.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the number of documents (chapters) in our small corpus</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ndoc</span>(small_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the command to reshape our corpus to the sentence level</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>small_corpus_sentences <span class="ot">&lt;-</span> <span class="fu">corpus_reshape</span>(small_corpus, <span class="at">to =</span> <span class="st">"sentences"</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># can also be to = "sentences", "paragraphs", or "documents"</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#the number of documents (sentences) in our reshaped corpus</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ndoc</span>(small_corpus_sentences)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1901</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a summary of the first 5 texts in the sentence-level corpus</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(small_corpus_sentences, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Corpus consisting of 1901 documents, showing 5 documents:
+
+    Text Types Tokens Sentences  Text Types Tokens Sentences
+ text2.1    29     32         1 text2  1066   4154       237
+ text2.2    45     57         1 text2  1066   4154       237
+ text2.3    13     14         1 text2  1066   4154       237
+ text2.4    55     70         1 text2  1066   4154       237
+ text2.5    17     17         1 text2  1066   4154       237
+                book chapter
+ Philosopher's Stone       2
+ Philosopher's Stone       2
+ Philosopher's Stone       2
+ Philosopher's Stone       2
+ Philosopher's Stone       2</code></pre>
+</div>
+</div>
+<p>So we have gone from 7 documents (chapters) to 1,898 documents (sentences). The summary provides some unique new information for us now. The first four columns now relate to summary items for the sentence level (which is why <code>Sentences</code> is always equal to 1) and the next four columns relate to the document. Note that the first Text column now includes an additional term (i.e., <code>.1</code>). These index each sentence within the chapter.</p>
+<p>The “right” level of analysis is going to be really contingent on your specific research question. There is no single correct level of analysis across all analyses. Think – a lot – about what you are interested in studying, and what level is best for that study.</p>
+</section>
+<section id="tokens" class="level2">
+<h2 class="anchored" data-anchor-id="tokens">Tokens</h2>
+<p>We’ve used the phrase “tokens” in a few places now, and it’s time to dive into what we mean by it. Tokens are the individual component pieces of the text, and tokenizing is the process of breaking up the text into those component pieces. Consider the following tweet from President Trump:</p>
+<pre><code>Unless Republicans have a death wish, and it is also the right thing to do, they must approve the $2,000 payments ASAP. $600 IS NOT ENOUGH! Also, get rid of Section 230 - Don't let Big Tech steal our Country, and don't let the Democrats steal the Presidential Election. Get tough!</code></pre>
+<p>We can start to break that into constituent words (“Unless”, “Republicans”, etc.) but notice that we pretty quickly have decisions to make. Should we include the punctuation marks (“,”, “.”, “!”) with a word? As unique tokens themselves? What about numbers like 2,000? Likewise, we have to decide whether to include the “$” with 2,000; you can see why that’d be important when you get a bit further and run into “Section 230”. Finally, what should we do with contractions like “Don’t”? Is that one word or two? And should we treat “Don’t” and “don’t” as the same token, or two different tokens?</p>
+<p>All of these are choices that get nested into the tokenization process. The most basic versions of a tokenizer will split on white space; others are trained to split on a host of other characteristics. The big thing to know is to always look at the data you are creating.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the default breaks on white space</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>philosophers_stone_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(philosophers_stone_corpus)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(philosophers_stone_tokens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tokens consisting of 17 documents and 6 docvars.
+text1 :
+ [1] "THE"     "BOY"     "WHO"     "LIVED"   "Mr"      "."       "and"    
+ [8] "Mrs"     "."       "Dursley" ","       "of"     
+[ ... and 5,681 more ]
+
+text2 :
+ [1] "THE"       "VANISHING" "GLASS"     "Nearly"    "ten"       "years"    
+ [7] "had"       "passed"    "since"     "the"       "Dursleys"  "had"      
+[ ... and 4,142 more ]
+
+text3 :
+ [1] "THE"         "LETTERS"     "FROM"        "NO"          "ONE"        
+ [6] "The"         "escape"      "of"          "the"         "Brazilian"  
+[11] "boa"         "constrictor"
+[ ... and 4,644 more ]
+
+text4 :
+ [1] "THE"     "KEEPER"  "OF"      "THE"     "KEYS"    "BOOM"    "."      
+ [8] "They"    "knocked" "again"   "."       "Dudley" 
+[ ... and 4,820 more ]
+
+text5 :
+ [1] "DIAGON"   "ALLEY"    "Harry"    "woke"     "early"    "the"     
+ [7] "next"     "morning"  "."        "Although" "he"       "could"   
+[ ... and 8,434 more ]
+
+text6 :
+ [1] "THE"            "JOURNEY"        "FROM"           "PLATFORM"      
+ [5] "NINE"           "AND"            "THREE-QUARTERS" "Harry's"       
+ [9] "last"           "month"          "with"           "the"           
+[ ... and 8,004 more ]
+
+[ reached max_ndoc ... 11 more documents ]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can also drop punctuation</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>philosophers_stone_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(philosophers_stone_corpus,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">remove_punct =</span> T)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(philosophers_stone_tokens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tokens consisting of 17 documents and 6 docvars.
+text1 :
+ [1] "THE"     "BOY"     "WHO"     "LIVED"   "Mr"      "and"     "Mrs"    
+ [8] "Dursley" "of"      "number"  "four"    "Privet" 
+[ ... and 4,784 more ]
+
+text2 :
+ [1] "THE"       "VANISHING" "GLASS"     "Nearly"    "ten"       "years"    
+ [7] "had"       "passed"    "since"     "the"       "Dursleys"  "had"      
+[ ... and 3,556 more ]
+
+text3 :
+ [1] "THE"         "LETTERS"     "FROM"        "NO"          "ONE"        
+ [6] "The"         "escape"      "of"          "the"         "Brazilian"  
+[11] "boa"         "constrictor"
+[ ... and 3,984 more ]
+
+text4 :
+ [1] "THE"     "KEEPER"  "OF"      "THE"     "KEYS"    "BOOM"    "They"   
+ [8] "knocked" "again"   "Dudley"  "jerked"  "awake"  
+[ ... and 3,910 more ]
+
+text5 :
+ [1] "DIAGON"   "ALLEY"    "Harry"    "woke"     "early"    "the"     
+ [7] "next"     "morning"  "Although" "he"       "could"    "tell"    
+[ ... and 6,998 more ]
+
+text6 :
+ [1] "THE"            "JOURNEY"        "FROM"           "PLATFORM"      
+ [5] "NINE"           "AND"            "THREE-QUARTERS" "Harry's"       
+ [9] "last"           "month"          "with"           "the"           
+[ ... and 6,750 more ]
+
+[ reached max_ndoc ... 11 more documents ]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># as well as numbers</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>philosophers_stone_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(philosophers_stone_corpus,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">remove_punct =</span> T,      </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">remove_numbers =</span> T)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(philosophers_stone_tokens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tokens consisting of 17 documents and 6 docvars.
+text1 :
+ [1] "THE"     "BOY"     "WHO"     "LIVED"   "Mr"      "and"     "Mrs"    
+ [8] "Dursley" "of"      "number"  "four"    "Privet" 
+[ ... and 4,784 more ]
+
+text2 :
+ [1] "THE"       "VANISHING" "GLASS"     "Nearly"    "ten"       "years"    
+ [7] "had"       "passed"    "since"     "the"       "Dursleys"  "had"      
+[ ... and 3,556 more ]
+
+text3 :
+ [1] "THE"         "LETTERS"     "FROM"        "NO"          "ONE"        
+ [6] "The"         "escape"      "of"          "the"         "Brazilian"  
+[11] "boa"         "constrictor"
+[ ... and 3,981 more ]
+
+text4 :
+ [1] "THE"     "KEEPER"  "OF"      "THE"     "KEYS"    "BOOM"    "They"   
+ [8] "knocked" "again"   "Dudley"  "jerked"  "awake"  
+[ ... and 3,907 more ]
+
+text5 :
+ [1] "DIAGON"   "ALLEY"    "Harry"    "woke"     "early"    "the"     
+ [7] "next"     "morning"  "Although" "he"       "could"    "tell"    
+[ ... and 6,989 more ]
+
+text6 :
+ [1] "THE"            "JOURNEY"        "FROM"           "PLATFORM"      
+ [5] "NINE"           "AND"            "THREE-QUARTERS" "Harry's"       
+ [9] "last"           "month"          "with"           "the"           
+[ ... and 6,749 more ]
+
+[ reached max_ndoc ... 11 more documents ]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># as well as changing letters to lower cases</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tokens_tolower</span>(philosophers_stone_tokens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tokens consisting of 17 documents and 6 docvars.
+text1 :
+ [1] "the"     "boy"     "who"     "lived"   "mr"      "and"     "mrs"    
+ [8] "dursley" "of"      "number"  "four"    "privet" 
+[ ... and 4,784 more ]
+
+text2 :
+ [1] "the"       "vanishing" "glass"     "nearly"    "ten"       "years"    
+ [7] "had"       "passed"    "since"     "the"       "dursleys"  "had"      
+[ ... and 3,556 more ]
+
+text3 :
+ [1] "the"         "letters"     "from"        "no"          "one"        
+ [6] "the"         "escape"      "of"          "the"         "brazilian"  
+[11] "boa"         "constrictor"
+[ ... and 3,981 more ]
+
+text4 :
+ [1] "the"     "keeper"  "of"      "the"     "keys"    "boom"    "they"   
+ [8] "knocked" "again"   "dudley"  "jerked"  "awake"  
+[ ... and 3,907 more ]
+
+text5 :
+ [1] "diagon"   "alley"    "harry"    "woke"     "early"    "the"     
+ [7] "next"     "morning"  "although" "he"       "could"    "tell"    
+[ ... and 6,989 more ]
+
+text6 :
+ [1] "the"            "journey"        "from"           "platform"      
+ [5] "nine"           "and"            "three-quarters" "harry's"       
+ [9] "last"           "month"          "with"           "the"           
+[ ... and 6,749 more ]
+
+[ reached max_ndoc ... 11 more documents ]</code></pre>
+</div>
+</div>
+<p>When the data are tokenized, we can start to look at a more granular level at the usage of particular terms. For instance, maybe we want to know about the usage of particular terms within the corpus. We can look at that using <strong>k</strong>ey<strong>w</strong>ord-<strong>i</strong>n-<strong>c</strong>ontext (<code>kwic</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check the use of "dumbledore"</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>kwic_dumbledore <span class="ot">&lt;-</span> <span class="fu">kwic</span>(philosophers_stone_tokens,</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"dumbledore"</span>))</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># window = 5 </span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the first few uses</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kwic_dumbledore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Keyword-in-context with 6 matches.                                                             
+ [text1, 2292]       This man's name was Albus | Dumbledore |
+ [text1, 2294] name was Albus Dumbledore Albus | Dumbledore |
+ [text1, 2489]  happening down on the pavement | Dumbledore |
+ [text1, 2759]         can't blame them ` said | Dumbledore |
+ [text1, 2818]      a sharp sideways glance at | Dumbledore |
+ [text1, 2869]      suppose he really has gone | Dumbledore |
+                                  
+ Albus Dumbledore didn't seem to  
+ didn't seem to realize that      
+ slipped the Put-Outer back inside
+ gently ` We've had precious      
+ here as though hoping he         
+ ` ` It certainly seems           </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now look at a broader window of terms around "dumbledore"</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>kwic_dumbledore <span class="ot">&lt;-</span> <span class="fu">kwic</span>(philosophers_stone_tokens,</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"dumbledore"</span>),</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">window =</span> <span class="dv">10</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the first few uses</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kwic_dumbledore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Keyword-in-context with 6 matches.                                                                          
+ [text1, 2292]      been broken at least twice This man's name was Albus |
+ [text1, 2294] at least twice This man's name was Albus Dumbledore Albus |
+ [text1, 2489]   to see anything that was happening down on the pavement |
+ [text1, 2759]                much sense ` ` You can't blame them ` said |
+ [text1, 2818]    swapping rumors ` She threw a sharp sideways glance at |
+ [text1, 2869]             out about us all I suppose he really has gone |
+                                                                        
+ Dumbledore | Albus Dumbledore didn't seem to realize that he had just  
+ Dumbledore | didn't seem to realize that he had just arrived in        
+ Dumbledore | slipped the Put-Outer back inside his cloak and set off   
+ Dumbledore | gently ` We've had precious little to celebrate for eleven
+ Dumbledore | here as though hoping he was going to tell her            
+ Dumbledore | ` ` It certainly seems so ` said Dumbledore `             </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if you are more interested in phrases, then you can do that too using phrase()</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>kwic_phrase <span class="ot">&lt;-</span> <span class="fu">kwic</span>(philosophers_stone_tokens,</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">pattern =</span> <span class="fu">phrase</span>(<span class="st">"daily prophet"</span>))</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kwic_phrase)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Keyword-in-context with 3 matches.                                                                   
+   [text5, 901:902] Hagrid read his newspaper the | Daily Prophet |
+ [text6, 5196:5197]        It's been all over the | Daily Prophet |
+ [text8, 2909:2910]        was a cutting from the | Daily Prophet |
+                                                  
+ Harry had learned from Uncle                     
+ but I don't suppose you                          
+ GRINGOTTS BREAK-IN LATEST Investigations continue</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>kwic_hagrid <span class="ot">&lt;-</span> <span class="fu">kwic</span>(philosophers_stone_tokens,</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"hagrid"</span>))</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kwic_hagrid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Keyword-in-context with 6 matches.                                                              
+ [text1, 3853]               think it wise to trust | Hagrid |
+ [text1, 3864]                 this ` I would trust | Hagrid |
+ [text1, 4050]               a bundle of blankets ` | Hagrid |
+ [text1, 4237]       Underground Well give him here | Hagrid |
+ [text1, 4269]                   to him sir ` asked | Hagrid |
+ [text1, 4292] scratchy whiskery kiss Then suddenly | Hagrid |
+                                    
+ with something as important as     
+ with my life ` said                
+ ` said Dumbledore sounding relieved
+ we'd better get this over          
+ He bent his great shaggy           
+ let out a howl like                </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kwic_hagrid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Keyword-in-context with 6 matches.                                                              
+ [text1, 3853]               think it wise to trust | Hagrid |
+ [text1, 3864]                 this ` I would trust | Hagrid |
+ [text1, 4050]               a bundle of blankets ` | Hagrid |
+ [text1, 4237]       Underground Well give him here | Hagrid |
+ [text1, 4269]                   to him sir ` asked | Hagrid |
+ [text1, 4292] scratchy whiskery kiss Then suddenly | Hagrid |
+                                    
+ with something as important as     
+ with my life ` said                
+ ` said Dumbledore sounding relieved
+ we'd better get this over          
+ He bent his great shaggy           
+ let out a howl like                </code></pre>
+</div>
+</div>
+<p>The <em>Daily Prophet</em> offers a great example of a problem we might encounter with tokenizers; the standard approach is going to treat this as two different words when really it is the phrase itself that is likely of interest. Therefore, we can compound the tokens into a phrase using <code>tokens_compound()</code>. This creates a <code>bigram</code>; you can similarly create three-token phrases (trigram), four-token phrases (four-gram), and so on. Note that the newly created token will be the phrase separated by “_” (i.e., Daily_Prophet).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>philosophers_stone_compound <span class="ot">&lt;-</span> <span class="fu">tokens_compound</span>(philosophers_stone_tokens,</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">pattern =</span> <span class="fu">phrase</span>(<span class="st">"Daily Prophet"</span>))</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">kwic</span>(philosophers_stone_compound,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">pattern =</span> <span class="st">"Daily_Prophet"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Keyword-in-context with 3 matches.                                                              
+  [text5, 901] Hagrid read his newspaper the | Daily_Prophet |
+ [text6, 5196]        It's been all over the | Daily_Prophet |
+ [text8, 2909]        was a cutting from the | Daily_Prophet |
+                                                  
+ Harry had learned from Uncle                     
+ but I don't suppose you                          
+ GRINGOTTS BREAK-IN LATEST Investigations continue</code></pre>
+</div>
+</div>
+<p>Of course, you may also believe that there are lots and lots of potentially meaningful n-grams (i.e., uni-, bi-, tri-, four-, etc.) that you do not want to individually specify. In those cases, you can specify that tokenization specifically include <strong>every</strong> possible n-gram.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a tokens object with unigrams and bigrams</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>philosophers_stone_ngrams <span class="ot">&lt;-</span> <span class="fu">tokens_ngrams</span>(philosophers_stone_tokens, <span class="at">n=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the first few observations. Note the indexing here to look at only the first few words *within the first chapter*</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(philosophers_stone_ngrams[[<span class="dv">1</span>]], <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "THE"        "BOY"        "WHO"        "LIVED"      "Mr"        
+ [6] "and"        "Mrs"        "Dursley"    "of"         "number"    
+[11] "four"       "Privet"     "Drive"      "were"       "proud"     
+[16] "to"         "say"        "that"       "they"       "were"      
+[21] "perfectly"  "normal"     "thank"      "you"        "very"      
+[26] "much"       "They"       "were"       "the"        "last"      
+[31] "people"     "you'd"      "expect"     "to"         "be"        
+[36] "involved"   "in"         "anything"   "strange"    "or"        
+[41] "mysterious" "because"    "they"       "just"       "didn't"    
+[46] "hold"       "with"       "such"       "nonsense"   "Mr"        </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(philosophers_stone_ngrams[[<span class="dv">1</span>]], <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "nor_that"       "that_he"        "he_would"       "would_spend"   
+ [5] "spend_the"      "the_next"       "next_few"       "few_weeks"     
+ [9] "weeks_being"    "being_prodded"  "prodded_and"    "and_pinched"   
+[13] "pinched_by"     "by_his"         "his_cousin"     "cousin_Dudley" 
+[17] "Dudley_He"      "He_couldn't"    "couldn't_know"  "know_that"     
+[21] "that_at"        "at_this"        "this_very"      "very_moment"   
+[25] "moment_people"  "people_meeting" "meeting_in"     "in_secret"     
+[29] "secret_all"     "all_over"       "over_the"       "the_country"   
+[33] "country_were"   "were_holding"   "holding_up"     "up_their"      
+[37] "their_glasses"  "glasses_and"    "and_saying"     "saying_in"     
+[41] "in_hushed"      "hushed_voices"  "voices_`"       "`_To"          
+[45] "To_Harry"       "Harry_Potter"   "Potter_the"     "the_boy"       
+[49] "boy_who"        "who_lived"     </code></pre>
+</div>
+</div>
+<p>As you can see, there is a pretty severe curse of dimensionality problem as you look to expand into greater and greater ngrams. Nevertheless, computational time and space is cheap, and the added information from the phrases could be useful in different research settings.</p>
+</section>
+<section id="combining-corpora" class="level2">
+<h2 class="anchored" data-anchor-id="combining-corpora">Combining Corpora</h2>
+<p>In the above, we’ve been working with just one text, broken into chapters. But occasionally we have two corpora that we need to combine. Here, for instance, there are 6 more Harry Potter books that we have not, to this point, added to any of our analysis.</p>
+<p>Doing so with <code>quanteda</code> is easy, but getting there is hard because we have to repeat a lot of steps for seven corpora. Instead, let’s do this with <em>loops</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list out the object (book) names that we need</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>myBooks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"philosophers_stone"</span>,</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">"chamber_of_secrets"</span>,</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>             <span class="st">"prisoner_of_azkaban"</span>,</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">"goblet_of_fire"</span>,</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">"order_of_the_phoenix"</span>,</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">"half_blood_prince"</span>,</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">"deathly_hallows"</span>)</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a><span class="co"># create loop.</span></span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(myBooks)){</span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create corpora</span></span>
+<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a>  corpusCall <span class="ot">&lt;-</span> <span class="fu">paste</span>(myBooks[i],<span class="st">"_corpus &lt;- corpus("</span>,myBooks[i],<span class="st">")"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text=</span>corpusCall))</span>
+<span id="cb64-16"><a href="#cb64-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-17"><a href="#cb64-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># change document names for each chapter to include the book title. If you don't do this, the document names will be duplicated and you'll get an error.</span></span>
+<span id="cb64-18"><a href="#cb64-18" aria-hidden="true" tabindex="-1"></a>  namesCall <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"tmpNames &lt;- docnames("</span>,myBooks[i],<span class="st">"_corpus)"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb64-19"><a href="#cb64-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text=</span>namesCall))</span>
+<span id="cb64-20"><a href="#cb64-20" aria-hidden="true" tabindex="-1"></a>  bindCall <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"docnames("</span>,myBooks[i],<span class="st">"_corpus) &lt;- paste(</span><span class="sc">\"</span><span class="st">"</span>,myBooks[i],<span class="st">"</span><span class="sc">\"</span><span class="st">, tmpNames, sep = </span><span class="sc">\"</span><span class="st">-</span><span class="sc">\"</span><span class="st">)"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb64-21"><a href="#cb64-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text=</span>bindCall))</span>
+<span id="cb64-22"><a href="#cb64-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-23"><a href="#cb64-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create summary data</span></span>
+<span id="cb64-24"><a href="#cb64-24" aria-hidden="true" tabindex="-1"></a>  summaryCall <span class="ot">&lt;-</span> <span class="fu">paste</span>(myBooks[i],<span class="st">"_summary &lt;- summary("</span>,myBooks[i],<span class="st">"_corpus)"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb64-25"><a href="#cb64-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text=</span>summaryCall))</span>
+<span id="cb64-26"><a href="#cb64-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-27"><a href="#cb64-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add indicator</span></span>
+<span id="cb64-28"><a href="#cb64-28" aria-hidden="true" tabindex="-1"></a>  bookCall <span class="ot">&lt;-</span> <span class="fu">paste</span>(myBooks[i],<span class="st">"_summary$book &lt;- </span><span class="sc">\"</span><span class="st">"</span>,myBooks[i],<span class="st">"</span><span class="sc">\"</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb64-29"><a href="#cb64-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text=</span>bookCall))</span>
+<span id="cb64-30"><a href="#cb64-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-31"><a href="#cb64-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add chapter indicator</span></span>
+<span id="cb64-32"><a href="#cb64-32" aria-hidden="true" tabindex="-1"></a>  chapterCall <span class="ot">&lt;-</span> <span class="fu">paste</span>(myBooks[i],<span class="st">"_summary$chapter &lt;- as.numeric(str_extract("</span>,myBooks[i],<span class="st">"_summary$Text, </span><span class="sc">\"</span><span class="st">[0-9]+</span><span class="sc">\"</span><span class="st">))"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb64-33"><a href="#cb64-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text=</span>chapterCall))</span>
+<span id="cb64-34"><a href="#cb64-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-35"><a href="#cb64-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add meta data to each corpus</span></span>
+<span id="cb64-36"><a href="#cb64-36" aria-hidden="true" tabindex="-1"></a>  metaCall <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"docvars("</span>,myBooks[i],<span class="st">"_corpus) &lt;- "</span>,myBooks[i],<span class="st">"_summary"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb64-37"><a href="#cb64-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text=</span>metaCall))</span>
+<span id="cb64-38"><a href="#cb64-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-39"><a href="#cb64-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb64-40"><a href="#cb64-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-41"><a href="#cb64-41" aria-hidden="true" tabindex="-1"></a><span class="co"># once the loop finishes up, check to make sure you've created what you want</span></span>
+<span id="cb64-42"><a href="#cb64-42" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(deathly_hallows_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Text Types Tokens Sentences            book chapter
+1   deathly_hallows-text1  1108   3876       223 deathly_hallows       1
+2   deathly_hallows-text2  1466   4616       163 deathly_hallows       2
+3   deathly_hallows-text3  1110   4171       256 deathly_hallows       3
+4   deathly_hallows-text4  1549   6586       307 deathly_hallows       4
+5   deathly_hallows-text5  1577   7604       489 deathly_hallows       5
+6   deathly_hallows-text6  1772   8389       481 deathly_hallows       6
+7   deathly_hallows-text7  1810   8457       534 deathly_hallows       7
+8   deathly_hallows-text8  1860   7762       438 deathly_hallows       8
+9   deathly_hallows-text9  1288   5198       279 deathly_hallows       9
+10 deathly_hallows-text10  1724   8071       461 deathly_hallows      10
+11 deathly_hallows-text11  1677   6931       384 deathly_hallows      11
+12 deathly_hallows-text12  1848   7542       405 deathly_hallows      12
+13 deathly_hallows-text13  1725   7094       357 deathly_hallows      13
+14 deathly_hallows-text14  1295   5175       267 deathly_hallows      14
+15 deathly_hallows-text15  1908   8860       537 deathly_hallows      15
+16 deathly_hallows-text16  1527   6150       289 deathly_hallows      16
+17 deathly_hallows-text17  1510   6741       391 deathly_hallows      17
+18 deathly_hallows-text18  1183   4125       206 deathly_hallows      18
+19 deathly_hallows-text19  1708   8228       459 deathly_hallows      19
+20 deathly_hallows-text20  1451   5561       319 deathly_hallows      20
+21 deathly_hallows-text21  1426   6156       395 deathly_hallows      21
+22 deathly_hallows-text22  1620   7430       453 deathly_hallows      22
+23 deathly_hallows-text23  1881  10152       700 deathly_hallows      23
+24 deathly_hallows-text24  1655   8449       554 deathly_hallows      24
+25 deathly_hallows-text25  1344   5543       326 deathly_hallows      25
+26 deathly_hallows-text26  1878   8206       378 deathly_hallows      26
+27 deathly_hallows-text27   921   3207       148 deathly_hallows      27
+28 deathly_hallows-text28  1328   5622       338 deathly_hallows      28
+29 deathly_hallows-text29  1359   5806       373 deathly_hallows      29
+30 deathly_hallows-text30  1475   6266       372 deathly_hallows      30
+31 deathly_hallows-text31  2069   9913       560 deathly_hallows      31
+32 deathly_hallows-text32  1535   6801       326 deathly_hallows      32
+33 deathly_hallows-text33  2072  10456       721 deathly_hallows      33
+34 deathly_hallows-text34  1170   4599       241 deathly_hallows      34
+35 deathly_hallows-text35  1329   6321       426 deathly_hallows      35
+36 deathly_hallows-text36  1893   8635       424 deathly_hallows      36
+37 deathly_hallows-text37   710   2072       141 deathly_hallows      37</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can change the book name to any of the seven Harry Potter books</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have all of the corpora in order, we can combine then using <code>c()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create combined corpora of the first 7 harry potter books.</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>harry_potter_corpus <span class="ot">&lt;-</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(philosophers_stone_corpus,                  chamber_of_secrets_corpus,                  prisoner_of_azkaban_corpus,</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>    goblet_of_fire_corpus,                      order_of_the_phoenix_corpus,</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>    half_blood_prince_corpus,</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>    deathly_hallows_corpus)</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(harry_potter_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Corpus consisting of 200 documents, showing 100 documents:
+
+                       Text Types Tokens Sentences                       Text
+   philosophers_stone-text1  1271   5693       350   philosophers_stone-text1
+   philosophers_stone-text2  1066   4154       237   philosophers_stone-text2
+   philosophers_stone-text3  1226   4656       297   philosophers_stone-text3
+   philosophers_stone-text4  1193   4832       322   philosophers_stone-text4
+   philosophers_stone-text5  1818   8446       563   philosophers_stone-text5
+   philosophers_stone-text6  1563   8016       566   philosophers_stone-text6
+   philosophers_stone-text7  1374   5487       351   philosophers_stone-text7
+   philosophers_stone-text8  1095   3608       198   philosophers_stone-text8
+   philosophers_stone-text9  1422   6195       411   philosophers_stone-text9
+  philosophers_stone-text10  1293   5237       334  philosophers_stone-text10
+  philosophers_stone-text11  1110   4215       277  philosophers_stone-text11
+  philosophers_stone-text12  1509   6790       447  philosophers_stone-text12
+  philosophers_stone-text13  1076   3953       262  philosophers_stone-text13
+  philosophers_stone-text14  1110   4394       308  philosophers_stone-text14
+  philosophers_stone-text15  1385   6486       459  philosophers_stone-text15
+  philosophers_stone-text16  1581   8357       591  philosophers_stone-text16
+  philosophers_stone-text17  1489   7172       506  philosophers_stone-text17
+   chamber_of_secrets-text1   998   3206       183   chamber_of_secrets-text1
+   chamber_of_secrets-text2  1040   3715       252   chamber_of_secrets-text2
+   chamber_of_secrets-text3  1410   5743       342   chamber_of_secrets-text3
+   chamber_of_secrets-text4  1751   7350       393   chamber_of_secrets-text4
+   chamber_of_secrets-text5  1630   6390       354   chamber_of_secrets-text5
+   chamber_of_secrets-text6  1648   6145       358   chamber_of_secrets-text6
+   chamber_of_secrets-text7  1335   5019       363   chamber_of_secrets-text7
+   chamber_of_secrets-text8  1625   5896       353   chamber_of_secrets-text8
+   chamber_of_secrets-text9  1554   6701       431   chamber_of_secrets-text9
+  chamber_of_secrets-text10  1563   6652       407  chamber_of_secrets-text10
+  chamber_of_secrets-text11  1763   7380       444  chamber_of_secrets-text11
+  chamber_of_secrets-text12  1472   5582       349  chamber_of_secrets-text12
+  chamber_of_secrets-text13  1092   4050       263  chamber_of_secrets-text13
+  chamber_of_secrets-text14   898   2959       195  chamber_of_secrets-text14
+  chamber_of_secrets-text15  1377   5328       335  chamber_of_secrets-text15
+  chamber_of_secrets-text16   986   3150       168  chamber_of_secrets-text16
+  chamber_of_secrets-text17  1485   6613       464  chamber_of_secrets-text17
+  chamber_of_secrets-text18  1063   4316       307  chamber_of_secrets-text18
+  chamber_of_secrets-text19  2063  10949       729  chamber_of_secrets-text19
+  prisoner_of_azkaban-text1  1267   4299       217  prisoner_of_azkaban-text1
+  prisoner_of_azkaban-text2  1254   4795       302  prisoner_of_azkaban-text2
+  prisoner_of_azkaban-text3  1383   5660       364  prisoner_of_azkaban-text3
+  prisoner_of_azkaban-text4  1619   6414       382  prisoner_of_azkaban-text4
+  prisoner_of_azkaban-text5  1621   7059       437  prisoner_of_azkaban-text5
+  prisoner_of_azkaban-text6  1762   7978       504  prisoner_of_azkaban-text6
+  prisoner_of_azkaban-text7  1318   5501       388  prisoner_of_azkaban-text7
+  prisoner_of_azkaban-text8  1583   6469       417  prisoner_of_azkaban-text8
+  prisoner_of_azkaban-text9  1542   6737       450  prisoner_of_azkaban-text9
+ prisoner_of_azkaban-text10  1982   9021       570 prisoner_of_azkaban-text10
+ prisoner_of_azkaban-text11  1575   6517       416 prisoner_of_azkaban-text11
+ prisoner_of_azkaban-text12  1366   6283       433 prisoner_of_azkaban-text12
+ prisoner_of_azkaban-text13  1374   5388       326 prisoner_of_azkaban-text13
+ prisoner_of_azkaban-text14  1609   7043       496 prisoner_of_azkaban-text14
+ prisoner_of_azkaban-text15  1664   6908       459 prisoner_of_azkaban-text15
+ prisoner_of_azkaban-text16  1325   5007       344 prisoner_of_azkaban-text16
+ prisoner_of_azkaban-text17  1206   5464       360 prisoner_of_azkaban-text17
+ prisoner_of_azkaban-text18   784   2955       186 prisoner_of_azkaban-text18
+ prisoner_of_azkaban-text19  1382   7013       486 prisoner_of_azkaban-text19
+ prisoner_of_azkaban-text20   736   2571       184 prisoner_of_azkaban-text20
+ prisoner_of_azkaban-text21  1622   9752       748 prisoner_of_azkaban-text21
+ prisoner_of_azkaban-text22  1436   6165       475 prisoner_of_azkaban-text22
+       goblet_of_fire-text1  1225   5150       278       goblet_of_fire-text1
+       goblet_of_fire-text2   975   3307       151       goblet_of_fire-text2
+       goblet_of_fire-text3  1064   3777       214       goblet_of_fire-text3
+       goblet_of_fire-text4  1053   3753       236       goblet_of_fire-text4
+       goblet_of_fire-text5  1244   4773       274       goblet_of_fire-text5
+       goblet_of_fire-text6   878   3080       199       goblet_of_fire-text6
+       goblet_of_fire-text7  1647   6731       416       goblet_of_fire-text7
+       goblet_of_fire-text8  1655   7219       421       goblet_of_fire-text8
+       goblet_of_fire-text9  1734   9396       647       goblet_of_fire-text9
+      goblet_of_fire-text10  1108   4194       267      goblet_of_fire-text10
+      goblet_of_fire-text11  1162   4246       258      goblet_of_fire-text11
+      goblet_of_fire-text12  1700   6770       394      goblet_of_fire-text12
+      goblet_of_fire-text13  1408   5021       312      goblet_of_fire-text13
+      goblet_of_fire-text14  1453   6107       393      goblet_of_fire-text14
+      goblet_of_fire-text15  1733   6429       343      goblet_of_fire-text15
+      goblet_of_fire-text16  1635   7579       458      goblet_of_fire-text16
+      goblet_of_fire-text17  1255   5269       345      goblet_of_fire-text17
+      goblet_of_fire-text18  1758   8330       467      goblet_of_fire-text18
+      goblet_of_fire-text19  1695   7876       441      goblet_of_fire-text19
+      goblet_of_fire-text20  1747   9024       516      goblet_of_fire-text20
+      goblet_of_fire-text21  1616   7134       443      goblet_of_fire-text21
+      goblet_of_fire-text22  1310   5735       379      goblet_of_fire-text22
+      goblet_of_fire-text23  2131  10268       619      goblet_of_fire-text23
+      goblet_of_fire-text24  1742   8010       501      goblet_of_fire-text24
+      goblet_of_fire-text25  1505   7175       409      goblet_of_fire-text25
+      goblet_of_fire-text26  2021   9944       529      goblet_of_fire-text26
+      goblet_of_fire-text27  1815   8780       534      goblet_of_fire-text27
+      goblet_of_fire-text28  1898   9578       670      goblet_of_fire-text28
+      goblet_of_fire-text29  1278   5674       406      goblet_of_fire-text29
+      goblet_of_fire-text30  1492   8054       515      goblet_of_fire-text30
+      goblet_of_fire-text31  1932   9930       661      goblet_of_fire-text31
+      goblet_of_fire-text32   689   2410       131      goblet_of_fire-text32
+      goblet_of_fire-text33  1134   5217       275      goblet_of_fire-text33
+      goblet_of_fire-text34   818   3713       145      goblet_of_fire-text34
+      goblet_of_fire-text35  1442   7531       607      goblet_of_fire-text35
+      goblet_of_fire-text36  1518   7797       535      goblet_of_fire-text36
+      goblet_of_fire-text37  1408   6273       443      goblet_of_fire-text37
+ order_of_the_phoenix-text1  1761   7026       405 order_of_the_phoenix-text1
+ order_of_the_phoenix-text2  1654   7724       545 order_of_the_phoenix-text2
+ order_of_the_phoenix-text3  1622   6435       398 order_of_the_phoenix-text3
+ order_of_the_phoenix-text4  1641   7158       447 order_of_the_phoenix-text4
+ order_of_the_phoenix-text5  1544   6877       431 order_of_the_phoenix-text5
+ Types Tokens Sentences                 book chapter
+  1271   5693       350   philosophers_stone       1
+  1066   4154       237   philosophers_stone       2
+  1226   4656       297   philosophers_stone       3
+  1193   4832       322   philosophers_stone       4
+  1818   8446       563   philosophers_stone       5
+  1563   8016       566   philosophers_stone       6
+  1374   5487       351   philosophers_stone       7
+  1095   3608       198   philosophers_stone       8
+  1422   6195       411   philosophers_stone       9
+  1293   5237       334   philosophers_stone      10
+  1110   4215       277   philosophers_stone      11
+  1509   6790       447   philosophers_stone      12
+  1076   3953       262   philosophers_stone      13
+  1110   4394       308   philosophers_stone      14
+  1385   6486       459   philosophers_stone      15
+  1581   8357       591   philosophers_stone      16
+  1489   7172       506   philosophers_stone      17
+   998   3206       183   chamber_of_secrets       1
+  1040   3715       252   chamber_of_secrets       2
+  1410   5743       342   chamber_of_secrets       3
+  1751   7350       393   chamber_of_secrets       4
+  1630   6390       354   chamber_of_secrets       5
+  1648   6145       358   chamber_of_secrets       6
+  1335   5019       363   chamber_of_secrets       7
+  1625   5896       353   chamber_of_secrets       8
+  1554   6701       431   chamber_of_secrets       9
+  1563   6652       407   chamber_of_secrets      10
+  1763   7380       444   chamber_of_secrets      11
+  1472   5582       349   chamber_of_secrets      12
+  1092   4050       263   chamber_of_secrets      13
+   898   2959       195   chamber_of_secrets      14
+  1377   5328       335   chamber_of_secrets      15
+   986   3150       168   chamber_of_secrets      16
+  1485   6613       464   chamber_of_secrets      17
+  1063   4316       307   chamber_of_secrets      18
+  2063  10949       729   chamber_of_secrets      19
+  1267   4299       217  prisoner_of_azkaban       1
+  1254   4795       302  prisoner_of_azkaban       2
+  1383   5660       364  prisoner_of_azkaban       3
+  1619   6414       382  prisoner_of_azkaban       4
+  1621   7059       437  prisoner_of_azkaban       5
+  1762   7978       504  prisoner_of_azkaban       6
+  1318   5501       388  prisoner_of_azkaban       7
+  1583   6469       417  prisoner_of_azkaban       8
+  1542   6737       450  prisoner_of_azkaban       9
+  1982   9021       570  prisoner_of_azkaban      10
+  1575   6517       416  prisoner_of_azkaban      11
+  1366   6283       433  prisoner_of_azkaban      12
+  1374   5388       326  prisoner_of_azkaban      13
+  1609   7043       496  prisoner_of_azkaban      14
+  1664   6908       459  prisoner_of_azkaban      15
+  1325   5007       344  prisoner_of_azkaban      16
+  1206   5464       360  prisoner_of_azkaban      17
+   784   2955       186  prisoner_of_azkaban      18
+  1382   7013       486  prisoner_of_azkaban      19
+   736   2571       184  prisoner_of_azkaban      20
+  1622   9752       748  prisoner_of_azkaban      21
+  1436   6165       475  prisoner_of_azkaban      22
+  1225   5150       278       goblet_of_fire       1
+   975   3307       151       goblet_of_fire       2
+  1064   3777       214       goblet_of_fire       3
+  1053   3753       236       goblet_of_fire       4
+  1244   4773       274       goblet_of_fire       5
+   878   3080       199       goblet_of_fire       6
+  1647   6731       416       goblet_of_fire       7
+  1655   7219       421       goblet_of_fire       8
+  1734   9396       647       goblet_of_fire       9
+  1108   4194       267       goblet_of_fire      10
+  1162   4246       258       goblet_of_fire      11
+  1700   6770       394       goblet_of_fire      12
+  1408   5021       312       goblet_of_fire      13
+  1453   6107       393       goblet_of_fire      14
+  1733   6429       343       goblet_of_fire      15
+  1635   7579       458       goblet_of_fire      16
+  1255   5269       345       goblet_of_fire      17
+  1758   8330       467       goblet_of_fire      18
+  1695   7876       441       goblet_of_fire      19
+  1747   9024       516       goblet_of_fire      20
+  1616   7134       443       goblet_of_fire      21
+  1310   5735       379       goblet_of_fire      22
+  2131  10268       619       goblet_of_fire      23
+  1742   8010       501       goblet_of_fire      24
+  1505   7175       409       goblet_of_fire      25
+  2021   9944       529       goblet_of_fire      26
+  1815   8780       534       goblet_of_fire      27
+  1898   9578       670       goblet_of_fire      28
+  1278   5674       406       goblet_of_fire      29
+  1492   8054       515       goblet_of_fire      30
+  1932   9930       661       goblet_of_fire      31
+   689   2410       131       goblet_of_fire      32
+  1134   5217       275       goblet_of_fire      33
+   818   3713       145       goblet_of_fire      34
+  1442   7531       607       goblet_of_fire      35
+  1518   7797       535       goblet_of_fire      36
+  1408   6273       443       goblet_of_fire      37
+  1761   7026       405 order_of_the_phoenix       1
+  1654   7724       545 order_of_the_phoenix       2
+  1622   6435       398 order_of_the_phoenix       3
+  1641   7158       447 order_of_the_phoenix       4
+  1544   6877       431 order_of_the_phoenix       5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ntoken</span>(harry_potter_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   philosophers_stone-text1    philosophers_stone-text2 
+                       5693                        4154 
+   philosophers_stone-text3    philosophers_stone-text4 
+                       4656                        4832 
+   philosophers_stone-text5    philosophers_stone-text6 
+                       8446                        8016 
+   philosophers_stone-text7    philosophers_stone-text8 
+                       5487                        3608 
+   philosophers_stone-text9   philosophers_stone-text10 
+                       6195                        5237 
+  philosophers_stone-text11   philosophers_stone-text12 
+                       4215                        6790 
+  philosophers_stone-text13   philosophers_stone-text14 
+                       3953                        4394 
+  philosophers_stone-text15   philosophers_stone-text16 
+                       6486                        8357 
+  philosophers_stone-text17    chamber_of_secrets-text1 
+                       7172                        3206 
+   chamber_of_secrets-text2    chamber_of_secrets-text3 
+                       3715                        5743 
+   chamber_of_secrets-text4    chamber_of_secrets-text5 
+                       7350                        6390 
+   chamber_of_secrets-text6    chamber_of_secrets-text7 
+                       6145                        5019 
+   chamber_of_secrets-text8    chamber_of_secrets-text9 
+                       5896                        6701 
+  chamber_of_secrets-text10   chamber_of_secrets-text11 
+                       6652                        7380 
+  chamber_of_secrets-text12   chamber_of_secrets-text13 
+                       5582                        4050 
+  chamber_of_secrets-text14   chamber_of_secrets-text15 
+                       2959                        5328 
+  chamber_of_secrets-text16   chamber_of_secrets-text17 
+                       3150                        6613 
+  chamber_of_secrets-text18   chamber_of_secrets-text19 
+                       4316                       10949 
+  prisoner_of_azkaban-text1   prisoner_of_azkaban-text2 
+                       4299                        4795 
+  prisoner_of_azkaban-text3   prisoner_of_azkaban-text4 
+                       5660                        6414 
+  prisoner_of_azkaban-text5   prisoner_of_azkaban-text6 
+                       7059                        7978 
+  prisoner_of_azkaban-text7   prisoner_of_azkaban-text8 
+                       5501                        6469 
+  prisoner_of_azkaban-text9  prisoner_of_azkaban-text10 
+                       6737                        9021 
+ prisoner_of_azkaban-text11  prisoner_of_azkaban-text12 
+                       6517                        6283 
+ prisoner_of_azkaban-text13  prisoner_of_azkaban-text14 
+                       5388                        7043 
+ prisoner_of_azkaban-text15  prisoner_of_azkaban-text16 
+                       6908                        5007 
+ prisoner_of_azkaban-text17  prisoner_of_azkaban-text18 
+                       5464                        2955 
+ prisoner_of_azkaban-text19  prisoner_of_azkaban-text20 
+                       7013                        2571 
+ prisoner_of_azkaban-text21  prisoner_of_azkaban-text22 
+                       9752                        6165 
+       goblet_of_fire-text1        goblet_of_fire-text2 
+                       5150                        3307 
+       goblet_of_fire-text3        goblet_of_fire-text4 
+                       3777                        3753 
+       goblet_of_fire-text5        goblet_of_fire-text6 
+                       4773                        3080 
+       goblet_of_fire-text7        goblet_of_fire-text8 
+                       6731                        7219 
+       goblet_of_fire-text9       goblet_of_fire-text10 
+                       9396                        4194 
+      goblet_of_fire-text11       goblet_of_fire-text12 
+                       4246                        6770 
+      goblet_of_fire-text13       goblet_of_fire-text14 
+                       5021                        6107 
+      goblet_of_fire-text15       goblet_of_fire-text16 
+                       6429                        7579 
+      goblet_of_fire-text17       goblet_of_fire-text18 
+                       5269                        8330 
+      goblet_of_fire-text19       goblet_of_fire-text20 
+                       7876                        9024 
+      goblet_of_fire-text21       goblet_of_fire-text22 
+                       7134                        5735 
+      goblet_of_fire-text23       goblet_of_fire-text24 
+                      10268                        8010 
+      goblet_of_fire-text25       goblet_of_fire-text26 
+                       7175                        9944 
+      goblet_of_fire-text27       goblet_of_fire-text28 
+                       8780                        9578 
+      goblet_of_fire-text29       goblet_of_fire-text30 
+                       5674                        8054 
+      goblet_of_fire-text31       goblet_of_fire-text32 
+                       9930                        2410 
+      goblet_of_fire-text33       goblet_of_fire-text34 
+                       5217                        3713 
+      goblet_of_fire-text35       goblet_of_fire-text36 
+                       7531                        7797 
+      goblet_of_fire-text37  order_of_the_phoenix-text1 
+                       6273                        7026 
+ order_of_the_phoenix-text2  order_of_the_phoenix-text3 
+                       7724                        6435 
+ order_of_the_phoenix-text4  order_of_the_phoenix-text5 
+                       7158                        6877 
+ order_of_the_phoenix-text6  order_of_the_phoenix-text7 
+                       8364                        5608 
+ order_of_the_phoenix-text8  order_of_the_phoenix-text9 
+                       5330                       10283 
+order_of_the_phoenix-text10 order_of_the_phoenix-text11 
+                       7354                        7204 
+order_of_the_phoenix-text12 order_of_the_phoenix-text13 
+                      10531                       10956 
+order_of_the_phoenix-text14 order_of_the_phoenix-text15 
+                      10094                        8693 
+order_of_the_phoenix-text16 order_of_the_phoenix-text17 
+                       7506                        8340 
+order_of_the_phoenix-text18 order_of_the_phoenix-text19 
+                       8749                        8230 
+order_of_the_phoenix-text20 order_of_the_phoenix-text21 
+                       8750                        9448 
+order_of_the_phoenix-text22 order_of_the_phoenix-text23 
+                      10033                        9276 
+order_of_the_phoenix-text24 order_of_the_phoenix-text25 
+                      10167                        9959 
+order_of_the_phoenix-text26 order_of_the_phoenix-text27 
+                      10611                        9444 
+order_of_the_phoenix-text28 order_of_the_phoenix-text29 
+                       9994                        9296 
+order_of_the_phoenix-text30 order_of_the_phoenix-text31 
+                      10557                        9621 
+order_of_the_phoenix-text32 order_of_the_phoenix-text33 
+                       8051                        4848 
+order_of_the_phoenix-text34 order_of_the_phoenix-text35 
+                       6370                        9608 
+order_of_the_phoenix-text36 order_of_the_phoenix-text37 
+                       4765                        9920 
+order_of_the_phoenix-text38     half_blood_prince-text1 
+                       9603                        6292 
+    half_blood_prince-text2     half_blood_prince-text3 
+                       6215                        5703 
+    half_blood_prince-text4     half_blood_prince-text5 
+                       7618                        7787 
+    half_blood_prince-text6     half_blood_prince-text7 
+                       7589                        8243 
+    half_blood_prince-text8     half_blood_prince-text9 
+                       5234                        7354 
+   half_blood_prince-text10    half_blood_prince-text11 
+                       7524                        6431 
+   half_blood_prince-text12    half_blood_prince-text13 
+                       6792                        6928 
+   half_blood_prince-text14    half_blood_prince-text15 
+                       8084                        7553 
+   half_blood_prince-text16    half_blood_prince-text17 
+                       8132                        8068 
+   half_blood_prince-text18    half_blood_prince-text19 
+                       8893                        7918 
+   half_blood_prince-text20    half_blood_prince-text21 
+                       8310                        7270 
+   half_blood_prince-text22    half_blood_prince-text23 
+                       7715                        7334 
+   half_blood_prince-text24    half_blood_prince-text25 
+                       7287                        6563 
+   half_blood_prince-text26    half_blood_prince-text27 
+                       8013                        6253 
+   half_blood_prince-text28    half_blood_prince-text29 
+                       4426                        7145 
+   half_blood_prince-text30       deathly_hallows-text1 
+                       6654                        3876 
+      deathly_hallows-text2       deathly_hallows-text3 
+                       4616                        4171 
+      deathly_hallows-text4       deathly_hallows-text5 
+                       6586                        7604 
+      deathly_hallows-text6       deathly_hallows-text7 
+                       8389                        8457 
+      deathly_hallows-text8       deathly_hallows-text9 
+                       7762                        5198 
+     deathly_hallows-text10      deathly_hallows-text11 
+                       8071                        6931 
+     deathly_hallows-text12      deathly_hallows-text13 
+                       7542                        7094 
+     deathly_hallows-text14      deathly_hallows-text15 
+                       5175                        8860 
+     deathly_hallows-text16      deathly_hallows-text17 
+                       6150                        6741 
+     deathly_hallows-text18      deathly_hallows-text19 
+                       4125                        8228 
+     deathly_hallows-text20      deathly_hallows-text21 
+                       5561                        6156 
+     deathly_hallows-text22      deathly_hallows-text23 
+                       7430                       10152 
+     deathly_hallows-text24      deathly_hallows-text25 
+                       8449                        5543 
+     deathly_hallows-text26      deathly_hallows-text27 
+                       8206                        3207 
+     deathly_hallows-text28      deathly_hallows-text29 
+                       5622                        5806 
+     deathly_hallows-text30      deathly_hallows-text31 
+                       6266                        9913 
+     deathly_hallows-text32      deathly_hallows-text33 
+                       6801                       10456 
+     deathly_hallows-text34      deathly_hallows-text35 
+                       4599                        6321 
+     deathly_hallows-text36      deathly_hallows-text37 
+                       8635                        2072 </code></pre>
+</div>
+</div>
+<p>Now we’re cooking. Here are some handy functions that can help us get a handle of the size and scope of our corpus now that we’re not going to be able to quickly see everything even in a summary page.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check the number of documents (here, total chapters in the 7 books)</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ndoc</span>(harry_potter_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 200</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check the total length of the text (i.e., the total word count)</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">ntoken</span>(harry_potter_corpus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1365970</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">ntoken</span>(harry_potter_corpus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10956</code></pre>
+</div>
+</div>
+<p>We’ll learn other ways to characterize and explore the texts later this semester when we turn to the different manners in which we present them. For now, you should have all of the tools you need to get your own corpus set up in R, and to be able to identify a number of important characteristics (the size of the corpus in terms of documents and vocabulary, for instance).</p>
+</section>
+<section id="need-more-practice" class="level2">
+<h2 class="anchored" data-anchor-id="need-more-practice">Need more practice?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("janeaustenr")</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janeaustenr)</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Jane Austen's novel "sense and sensibility"</span></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>sensesensibility[<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "SENSE AND SENSIBILITY"                                                  
+ [2] ""                                                                       
+ [3] "by Jane Austen"                                                         
+ [4] ""                                                                       
+ [5] "(1811)"                                                                 
+ [6] ""                                                                       
+ [7] ""                                                                       
+ [8] ""                                                                       
+ [9] ""                                                                       
+[10] "CHAPTER 1"                                                              
+[11] ""                                                                       
+[12] ""                                                                       
+[13] "The family of Dashwood had long been settled in Sussex.  Their estate"  
+[14] "was large, and their residence was at Norland Park, in the centre of"   
+[15] "their property, where, for many generations, they had lived in so"      
+[16] "respectable a manner as to engage the general good opinion of their"    
+[17] "surrounding acquaintance.  The late owner of this estate was a single"  
+[18] "man, who lived to a very advanced age, and who for many years of his"   
+[19] "life, had a constant companion and housekeeper in his sister.  But her" 
+[20] "death, which happened ten years before his own, produced a great"       
+[21] "alteration in his home; for to supply her loss, he invited and received"
+[22] "into his house the family of his nephew Mr. Henry Dashwood, the legal"  
+[23] "inheritor of the Norland estate, and the person to whom he intended to" 
+[24] "bequeath it.  In the society of his nephew and niece, and their"        
+[25] "children, the old Gentleman's days were comfortably spent.  His"        
+[26] "attachment to them all increased.  The constant attention of Mr. and"   
+[27] "Mrs. Henry Dashwood to his wishes, which proceeded not merely from"     
+[28] "interest, but from goodness of heart, gave him every degree of solid"   
+[29] "comfort which his age could receive; and the cheerfulness of the"       
+[30] "children added a relish to his existence."                              </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sensesensibility)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>sensesensibility[<span class="dv">110</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "father's decease; but the indelicacy of her conduct was so much the"</code></pre>
+</div>
+</div>
+<p>We see that this is a character vector that contains multiple strings. We want to combine these strings into one.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>sensesensibility_test <span class="ot">&lt;-</span> <span class="fu">paste</span>(sensesensibility, <span class="at">collapse =</span> <span class="st">" "</span>)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sensesensibility_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print(sensesensibility_test)</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Output is too long, so I won't render it</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="co">#We'll show this in class</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>WOW, this is really long. We notice that this character vector now contains only one element, which is the whole book. And we want to separate it by chapters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>sensesensibility2 <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(sensesensibility_test, <span class="st">"CHAPTER [0-9]+   "</span>))</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sensesensibility2[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "SENSE AND SENSIBILITY  by Jane Austen  (1811)     "</code></pre>
+</div>
+</div>
+<p>Now we convert the character vectors to a corpus</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>snse2corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(sensesensibility2)</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>sensesummary <span class="ot">&lt;-</span> <span class="fu">summary</span>(snse2corpus)</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sensesummary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Corpus consisting of 51 documents, showing 51 documents:
+
+   Text Types Tokens Sentences
+  text1     9      9         1
+  text2   560   1810        49
+  text3   611   2339        99
+  text4   606   1785        79
+  text5   682   2255        88
+  text6   463   1171        33
+  text7   557   1499        44
+  text8   523   1424        41
+  text9   511   1452        62
+ text10   729   2191        79
+ text11   774   2412        82
+ text12   590   1636        58
+ text13   628   1965        68
+ text14   653   2637       130
+ text15   577   1752        70
+ text16   794   3003       138
+ text17   745   2386       103
+ text18   612   2063       114
+ text19   611   1823        77
+ text20   898   3502       139
+ text21   650   3032       154
+ text22   914   3455       107
+ text23   819   3437       120
+ text24   814   2710        69
+ text25   719   2481        82
+ text26   660   2248        65
+ text27   817   2929        95
+ text28   843   2973       115
+ text29   581   1689        59
+ text30  1071   4636       172
+ text31   900   3729       166
+ text32  1114   4556       156
+ text33   853   3011        99
+ text34   916   3601       138
+ text35   879   3117        69
+ text36   731   2850        95
+ text37   965   3556       100
+ text38  1126   5484       167
+ text39   838   3755       119
+ text40   707   2396        54
+ text41   759   3217       114
+ text42   818   3246        84
+ text43   709   2081        34
+ text44  1013   4030        99
+ text45  1363   6959       228
+ text46   745   2556        67
+ text47  1016   3419        87
+ text48   785   2869        90
+ text49   523   1601        60
+ text50  1155   4955       110
+ text51   871   2884        57</code></pre>
+</div>
+</div>
+<p>Why are there NINE tokens in text1 (The book title)? (hint: find the answer using tokens function)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>snse2corpus_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(snse2corpus,</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">remove_punct =</span> T,      </span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">remove_numbers =</span> T)</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(snse2corpus_tokens[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tokens consisting of 1 document.
+text1 :
+[1] "SENSE"       "AND"         "SENSIBILITY" "by"          "Jane"       
+[6] "Austen"     </code></pre>
+</div>
+</div>
+</section>
+<section id="mcas-corpus" class="level1">
+<h1>MCAS Corpus?</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the folder containing the .rda files. </span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>folder <span class="ot">&lt;-</span> <span class="st">"/Users/theresaszczepanski/Documents/DACSS758/MCAS_g5_ste"</span></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the list of all .rda files in the folder</span></span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>p_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(folder, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.pdf"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all .rda files into the environment</span></span>
+<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a><span class="co">#p_files_unclean&lt;-lapply(p_files, pdf_text)</span></span>
+<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a><span class="co">#p_files_unclean</span></span>
+<span id="cb92-11"><a href="#cb92-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-12"><a href="#cb92-12" aria-hidden="true" tabindex="-1"></a>g5_ste_corpus<span class="ot">&lt;-</span><span class="fu">corpus</span>(p_files)</span>
+<span id="cb92-13"><a href="#cb92-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-14"><a href="#cb92-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(g5_ste_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Corpus consisting of 4 documents, showing 4 documents:
+
+  Text Types Tokens Sentences
+ text1     9     14         1
+ text2     9     14         1
+ text3     9     14         1
+ text4     9     14         1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>g5_ste_corpus<span class="sc">$</span>Tokens</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

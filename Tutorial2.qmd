@@ -1,0 +1,424 @@
+---
+title: "Tutorial 2 Text as Data"
+pagetitle: Tutorial_2
+---
+
+This is our second tutorial for running R. In this tutorial, we'll start working with texts. As we discussed in class, there's a huge variance in what counts as a "text", running the gamut from sentences or tweets to entire novels like War & Peace.
+
+In this tutorial, you'll learn how to start working with text-as-data in R. That includes storage formats, manipulation, counting, subsetting, and editing of the texts. There's a lot we can do once we have the texts in R!
+
+By the end of this tutorial, you should be familiar with the following:
+
+1\. Character vectors: c()
+
+2\. Corpus: corpus(), summary()
+
+3\. Metadata: docvars()
+
+4\. Subsetting corpora: corpus_subset()
+
+5\. Number of documents: ndoc()
+
+6\. Tokenization: tokens()
+
+7\. Contextual analysis: kwic()
+
+8\. N-grams: tokens_ngrams()
+
+## Front-end Matters
+
+This week, we'll start by looking at the Harry Potter series. First things first, we need to install and load the packages for today's notebook.
+
+```{r}
+library(tidytext)
+library(plyr)
+library(tidyverse)
+library(quanteda)
+```
+
+## Reading all files in a directory
+
+Unfortunately, the `harrypotter` package, which contains the book contents of all seven Harry Potter books, we used in previous years no longer works now (It seems R packages can disappear faster than a disarming spell!). So before we move on to text analysis, let's read in our data first. Please visit my Github [HarryPotter repository](https://github.com/RosemaryPang/HarryPotter). **Download all the .rda files, and save them under the same folder**.
+
+**Make sure to replace the folder path with the correct path on your own device.**
+
+```{r}
+# Define the folder containing the .rda files. 
+folder <- "/Users/theresaszczepanski/Documents/DACSS758/HarryPotter"
+
+# Get the list of all .rda files in the folder
+rda_files <- list.files(folder, pattern = "\\.rda$", full.names = TRUE)
+
+# Load all .rda files into the environment
+lapply(rda_files, load, .GlobalEnv)
+```
+
+## Character Vectors
+
+Now you should see the seven books our workspace/environment. These are:
+
+1\. philosophers_stone: Harry Potter and the Philosophers Stone (1997)
+
+2\. chamber_of_secrets: Harry Potter and the Chamber of Secrets (1998)
+
+3\. prisoner_of_azkaban: Harry Potter and the Prisoner of Azkaban (1999)
+
+4\. goblet_of_fire: Harry Potter and the Goblet of Fire (2000)
+
+5\. order_of_the_phoenix: Harry Potter and the Order of the Phoenix
+
+6\. half_blood_price: Harry Potter and the Half-Blood Prince (2005)
+
+7\. deathly_hallows: Harry Potter and the Deathly Hallows (2007)
+
+Each is stored as a **character vector**. A character vector is a collection of elements, where each element is a string. You could create your own character vector as something like:
+
+```{r}
+my_char_vec <- c("Rosemary's", "favorite","horror movie","director", "is", "James Wan.")
+print(my_char_vec)
+```
+
+Each element of a vector has an index; starting at 1, count from left-to-right. You can call to particular elements from the character vector using that indexing. So, if I wanted the third element from the above, I could type:
+
+```{r}
+my_char_vec[3]
+```
+
+As you can see in the example, an element doesn't have to be a single word. Each element can be as long as you like. For instance, a character vector could also be:
+
+```{r}
+my_char_vec2 <- c("Rosemary's favorite horror movie director is James Wan.", "She has a James Wan figure in her office.", "She likes the Conjuring series the most.")
+print(my_char_vec2)
+```
+
+The storage of the Harry Potter books follows this intuition. Each book is a character vector, and each chapter is an element in that book's character vector. So, for `philosophers_stone`, we can see the first chapter via:
+
+```{r}
+philosophers_stone[1]
+```
+
+## Corpus
+
+While this is interesting, we want something that's more straightforward to work with. Therefore, we are going to convert the character vectors to a corpus. A corpus is a stored collection of texts; we can also store corpus meta-data as a dataframe associated with the corpus. This is particularly helpful when we have document-level covariates that we might want to use in analysis of the texts.
+
+```{r}
+philosophers_stone_corpus <- corpus(philosophers_stone)
+philosophers_stone_summary <- summary(philosophers_stone_corpus)
+philosophers_stone_summary
+
+# how to access to "Tokens" in the summary?
+philosophers_stone_summary$Tokens
+
+# Which chapters have less than 5000 words?
+which(philosophers_stone_summary$Tokens < 5000)
+```
+
+Notice that each element from the character vector has been treated as a unique text; that is, each chapter is being treated as a separate text. The `summary()` function provides a breakdown of some basic statistics on each chapter then. `Text` is an automatically created unique identifier for each text, `Types` is the number of unique words/tokens in the text, `Tokens` is the total number of words/tokens in the text (i.e., the length of the chapter), and `Sentences` is the number of sentences in the chapter.
+
+## Metadata
+
+For each book, we don't have much in the way of metadata. However, this summary gives us a start and is something we can use to add metadata to the corpus we've created.
+
+```{r}
+# check for metadata; shouldn't see any
+docvars(philosophers_stone_corpus)
+```
+
+```{r}
+# add an indicator for the book; this will be useful later when we add all the books together into a single corpus
+philosophers_stone_summary$book <- "Philosopher's Stone"
+philosophers_stone_summary$Tokens
+
+```
+
+```{r}
+# create a chapter indicator
+philosophers_stone_summary$chapter <- as.numeric(str_extract(philosophers_stone_summary$Text, "[0-9]+"))
+philosophers_stone_summary
+```
+
+Now we can assign these to the corpus as document-level metadata as follows:
+
+```{r}
+docvars(philosophers_stone_corpus) <- philosophers_stone_summary
+docvars(philosophers_stone_corpus)
+```
+
+These document variables can be really useful when we want to subset the corpus to some specific level. With just one book, it doesn't make a lot of sense to subset right now. But the intuition works later, so let's look at what we'd do if we wanted to, say, look at only chapters with fewer than 5,000 tokens.
+
+```{r}
+small_corpus <- corpus_subset(philosophers_stone_corpus, Tokens < 5000)
+summary(small_corpus)
+
+test_corpus <- corpus_subset(philosophers_stone_corpus, Tokens > 8000 )
+
+summary(test_corpus)
+```
+
+Chapters offer a natural unit for analysis here. However, we may want to reshape the level of analysis that we are conducting, perhaps moving from the chapter level to the paragraph or sentence level.
+
+```{r}
+# the number of documents (chapters) in our small corpus
+ndoc(small_corpus)
+
+# the command to reshape our corpus to the sentence level
+small_corpus_sentences <- corpus_reshape(small_corpus, to = "sentences")
+# can also be to = "sentences", "paragraphs", or "documents"
+
+#the number of documents (sentences) in our reshaped corpus
+ndoc(small_corpus_sentences)
+
+# a summary of the first 5 texts in the sentence-level corpus
+summary(small_corpus_sentences, n = 5)
+
+```
+
+So we have gone from 7 documents (chapters) to 1,898 documents (sentences). The summary provides some unique new information for us now. The first four columns now relate to summary items for the sentence level (which is why `Sentences` is always equal to 1) and the next four columns relate to the document. Note that the first Text column now includes an additional term (i.e., `.1`). These index each sentence within the chapter.
+
+The "right" level of analysis is going to be really contingent on your specific research question. There is no single correct level of analysis across all analyses. Think -- a lot -- about what you are interested in studying, and what level is best for that study.
+
+## Tokens
+
+We've used the phrase "tokens" in a few places now, and it's time to dive into what we mean by it. Tokens are the individual component pieces of the text, and tokenizing is the process of breaking up the text into those component pieces. Consider the following tweet from President Trump:
+
+```         
+Unless Republicans have a death wish, and it is also the right thing to do, they must approve the $2,000 payments ASAP. $600 IS NOT ENOUGH! Also, get rid of Section 230 - Don't let Big Tech steal our Country, and don't let the Democrats steal the Presidential Election. Get tough!
+```
+
+We can start to break that into constituent words ("Unless", "Republicans", etc.) but notice that we pretty quickly have decisions to make. Should we include the punctuation marks (",", ".", "!") with a word? As unique tokens themselves? What about numbers like 2,000? Likewise, we have to decide whether to include the "\$" with 2,000; you can see why that'd be important when you get a bit further and run into "Section 230". Finally, what should we do with contractions like "Don't"? Is that one word or two? And should we treat "Don't" and "don't" as the same token, or two different tokens?
+
+All of these are choices that get nested into the tokenization process. The most basic versions of a tokenizer will split on white space; others are trained to split on a host of other characteristics. The big thing to know is to always look at the data you are creating.
+
+```{r}
+# the default breaks on white space
+philosophers_stone_tokens <- tokens(philosophers_stone_corpus)
+print(philosophers_stone_tokens)
+```
+
+```{r}
+# you can also drop punctuation
+philosophers_stone_tokens <- tokens(philosophers_stone_corpus,
+       remove_punct = T)
+print(philosophers_stone_tokens)
+```
+
+```{r}
+# as well as numbers
+philosophers_stone_tokens <- tokens(philosophers_stone_corpus,
+       remove_punct = T,      
+       remove_numbers = T)
+print(philosophers_stone_tokens)
+
+# as well as changing letters to lower cases
+tokens_tolower(philosophers_stone_tokens)
+```
+
+When the data are tokenized, we can start to look at a more granular level at the usage of particular terms. For instance, maybe we want to know about the usage of particular terms within the corpus. We can look at that using **k**ey**w**ord-**i**n-**c**ontext (`kwic`).
+
+```{r}
+# check the use of "dumbledore"
+kwic_dumbledore <- kwic(philosophers_stone_tokens,
+     pattern = c("dumbledore"))
+# window = 5 
+
+# look at the first few uses
+head(kwic_dumbledore)
+
+# now look at a broader window of terms around "dumbledore"
+kwic_dumbledore <- kwic(philosophers_stone_tokens,
+     pattern = c("dumbledore"),
+     window = 10)
+
+# look at the first few uses
+head(kwic_dumbledore)
+
+# if you are more interested in phrases, then you can do that too using phrase()
+kwic_phrase <- kwic(philosophers_stone_tokens,
+                    pattern = phrase("daily prophet"))
+
+
+head(kwic_phrase)
+
+
+kwic_hagrid <- kwic(philosophers_stone_tokens,
+                    pattern = c("hagrid"))
+
+head(kwic_hagrid)
+
+
+head(kwic_hagrid)
+```
+
+The *Daily Prophet* offers a great example of a problem we might encounter with tokenizers; the standard approach is going to treat this as two different words when really it is the phrase itself that is likely of interest. Therefore, we can compound the tokens into a phrase using `tokens_compound()`. This creates a `bigram`; you can similarly create three-token phrases (trigram), four-token phrases (four-gram), and so on. Note that the newly created token will be the phrase separated by "\_" (i.e., Daily_Prophet).
+
+```{r}
+philosophers_stone_compound <- tokens_compound(philosophers_stone_tokens,
+                pattern = phrase("Daily Prophet"))
+
+head(kwic(philosophers_stone_compound,
+          pattern = "Daily_Prophet"))
+```
+
+Of course, you may also believe that there are lots and lots of potentially meaningful n-grams (i.e., uni-, bi-, tri-, four-, etc.) that you do not want to individually specify. In those cases, you can specify that tokenization specifically include **every** possible n-gram.
+
+```{r}
+# create a tokens object with unigrams and bigrams
+philosophers_stone_ngrams <- tokens_ngrams(philosophers_stone_tokens, n=1:2)
+
+# look at the first few observations. Note the indexing here to look at only the first few words *within the first chapter*
+head(philosophers_stone_ngrams[[1]], 50)
+tail(philosophers_stone_ngrams[[1]], 50)
+```
+
+As you can see, there is a pretty severe curse of dimensionality problem as you look to expand into greater and greater ngrams. Nevertheless, computational time and space is cheap, and the added information from the phrases could be useful in different research settings.
+
+## Combining Corpora
+
+In the above, we've been working with just one text, broken into chapters. But occasionally we have two corpora that we need to combine. Here, for instance, there are 6 more Harry Potter books that we have not, to this point, added to any of our analysis.
+
+Doing so with `quanteda` is easy, but getting there is hard because we have to repeat a lot of steps for seven corpora. Instead, let's do this with *loops*.
+
+```{r}
+# list out the object (book) names that we need
+myBooks <- c("philosophers_stone",
+             "chamber_of_secrets",
+             "prisoner_of_azkaban",
+             "goblet_of_fire",
+             "order_of_the_phoenix",
+             "half_blood_prince",
+             "deathly_hallows")
+
+# create loop.
+for (i in 1:length(myBooks)){
+  
+  # create corpora
+  corpusCall <- paste(myBooks[i],"_corpus <- corpus(",myBooks[i],")", sep = "")
+  eval(parse(text=corpusCall))
+
+  # change document names for each chapter to include the book title. If you don't do this, the document names will be duplicated and you'll get an error.
+  namesCall <- paste("tmpNames <- docnames(",myBooks[i],"_corpus)", sep = "")
+  eval(parse(text=namesCall))
+  bindCall <- paste("docnames(",myBooks[i],"_corpus) <- paste(\"",myBooks[i],"\", tmpNames, sep = \"-\")", sep = "")
+  eval(parse(text=bindCall))
+
+  # create summary data
+  summaryCall <- paste(myBooks[i],"_summary <- summary(",myBooks[i],"_corpus)", sep = "")
+  eval(parse(text=summaryCall))
+
+  # add indicator
+  bookCall <- paste(myBooks[i],"_summary$book <- \"",myBooks[i],"\"", sep = "")
+  eval(parse(text=bookCall))
+
+  # add chapter indicator
+  chapterCall <- paste(myBooks[i],"_summary$chapter <- as.numeric(str_extract(",myBooks[i],"_summary$Text, \"[0-9]+\"))", sep = "")
+  eval(parse(text=chapterCall))
+
+  # add meta data to each corpus
+  metaCall <- paste("docvars(",myBooks[i],"_corpus) <- ",myBooks[i],"_summary", sep = "")
+  eval(parse(text=metaCall))
+
+}
+
+# once the loop finishes up, check to make sure you've created what you want
+docvars(deathly_hallows_corpus)
+# You can change the book name to any of the seven Harry Potter books
+```
+
+Now that we have all of the corpora in order, we can combine then using `c()`.
+
+```{r}
+# create combined corpora of the first 7 harry potter books.
+harry_potter_corpus <-
+  c(philosophers_stone_corpus,                  chamber_of_secrets_corpus,                  prisoner_of_azkaban_corpus,
+    goblet_of_fire_corpus,                      order_of_the_phoenix_corpus,
+    half_blood_prince_corpus,
+    deathly_hallows_corpus)
+summary(harry_potter_corpus)
+
+ntoken(harry_potter_corpus)
+```
+
+Now we're cooking. Here are some handy functions that can help us get a handle of the size and scope of our corpus now that we're not going to be able to quickly see everything even in a summary page.
+
+```{r}
+# check the number of documents (here, total chapters in the 7 books)
+ndoc(harry_potter_corpus)
+
+# check the total length of the text (i.e., the total word count)
+sum(ntoken(harry_potter_corpus))
+
+max(ntoken(harry_potter_corpus))
+
+```
+
+We'll learn other ways to characterize and explore the texts later this semester when we turn to the different manners in which we present them. For now, you should have all of the tools you need to get your own corpus set up in R, and to be able to identify a number of important characteristics (the size of the corpus in terms of documents and vocabulary, for instance).
+
+## Need more practice?
+
+```{r}
+#install.packages("janeaustenr")
+library(janeaustenr)
+
+# Jane Austen's novel "sense and sensibility"
+sensesensibility[1:30]
+class(sensesensibility)
+sensesensibility[110]
+```
+
+We see that this is a character vector that contains multiple strings. We want to combine these strings into one.
+
+```{r}
+sensesensibility_test <- paste(sensesensibility, collapse = " ")
+class(sensesensibility_test)
+#print(sensesensibility_test)
+#Output is too long, so I won't render it
+#We'll show this in class
+```
+
+WOW, this is really long. We notice that this character vector now contains only one element, which is the whole book. And we want to separate it by chapters.
+
+```{r}
+sensesensibility2 <- unlist(strsplit(sensesensibility_test, "CHAPTER [0-9]+   "))
+
+print(sensesensibility2[1])
+```
+
+Now we convert the character vectors to a corpus
+
+```{r}
+snse2corpus <- corpus(sensesensibility2)
+sensesummary <- summary(snse2corpus)
+print(sensesummary)
+```
+
+Why are there NINE tokens in text1 (The book title)? (hint: find the answer using tokens function)
+
+```{r}
+snse2corpus_tokens <- tokens(snse2corpus,
+       remove_punct = T,      
+       remove_numbers = T)
+print(snse2corpus_tokens[1])
+```
+
+# MCAS Corpus?
+
+```{r}
+# Define the folder containing the .rda files. 
+folder <- "/Users/theresaszczepanski/Documents/DACSS758/MCAS_g5_ste"
+
+# Get the list of all .rda files in the folder
+p_files <- list.files(folder, pattern = "\\.pdf", full.names = TRUE)
+
+# Load all .rda files into the environment
+#p_files_unclean<-lapply(p_files, pdf_text)
+
+#p_files_unclean
+
+g5_ste_corpus<-corpus(p_files)
+
+summary(g5_ste_corpus)
+
+g5_ste_corpus$Tokens
+
+
+```
